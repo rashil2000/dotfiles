@@ -1,0 +1,559 @@
+# You can edit this file by hand, but it's recommended not to do that.
+
+# Marks:
+'H
+	/data/data/com.termux/files/home/
+	..
+1574352288
+'b
+	/data/data/com.termux/files/home/bin/
+	..
+1574352288
+'h
+	/data/data/com.termux/files/home/
+	..
+1574352288
+
+# Bookmarks:
+
+# TUI:
+al
+q0
+v2
+ov
+m-1
+l2
+r2
+
+# Left window history (oldest to newest):
+d/data/data/com.termux/files/home/go/pkg/mod
+	cache
+1
+d/data/data/com.termux/files/home/go/pkg
+	mod
+1
+d/data/data/com.termux/files/home/go
+	pkg
+1
+d/data/data/com.termux/files/home
+	.config
+2
+d/data/data/com.termux/files/home/.config
+	configstore
+1
+d/data/data/com.termux/files/home
+	.cache
+1
+d/data/data/com.termux/files/home/.cache
+	pip
+4
+d/data/data/com.termux/files/home/.cache/pip
+	http
+1
+d/data/data/com.termux/files/home/.cache/pip/http
+	0
+1
+d/data/data/com.termux/files/home/.cache/pip/http/0
+	d
+1
+d/data/data/com.termux/files/home/.cache/pip/http/0/d
+	b
+1
+d/data/data/com.termux/files/home/.cache/pip/http/0/d/b
+	9
+1
+d/data/data/com.termux/files/home/.cache/pip/http/0/d/b/9
+	8
+1
+d/data/data/com.termux/files/home/.cache/pip/http/0/d/b/9/8
+	..
+0
+d/data/data/com.termux/files/home/.cache/pip/http/0/d/b/9
+	8
+1
+d/data/data/com.termux/files/home/.cache/pip/http/0/d/b
+	9
+1
+d/data/data/com.termux/files/home/.cache/pip/http/0/d
+	b
+1
+d/data/data/com.termux/files/home/.cache/pip/http/0
+	d
+1
+d/data/data/com.termux/files/home/.cache/pip/http
+	0
+1
+d/data/data/com.termux/files/home/.cache/pip
+	http
+1
+d/data/data/com.termux/files/home/.cache
+	pip
+4
+d/data/data/com.termux/files/home
+	.cache
+1
+d/data/data/com.termux/files
+	usr
+2
+d/data/data/com.termux/files/usr
+	lib
+5
+d/data/data/com.termux/files/usr/lib
+	python3.8
+13
+d/data/data/com.termux/files/usr/lib/python3.8
+	site-packages
+20
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages
+	powerline
+9
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages/powerline
+	bindings
+2
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages/powerline/bindings
+	..
+0
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages/powerline
+	bindings
+2
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages
+	powerline
+9
+d/data/data/com.termux/files/usr/lib/python3.8
+	site-packages
+20
+d/data/data/com.termux/files/usr/lib
+	python3.8
+13
+d/data/data/com.termux/files/usr/lib/python3.8
+	site-packages
+20
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages
+	powerline
+9
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages/powerline
+	bindings
+2
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages/powerline/bindings
+	__pycache__
+1
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages/powerline
+	bindings
+2
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages
+	powerline
+9
+d/data/data/com.termux/files/usr/lib/python3.8
+	site-packages
+20
+d/data/data/com.termux/files/usr/lib
+	python3.8
+13
+d/data/data/com.termux/files/usr/lib/python3.8
+	site-packages
+20
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages
+	powerline
+9
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages/powerline
+	bindings
+2
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages/powerline/bindings
+	tmux
+14
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages/powerline/bindings/tmux
+	..
+0
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages/powerline/bindings
+	tmux
+14
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages/powerline
+	bindings
+2
+d/data/data/com.termux/files/usr/lib/python3.8/site-packages
+	powerline
+9
+d/data/data/com.termux/files/usr/lib/python3.8
+	site-packages
+20
+d/data/data/com.termux/files/usr/lib
+	python3.8
+13
+d/data/data/com.termux/files/usr
+	etc
+3
+d/data/data/com.termux/files
+	home
+1
+d/data/data/com.termux/files/home
+	.local
+5
+d/data/data/com.termux/files/home/.local
+	share
+1
+d/data/data/com.termux/files/home/.local/share
+	fonts
+1
+d/data/data/com.termux/files/home/.local/share/fonts
+	..
+0
+d/data/data/com.termux/files/home/.local/share
+	vifm
+2
+d/data/data/com.termux/files/home/.local/share/vifm
+	Trash
+1
+d/data/data/com.termux/files/home/.local/share/vifm/Trash
+	..
+0
+d/data/data/com.termux/files/home/.local/share/vifm
+	Trash
+1
+d/data/data/com.termux/files/home/.local/share
+	vifm
+2
+d/data/data/com.termux/files/home/.local
+	share
+1
+d/data/data/com.termux/files/home
+	.config
+4
+d/data/data/com.termux/files/home/.config
+	configstore
+1
+d/data/data/com.termux/files/home
+	.cache
+3
+d/data/data/com.termux/files/home/.cache
+	vimfiles
+6
+d/data/data/com.termux/files/home/.cache/vimfiles
+	..
+0
+d/data/data/com.termux/files/home/.cache
+	parso
+4
+d/data/data/com.termux/files/home/.cache/parso
+	..
+0
+d/data/data/com.termux/files/home/.cache
+	parso
+4
+d/data/data/com.termux/files/home
+	.local
+5
+d/data/data/com.termux/files/home/.local
+	share
+1
+d/data/data/com.termux/files/home/.local/share
+	vifm
+2
+d/data/data/com.termux/files/home/.local/share/vifm
+	Trash
+1
+d/data/data/com.termux/files/home/.local/share
+	vifm
+2
+d/data/data/com.termux/files/home/.local
+	share
+1
+d/data/data/com.termux/files/home
+	.config
+4
+d/data/data/com.termux/files/home/.config
+	htop
+2
+d/data/data/com.termux/files/home/.config/htop
+	..
+0
+d/data/data/com.termux/files/home/.config
+	neofetch
+3
+d/data/data/com.termux/files/home/.config/neofetch
+	config.conf
+1
+d/data/data/com.termux/files/home/.config
+	vifm
+5
+d/data/data/com.termux/files/home/.config/vifm
+	vifmrc
+4
+d/data/data/com.termux/files/home/.config
+	vifm
+5
+d/data/data/com.termux/files/home
+	..
+0
+d/data/data/com.termux/files
+	usr
+2
+d/data/data/com.termux/files/usr
+	etc
+3
+d/data/data/com.termux/files/usr/etc
+	bash.bashrc
+7
+d/data/data/com.termux/files/usr
+	etc
+3
+d/data/data/com.termux/files
+	home
+1
+d/data/data/com.termux/files/home
+	.config
+4
+d/data/data/com.termux/files/home/.config
+	vifm
+5
+d/data/data/com.termux/files/home/.config/vifm
+	vifmrc
+4
+d/data/data/com.termux/files/home/.config
+	vifm
+5
+d/data/data/com.termux/files/home
+	.config
+4
+d/data/data/com.termux/files/home/.config
+	vifm
+5
+d/data/data/com.termux/files/home/.config/vifm
+	vifmrc
+4
+d/data/data/com.termux/files/home/.config
+	vifm
+5
+d/data/data/com.termux/files/home
+	.config
+4
+d
+
+# Right window history (oldest to newest):
+D/data/data/com.termux/files/home/.local/share
+	..
+0
+D/data/data/com.termux/files/home/.local
+	share
+1
+D/data/data/com.termux/files/home
+	.vim
+6
+D/data/data/com.termux/files/home/.vim
+	..
+0
+D/data/data/com.termux/files/home
+	storage
+7
+D/data/data/com.termux/files
+	usr
+2
+D/data/data/com.termux/files/usr
+	bin
+1
+D/data/data/com.termux/files
+	home
+1
+D/data/data/com.termux/files/home
+	.npm
+3
+D/data/data/com.termux/files
+	usr
+2
+D/data/data/com.termux/files/usr
+	share
+6
+D/data/data/com.termux/files/usr/share
+	..
+0
+D/data/data/com.termux/files/usr
+	tmp
+7
+D/data/data/com.termux/files/usr/tmp
+	..
+0
+D/data/data/com.termux/files/usr
+	etc
+2
+D/data/data/com.termux/files/usr/etc
+	bash.bashrc
+6
+D/data/data/com.termux/files/usr
+	etc
+2
+D/data/data/com.termux/files
+	home
+1
+D/data/data/com.termux/files/home
+	.config
+1
+D/data/data/com.termux/files/home/.config
+	neofetch
+1
+D/data/data/com.termux/files/home
+	.cache
+1
+D/data/data/com.termux/files/home/.cache
+	dein
+1
+D/data/data/com.termux/files/home/.cache/dein
+	repos
+2
+D/data/data/com.termux/files/home/.cache/dein/repos
+	github.com
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com
+	artur-shaik
+2
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik
+	vim-javacomplete2
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2
+	libs
+6
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs
+	javavi
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs/javavi
+	src
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs/javavi/src
+	main
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs/javavi/src/main
+	java
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs/javavi/src/main/java
+	kg
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs/javavi/src/main/java/kg
+	ash
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs/javavi/src/main/java/kg/ash
+	javavi
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs/javavi/src/main/java/kg/ash/javavi
+	..
+0
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs/javavi/src/main/java/kg/ash
+	javavi
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs/javavi/src/main/java/kg
+	ash
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs/javavi/src/main/java
+	kg
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs/javavi/src/main
+	java
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs/javavi/src
+	main
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs/javavi
+	src
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs
+	javavi
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2
+	libs
+6
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs
+	javavi
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs/javavi
+	src
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2/libs
+	javavi
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik/vim-javacomplete2
+	libs
+6
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/artur-shaik
+	vim-javacomplete2
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com
+	Shougo
+1
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com/Shougo
+	..
+0
+D/data/data/com.termux/files/home/.cache/dein/repos/github.com
+	Shougo
+1
+D/data/data/com.termux/files/home/.cache/dein/repos
+	github.com
+1
+D/data/data/com.termux/files/home/.cache/dein
+	.cache
+1
+D/data/data/com.termux/files/home/.cache/dein/.cache
+	init.vim
+1
+D/data/data/com.termux/files/home/.cache/dein/.cache/init.vim
+	.dein
+1
+D/data/data/com.termux/files/home/.cache/dein/.cache/init.vim/.dein
+	libs
+4
+D/data/data/com.termux/files/home/.cache/dein/.cache/init.vim/.dein/libs
+	javavi
+1
+D/data/data/com.termux/files/home/.cache/dein/.cache/init.vim/.dein/libs/javavi
+	target
+2
+D/data/data/com.termux/files/home/.cache/dein/.cache/init.vim/.dein/libs/javavi/target
+	classes
+1
+D/data/data/com.termux/files/home/.cache/dein/.cache/init.vim/.dein/libs/javavi/target/classes
+	..
+0
+D/data/data/com.termux/files/home/.cache/dein/.cache/init.vim/.dein/libs/javavi/target
+	classes
+1
+D/data/data/com.termux/files/home/.cache/dein/.cache/init.vim/.dein/libs/javavi
+	target
+2
+D/data/data/com.termux/files/home/.cache/dein/.cache/init.vim/.dein/libs
+	javavi
+1
+D/data/data/com.termux/files/home/.cache/dein/.cache/init.vim/.dein
+	libs
+4
+D/data/data/com.termux/files/home/.cache/dein/.cache/init.vim
+	.dein
+1
+D/data/data/com.termux/files/home/.cache/dein/.cache
+	init.vim
+1
+D/data/data/com.termux/files/home/.cache
+	..
+0
+D
+
+# Command line history (oldest to newest):
+:q
+
+# Search history (oldest to newest):
+
+# Prompt history (oldest to newest):
+
+# Local filter history (oldest to newest):
+
+# Registers:
+
+# Directory stack (oldest to newest):
+
+# Trash content:
+
+# State:
+f
+i1
+[.0
+[F
+F
+I1
+].0
+]F
+s0
