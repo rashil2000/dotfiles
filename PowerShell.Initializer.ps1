@@ -48,8 +48,10 @@ if (!(Test-Path -Path $PROFILE )) {
 $DefaultProfileOptions = "Function ContentAliasFunc {Get-ChildItem -Force}
 Set-Alias -Name gci -Value ContentAliasFunc -Force
 Set-Alias -Name dir -Value ContentAliasFunc -Option AllScope
-Set-Alias -Name ll -Value ContentAliasFunc
-Set-Alias -Name ls -Value Get-ChildItem
+Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+Set-PSReadlineKeyHandler -Key Tab -Function Complete
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-Prompt
 Import-Module -Name Terminal-Icons"
 
