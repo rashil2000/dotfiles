@@ -2,13 +2,13 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+start=`date +%s%N`
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
-
-start=`date +%s%N`
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -125,12 +125,12 @@ function prompt_right() {
 }
 
 function prompt_left() {
-  echo -e "${debian_chroot:+($debian_chroot)}\[\e[34m\]\u_\[\e[m\] : \[\e[32m\]\w\[\e[m\] \`parse_git_branch\`"
+  echo -e "${debian_chroot:+($debian_chroot)}\[\e[34m\]\u\[\e[m\] : \[\e[32m\]\w\[\e[m\] \`parse_git_branch\`"
 }
 
 function prompt() {
     compensate=5
-    PS1=$(printf "%*s\r%s\n\[\e[33m\]aws-bash\[\e[m\] \[\e[32m\]\\$\[\e[m\] " "$(($(tput cols)+${compensate}))" "$(prompt_right)" "$(prompt_left)")
+    PS1=$(printf "%*s\r%s\n\[\e[33m\]\\\h\[\e[m\] \[\e[32m\]\\$\[\e[m\] " "$(($(tput cols)+${compensate}))" "$(prompt_right)" "$(prompt_left)")
 }
 PROMPT_COMMAND=prompt
 
@@ -184,6 +184,4 @@ end=`date +%s%N`
 runtime=$((end/1000-start/1000))
 muSymbol=$'\u03bc'
 promptMessage="Loading personal and system profiles took ${runtime}${muSymbol}s."
-#echo $promptMessage
-
-pwsh
+echo $promptMessage
