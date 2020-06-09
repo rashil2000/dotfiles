@@ -15,8 +15,8 @@ Install-Module -Name posh-git -Scope CurrentUser
 Install-Module -Name oh-my-posh -Scope CurrentUser
 "Done."
 
-'`nInstalling Terminal-Icons...'
-Install-Module -Name Terminal-Icons -Scope CurrentUser
+'`nInstalling Get-ChildItemColor...'
+Install-Module -Name Get-ChildItemColor -Scope CurrentUser
 "Done."
 
 '`nInstalling PSReadline...'
@@ -53,15 +53,12 @@ Set-PSReadlineKeyHandler -Key Tab -Function Complete
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-Prompt
-Import-Module -Name Terminal-Icons"
+Import-Module Get-ChildItemColor"
 
 Add-Content $PROFILE $DefaultProfileOptions
 
 "`nTo see the list of available themes, Run 'Get-Theme'. Select the theme name from there (case-sensitive)."
 "Then Run 'Add-Content `$PROFILE 'Set-Theme <the name you selected above>''."
 
-"`nSome modules/scripts use the 'Sort' alias. This however will not work on *nix systems because 'sort' is a built-in command there."
-"If you want this to work, Run 'Add-Content `$PROFILE 'Set-Alias Sort Sort-Object''."
-"To reset this, Run 'Add-Content `$PROFILE 'Remove-Alias Sort''."
-
-"`nExit pwsh now, source your .bashrc/.zshrc, and restart by doing 'pwsh -nol'."
+"`nExit pwsh now, source your .bashrc/.zshrc, and restart by doing 'pwsh'."
+"`nAlternatively, you can set pwsh to be your default shell using the 'chsh' command."
