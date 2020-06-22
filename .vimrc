@@ -43,6 +43,7 @@ else
   let g:airline_theme='ayu_dark'
 endif
 colorscheme ayu
+highlight Comment cterm=italic gui=italic
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
