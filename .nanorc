@@ -216,9 +216,12 @@ set functioncolor green
 
 ## To include all existing syntax definitions, you can do:
 # include "@PKGDATADIR@/*.nanorc"
-include "C:/Users/RashilGandhi/.local/share/nano/syntax/*.nanorc"
-include "C:/Users/RashilGandhi/scoop/apps/nano/current/x86_64-w64-mingw32/share/nano/*.nanorc"
-include "C:/Users/RashilGandhi/scoop/apps/nano/current/x86_64-w64-mingw32/share/nano/extra/*.nanorc"
+#include "C:/Users/RashilGandhi/.local/share/nano/syntax/*.nanorc"
+#include "C:/Users/RashilGandhi/scoop/apps/nano/current/x86_64-w64-mingw32/share/nano/*.nanorc"
+#include "C:/Users/RashilGandhi/scoop/apps/nano/current/x86_64-w64-mingw32/share/nano/extra/*.nanorc"
+include "~/.local/share/nano/*.nanorc"
+include "usr/share/nano/*.nanorc"
+include "usr/share/nano/extra/*.nanorc"
 
 ## Or you can select just the ones you need.  For example:
 # include "@PKGDATADIR@/html.nanorc"

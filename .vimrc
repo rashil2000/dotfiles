@@ -1,8 +1,8 @@
-set list
+"set list
 set ruler
 set number
-set cursorline
-set cursorcolumn
+"set cursorline
+"set cursorcolumn
 syntax enable
 set autoindent
 set nocompatible
@@ -22,31 +22,26 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'vifm/vifm.vim'
 call plug#end()
 
 
-if (has("termguicolors"))
- set termguicolors
-endif
-
-" Change theme depending on the time of day
-let hr = (strftime('%H'))
-if hr >= 7 && hr < 19
-  let ayucolor="light"
-  let g:airline_theme='ayu_light'
-else
-  let ayucolor="dark"
-  let g:airline_theme='ayu_dark'
-endif
+" if (has("termguicolors"))
+  " set termguicolors
+" endif
+set t_Co=256
+let ayucolor="light"
+let g:airline_theme="ayu_light"
 colorscheme ayu
+
 highlight Comment cterm=italic gui=italic
+" highlight Normal ctermbg=none guibg=none
+" highlight SignColumn ctermbg=none guibg=none
+" highlight LineNr ctermbg=none guibg=none
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -123,7 +118,7 @@ set expandtab
 "" Custom configuration file for coc.nvim
 
 " List of completion extensions
-let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-powershell']
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
 
 " if hidden is not set, TextEdit might fail.
 set hidden
