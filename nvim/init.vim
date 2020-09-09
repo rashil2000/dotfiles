@@ -35,6 +35,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'jiangmiao/auto-pairs'
   Plug 'alvan/vim-closetag'
   Plug 'mileszs/ack.vim'
+  Plug 'voldikss/vim-floaterm'
 call plug#end()
 
 
@@ -79,25 +80,24 @@ nnoremap <M-j> <C-w>j
 nnoremap <M-k> <C-w>k
 nnoremap <M-l> <C-w>l
 " Shift-Tab will cycle buffers
-nnoremap <S-TAB> :bnext<CR>
+nnoremap <silent> <S-TAB> :bnext<CR>
 " Better tabbing
 vnoremap < <gv
 vnoremap > >gv
 
-"" Integrated Terminal keybindings
-" open new split panes to right and below
-set splitright
-set splitbelow
-" turn terminal to normal mode with escape
-tnoremap <Esc> <C-\><C-n>
-" start terminal in insert mode
-au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-" open terminal on ctrl+n
-function! OpenTerminal()
-  split term://powershell
-  resize 10
-endfunction
-nnoremap <c-n> :call OpenTerminal()<CR>
+" Floaterm configuration
+let g:floaterm_keymap_new    = '<F7>'
+let g:floaterm_keymap_prev   = '<F8>'
+let g:floaterm_keymap_next   = '<F9>'
+let g:floaterm_keymap_toggle = '<F12>'
+let g:floaterm_shell         = 'powershell -nol'
+let g:floaterm_autoclose     = 1
+let g:floaterm_wintype       = 'normal'
+let g:floaterm_height        = 0.2
+nnoremap <silent> <F10> :FloatermNew --wintype=floating --height=0.6<CR>
+tnoremap <silent> <F10> <C-\><C-n>:FloatermNew --wintype=floating --height=0.6<CR>
+nnoremap <silent> <C-f> :FloatermNew --wintype=floating --height=0.6 vifm<CR>
+tnoremap <silent> <C-f> <C-\><C-n>:FloatermNew --wintype=floating --height=0.6 vifm<CR>
 
 " Multi color Parentheses
 let g:rainbow#max_level = 16
@@ -304,4 +304,3 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
