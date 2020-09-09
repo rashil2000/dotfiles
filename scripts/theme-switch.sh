@@ -28,8 +28,8 @@ if [ $current = "Kali-Dark" ]; then
   sed -i -e 's/darkslategrey/#FFFFFE/g' ~/.mozilla/firefox/9xtl5lta.default-esr/chrome/userContent.css
   
   # VIm
-  sed -i -e 's/\"dark\"/\"light\"/g' ~/.vimrc
-  sed -i -e 's/\"ayu_dark\"/\"ayu_light\"/g' ~/.vimrc
+  sed -i -e 's/\"dark\"/\"light\"/g' ~/.config/nvim/init.vim
+  sed -i -e 's/\"ayu_dark\"/\"ayu_light\"/g' ~/.config/nvim/init.vim
 
   # Bashtop
   sed -i -e 's/flat-remix-dark/flat-remix-light/g' ~/.config/bashtop/bashtop.cfg
@@ -69,8 +69,8 @@ else
   sed -i -e 's/#FFFFFE/darkslategrey/g' ~/.mozilla/firefox/9xtl5lta.default-esr/chrome/userContent.css
 
   # VIm
-  sed -i -e 's/\"light\"/\"dark\"/g' ~/.vimrc
-  sed -i -e 's/\"ayu_light\"/\"ayu_dark\"/g' ~/.vimrc
+  sed -i -e 's/\"light\"/\"dark\"/g' ~/.config/nvim/init.vim
+  sed -i -e 's/\"ayu_light\"/\"ayu_dark\"/g' ~/.config/nvim/init.vim
 
   # Bashtop
   sed -i -e 's/flat-remix-light/flat-remix-dark/g' ~/.config/bashtop/bashtop.cfg
