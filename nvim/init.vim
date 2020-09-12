@@ -36,6 +36,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'alvan/vim-closetag'
   Plug 'mileszs/ack.vim'
   Plug 'voldikss/vim-floaterm'
+  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 call plug#end()
 
 
