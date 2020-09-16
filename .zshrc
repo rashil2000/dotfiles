@@ -32,8 +32,13 @@ bindkey '^[[D' backward-word                      # ctrl + <-
 bindkey '^[[5~' beginning-of-buffer-or-history    # page up
 bindkey '^[[6~' end-of-buffer-or-history          # page down
 bindkey '^[[Z' undo                               # shift + tab undo last action
-bindkey "^[OA" history-beginning-search-backward  # up to search history
-bindkey "^[OB" history-beginning-search-forward   # down to search history
+
+# better search defaults
+autoload -Uz history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^[OA" history-beginning-search-backward-end  # up to search history
+bindkey "^[OB" history-beginning-search-forward-end   # down to search history
 
 # enable completion features
 autoload -Uz compinit
@@ -170,8 +175,8 @@ precmd() {
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
