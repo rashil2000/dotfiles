@@ -8,16 +8,98 @@ case $- in
       *) return;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
+# Prevent file overwrite on stdout redirection
+# Use `>|` to force redirection to an existing file
+set -o noclobber
+
+# Automatically trim long paths in the prompt
+PROMPT_DIRTRIM=2
+
+## Readline bindings ##
+
+# Enable history expansion with space
+# E.g. typing !!<space> will replace the !! with your last command
+bind Space:magic-space
+
+# Perform file completion in a case insensitive fashion
+bind "set completion-ignore-case on"
+
+# Treat hyphens and underscores as equivalent
+bind "set completion-map-case on"
+
+# Display matches for ambiguous patterns at first tab press
+bind "set show-all-if-ambiguous on"
+bind "TAB: menu-complete"
+bind "set menu-complete-display-prefix on"
+
+# Immediately add a trailing slash when autocompleting symlinks to directories
+bind "set mark-symlinked-directories on"
+
+# Suffix each returned file completion with a character denoting its type, in a similar way to 'ls' with -F
+bind "set visible-stats on"
+
+# Display common prefix of set of possible completions using a different color
+bind "set colored-completion-prefix on"
+
+# Display possible completions using different colors to indicate their file type
+bind "set colored-stats on"
+
+# Enable incremental history search with up/down arrows (also Readline goodness)
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+bind '"\e[C": forward-char'
+bind '"\e[D": backward-char'
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=10000
+HISTFILESIZE=20000
+
+# Avoid duplicate entries
+HISTCONTROL="erasedups:ignoreboth"
+
+# Don't record some commands
+export HISTIGNORE="&:[ ]*:exit:ls:ll:bg:fg:history:clear"
+
+# Use standard ISO 8601 timestamp
+# %F equivalent to %Y-%m-%d
+# %T equivalent to %H:%M:%S (24-hours format)
+HISTTIMEFORMAT='%F %T '
+
+# Save multi-line commands as one command
+shopt -s cmdhist
+
+# use readline on history
+shopt -s histreedit
+
+# load history line onto readline buffer for editing
+shopt -s histverify
+
+# save history with newlines instead of ; where possible
+shopt -s lithist
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+## BETTER DIRECTORY NAVIGATION ##
+
+# Prepend cd to directory names automatically
+shopt -s autocd 2> /dev/null
+# Correct spelling errors during tab-completion
+shopt -s dirspell 2> /dev/null
+# Correct spelling errors in arguments supplied to cd
+shopt -s cdspell 2> /dev/null
+
+# This defines where cd looks for targets
+# Add the directories you want to have fast access to, separated by colon
+# Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projec
+CDPATH="."
+
+# This allows you to bookmark your favorite places across the file system
+# Define a variable containing a path and you will be able to cd into it regardless of the directory you're in
+shopt -s cdable_vars
+
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob;
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -172,7 +254,41 @@ function prompt() {
 PROMPT_COMMAND=prompt
 
 # Custom Aliases
-alias ll='ls -AlF --group-directories-first --human-readable --color=auto'
+alias ll='ls -AlF --group-directories-first --human-readable'
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"' # An "alert" alias for long running commands.  Use like so: $ sleep 10; alert
+command -v lsd > /dev/null && alias ls='lsd -A --group-dirs first' && alias ll='ls -l'
+command -v lsd > /dev/null && alias tree='lsd --tree'
 alias :q='exit'
 alias history='history | less'
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"' # An "alert" alias for long running commands.  Use like so: $ sleep 10; alert
+alias ts='~/dotfiles/scripts/theme-switch.sh'
+alias ncdu='ncdu --color dark'
+#alias tty-clock='tty-clock -cbB -f %d-%m-%Y'
+#alias vlock='vlock -n -t 30 cmatrix'
+#alias links2='links2 -http-proxy 172.16.2.30:8080 -https-proxy 172.16.2.30:8080 -no-proxy-domains 10.5.18.110,10.57.2.100'
+list-package-sizes() {
+  dpkg-query -Wf '${db:Status-Status} ${Installed-Size}\t${Package}\n' | sed -ne 's/^installed //p'| sort -n
+}
+purge-package-cache() {
+  dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge
+}
+glog() {
+    setterm -linewrap off
+
+    git --no-pager log --all --color=always --graph --abbrev-commit --decorate \
+        --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' | \
+        sed -E \
+            -e 's/\|(\x1b\[[0-9;]*m)+\\(\x1b\[[0-9;]*m)+ /├\1─╮\2/' \
+            -e 's/(\x1b\[[0-9;]+m)\|\x1b\[m\1\/\x1b\[m /\1├─╯\x1b\[m/' \
+            -e 's/\|(\x1b\[[0-9;]*m)+\\(\x1b\[[0-9;]*m)+/├\1╮\2/' \
+            -e 's/(\x1b\[[0-9;]+m)\|\x1b\[m\1\/\x1b\[m/\1├╯\x1b\[m/' \
+            -e 's/╮(\x1b\[[0-9;]*m)+\\/╮\1╰╮/' \
+            -e 's/╯(\x1b\[[0-9;]*m)+\//╯\1╭╯/' \
+            -e 's/(\||\\)\x1b\[m   (\x1b\[[0-9;]*m)/╰╮\2/' \
+            -e 's/(\x1b\[[0-9;]*m)\\/\1╮/g' \
+            -e 's/(\x1b\[[0-9;]*m)\//\1╯/g' \
+            -e 's/^\*|(\x1b\[m )\*/\1⎬/g' \
+            -e 's/(\x1b\[[0-9;]*m)\|/\1│/g' \
+        | command less -r +'/[^/]HEAD'
+
+    setterm -linewrap on
+}
