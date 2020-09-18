@@ -22,7 +22,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'sheerun/vim-polyglot'
   Plug 'junegunn/limelight.vim'
   Plug 'junegunn/goyo.vim'
-  Plug 'junegunn/rainbow_parentheses.vim'
   Plug 'junegunn/gv.vim'
   Plug 'ayu-theme/ayu-vim'
   Plug 'vim-airline/vim-airline'
@@ -99,11 +98,6 @@ nnoremap <silent> <F10> :FloatermNew --wintype=floating --height=0.6<CR>
 tnoremap <silent> <F10> <C-\><C-n>:FloatermNew --wintype=floating --height=0.6<CR>
 nnoremap <silent> <C-f> :FloatermNew --wintype=floating --height=0.6 vifm<CR>
 tnoremap <silent> <C-f> <C-\><C-n>:FloatermNew --wintype=floating --height=0.6 vifm<CR>
-
-" Multi color Parentheses
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>']]
-autocmd FileType * RainbowParentheses
 
 "" Startify configuration
 let g:startify_session_dir = '~/AppData/Local/nvim/sessions'
