@@ -1,13 +1,4 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": [
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "json",
-    "javascriptreact",
-    "typescript.tsx"
-  ],
-
   "diagnostic.virtualText": true,
 
   "explorer.file.showHiddenFiles": true,

@@ -170,9 +170,9 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-#alias ll='ls -l'
-#alias la='ls -A'
-#alias l='ls -CF'
+alias ll='ls -l'
+alias la='ls -A'
+alias l='ls -CF'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -254,10 +254,10 @@ function prompt() {
 PROMPT_COMMAND=prompt
 
 # Custom Aliases
-alias ll='ls -AlF --group-directories-first --human-readable'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"' # An "alert" alias for long running commands.  Use like so: $ sleep 10; alert
 command -v lsd > /dev/null && alias ls='lsd -A --group-dirs first' && alias ll='ls -l'
 command -v lsd > /dev/null && alias tree='lsd --tree'
+alias dir='ls -l'
 alias :q='exit'
 alias history='history | less'
 alias ts='~/dotfiles/scripts/theme-switch.sh'

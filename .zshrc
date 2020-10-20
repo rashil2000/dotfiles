@@ -212,7 +212,7 @@ fi
 
 command -v lsd > /dev/null && alias ls='lsd -A --group-dirs first'
 command -v lsd > /dev/null && alias tree='lsd --tree'
-alias ll='ls -l'
+alias dir='ls -l'
 alias :q='exit'
 alias history='history | less'
 alias ts='~/dotfiles/scripts/theme-switch.sh'
