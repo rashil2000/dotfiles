@@ -10,7 +10,6 @@ Remove-Item -Force Alias:fc, Alias:sc, Alias:dir, Alias:curl, Alias:sort, Alias:
 Remove-Item -Force Alias:h, Alias:r, Alias:ls, Alias:cp, Alias:lp, Alias:mv, Alias:ps, Alias:rm, Alias:man, Alias:pwd, Alias:cat, Alias:kill, Alias:wget, Alias:diff, Alias:sleep
 Set-Alias pls PowerColorLS
 Set-Alias mcm Measure-Command
-Set-Alias bash 'C:\Users\RashilGandhi\.local\bin\bash.exe' # Override WSL Bash
 Function p { colortool -q powershell.ini }
 Function :q { exit }
 Function h { Set-Location 'C:\Users\RashilGandhi' }
@@ -18,6 +17,7 @@ Function ghd { Set-Location 'D:\Data\GitHub' }
 Function prd { Set-Location 'D:\Data\Projects' }
 Function acd { Set-Location 'D:\Data\Documents\Academics\Semester 6' }
 Function dir { Get-ChildItem -Attributes !System -Force @args }
+Function bash { C:\MSys2\usr\bin\bash.exe -l @args } # Override WSL Bash
 Function msvc {
   Import-Module "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"
   Enter-VsDevShell 0a68dd02 -DevCmdArguments '-arch=x64'
