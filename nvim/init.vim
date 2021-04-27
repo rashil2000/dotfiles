@@ -17,7 +17,7 @@ set omnifunc=syntaxcomplete#Complete
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
-call plug#begin('~/.vim/plugged')
+call plug#begin(stdpath('data') . '/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'sheerun/vim-polyglot'
   Plug 'junegunn/limelight.vim'
@@ -40,6 +40,7 @@ call plug#end()
 
 
 " Colorscheme configuration
+set guifont=Consolas\ NF:h16
 if (has("termguicolors"))
  set termguicolors
 endif
@@ -100,7 +101,7 @@ nnoremap <silent> <C-f> :FloatermNew --wintype=floating --height=0.6 vifm<CR>
 tnoremap <silent> <C-f> <C-\><C-n>:FloatermNew --wintype=floating --height=0.6 vifm<CR>
 
 "" Startify configuration
-let g:startify_session_dir = '~/AppData/Local/nvim/sessions'
+let g:startify_session_dir = stdpath('data') . '/sessions'
 let g:startify_session_autoload = 1
 let g:startify_session_delete_buffers = 1
 let g:startify_change_to_vcs_root = 1
@@ -114,10 +115,10 @@ let g:startify_lists = [
   \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
   \ ]
 let g:startify_bookmarks = [
-  \ { 'p': '~/Documents/WindowsPowershell/Microsoft.PowerShell_profile.ps1' },
-  \ { 'i': '~/AppData/Local/nvim/init.vim' },
-  \ 'D:/Data/Git',
-  \ 'D:/Data/Projects',
+  \ { 'p': 'D:\Data\Documents\WindowsPowershell\Microsoft.PowerShell_profile.ps1' },
+  \ { 'i': $MYVIMRC },
+  \ 'D:\Data\GitHub',
+  \ 'D:\Data\Projects',
   \ ]
 let g:startify_custom_header = [
   \ '  /$$   /$$                     /$$    /$$ /$$                     /$$     /$$        ',
@@ -169,7 +170,7 @@ autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | end
 nnoremap <silent> <C-b> :CocCommand explorer<CR>
 
 " List of completion extensions
-let g:coc_global_extensions = ['coc-emmet', 'coc-highlight', 'coc-css', 'coc-explorer', 'coc-python', 'coc-sh', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-powershell']
+let g:coc_global_extensions = ['coc-emmet', 'coc-highlight', 'coc-css', 'coc-explorer', 'coc-rls', 'coc-sh', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-powershell']
 
 " if hidden is not set, TextEdit might fail.
 set hidden

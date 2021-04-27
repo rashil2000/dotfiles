@@ -1,0 +1,13 @@
+# name: Paths to load Lua scripts from
+# type: string
+clink.path = C:\Users\RashilGandhi\scoop\apps\clink-completions\current\;C:\Users\RashilGandhi\
+
+# name: Auto-answer terminate prompt
+# type: enum
+# options: off,answer_yes,answer_no
+cmd.auto_answer = answer_yes
+
+# name: Share history between instances
+# type: boolean
+history.shared = True
+

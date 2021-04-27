@@ -4,8 +4,15 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+    *i*)
+        # Initialize ble.sh
+        if [ -f /d/Data/GitHub/akinomyoga/ble.sh/out/ble.sh ]; then
+            . /d/Data/GitHub/akinomyoga/ble.sh/out/ble.sh --noattach
+        fi
+    ;;
+      *)
+        return
+    ;;
 esac
 
 # Prevent file overwrite on stdout redirection
@@ -13,7 +20,7 @@ esac
 set -o noclobber
 
 # Automatically trim long paths in the prompt
-PROMPT_DIRTRIM=2
+PROMPT_DIRTRIM=3
 
 ## Readline bindings ##
 
@@ -30,7 +37,6 @@ bind "set completion-map-case on"
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
 bind "TAB: menu-complete"
-bind "set menu-complete-display-prefix on"
 
 # Immediately add a trailing slash when autocompleting symlinks to directories
 bind "set mark-symlinked-directories on"
@@ -43,12 +49,6 @@ bind "set colored-completion-prefix on"
 
 # Display possible completions using different colors to indicate their file type
 bind "set colored-stats on"
-
-# Enable incremental history search with up/down arrows (also Readline goodness)
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-bind '"\e[C": forward-char'
-bind '"\e[D": backward-char'
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=10000
@@ -99,7 +99,7 @@ CDPATH="."
 shopt -s cdable_vars
 
 # Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob;
+shopt -s nocaseglob
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -107,56 +107,14 @@ shopt -s checkwinsize
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-#shopt -s globstar
+shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    test -r /etc/DIR_COLORS && eval "$(dircolors -b /etc/DIR_COLORS)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
@@ -164,24 +122,20 @@ if [ -x /usr/bin/dircolors ]; then
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
+    alias diff='diff --color=auto'
+    alias ip='ip --color=auto'
+
+    export LESS_TERMCAP_mb=$'\E[1;31m'  # begin blink
+    export LESS_TERMCAP_md=$'\E[1;36m'  # begin bold
+    export LESS_TERMCAP_me=$'\E[0m'     # reset bold/blink
+    export LESS_TERMCAP_so=$'\E[01;33m' # begin reverse video
+    export LESS_TERMCAP_se=$'\E[0m'     # reset reverse video
+    export LESS_TERMCAP_us=$'\E[1;32m'  # begin underline
+    export LESS_TERMCAP_ue=$'\E[0m'     # reset underline
 fi
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -194,77 +148,26 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-# get current branch in git repo
-function parse_git_branch() {
-	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-	if [ ! "${BRANCH}" == "" ]
-	then
-		STAT=`parse_git_dirty`
-		echo "[${BRANCH}${STAT}]"
-	else
-		echo ""
-	fi
-}
-# get current status of git repo
-function parse_git_dirty {
-	status=`git status 2>&1 | tee`
-	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
-	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
-	ahead=`echo -n "${status}" 2> /dev/null | grep "branch ahead of" &> /dev/null; echo "$?"`
-	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
-	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
-	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
-	bits=''
-	if [ "${renamed}" == "0" ]; then
-		bits=">${bits}"
-	fi
-	if [ "${ahead}" == "0" ]; then
-		bits="*${bits}"
-	fi
-	if [ "${newfile}" == "0" ]; then
-		bits="+${bits}"
-	fi
-	if [ "${untracked}" == "0" ]; then
-		bits="?${bits}"
-	fi
-	if [ "${deleted}" == "0" ]; then
-		bits="x${bits}"
-	fi
-	if [ "${dirty}" == "0" ]; then
-		bits="!${bits}"
-	fi
-	if [ ! "${bits}" == "" ]; then
-		echo " ${bits}"
-	else
-		echo ""
-	fi
-}
-function prompt_right() {
-  echo -e "\033[0;36m\\\t\033[0m"
-}
-function prompt_left() {
-  echo -e "${debian_chroot:+($debian_chroot)}\[\e[34m\]\u\[\e[m\] : \[\e[32m\]\w\[\e[m\] \`parse_git_branch\`"
-}
-function prompt() {
-    compensate=5
-    PS1=$(printf "%*s\r%s\n\[\e[33m\]\\\h\[\e[m\] \[\e[32m\]\\$\[\e[m\] " "$(($(tput cols)+${compensate}))" "$(prompt_right)" "$(prompt_left)")
-}
-# Custom prompt
-PROMPT_COMMAND=prompt
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# An "alert" alias for long running commands.  Use like so: $ sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Custom Aliases
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"' # An "alert" alias for long running commands.  Use like so: $ sleep 10; alert
-command -v lsd > /dev/null && alias ls='lsd -A --group-dirs first' && alias ll='ls -l'
-command -v lsd > /dev/null && alias tree='lsd --tree'
-alias dir='ls -l'
+alias dir='ls -AlF --group-directories-first --human-readable'
 alias :q='exit'
 alias history='history | less'
-alias ts='~/dotfiles/scripts/theme-switch.sh'
 alias ncdu='ncdu --color dark'
-#alias tty-clock='tty-clock -cbB -f %d-%m-%Y'
-#alias vlock='vlock -n -t 30 cmatrix'
-#alias links2='links2 -http-proxy 172.16.2.30:8080 -https-proxy 172.16.2.30:8080 -no-proxy-domains 10.5.18.110,10.57.2.100'
+alias prd='cd /d/Data/Projects'
+alias ghd='cd /d/Data/GitHub'
+alias acd='cd /d/Data/Documents/Academics/Semester\ 6'
 list-package-sizes() {
   dpkg-query -Wf '${db:Status-Status} ${Installed-Size}\t${Package}\n' | sed -ne 's/^installed //p'| sort -n
 }
@@ -272,8 +175,6 @@ purge-package-cache() {
   dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge
 }
 glog() {
-    setterm -linewrap off
-
     git --no-pager log --all --color=always --graph --abbrev-commit --decorate \
         --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' | \
         sed -E \
@@ -289,6 +190,24 @@ glog() {
             -e 's/^\*|(\x1b\[m )\*/\1⎬/g' \
             -e 's/(\x1b\[[0-9;]*m)\|/\1│/g' \
         | command less -r +'/[^/]HEAD'
-
-    setterm -linewrap on
 }
+
+# Change to a safe location
+startpath=$(pwd)
+[[ $startpath == '/d/Data/Projects/Scripts' || $startpath == '/c/Program Files/WindowsApps/Microsoft.WindowsTerminal_1.4.3243.0_x64__8wekyb3d8bbwe' ]] && cd
+
+# Enable Starship prompt
+if [ -f ~/.local/share/starship.bash ]; then
+  . ~/.local/share/starship.bash
+fi
+
+# Startup info
+read msyskernelname msyskernelrelease <<<$(uname -sr)
+echo "Microsoft Windows [$msyskernelname]"
+echo "(c) Minimal System 2 - $msyskernelrelease"
+# if [[ -v __shell_start ]]; then
+#   echo -e "\nLoading personal and system profiles took $(($(date +%s%3N) - __shell_start))ms."
+# fi
+
+# Attach to ble.sh
+[[ ${BLE_VERSION-} ]] && ble-attach

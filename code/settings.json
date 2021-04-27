@@ -1,0 +1,94 @@
+{
+  /*---- Extension-specific Settings ----*/
+
+  // VSCode Vibrancy
+  "vscode_vibrancy.opacity": 0.6,
+  "vscode_vibrancy.theme": "Light (Only Subbar)",
+
+  // Excel Viewer
+  "csv-preview.capitalizeHeaders": false,
+  "csv-preview.lineNumbers": "ordinal",
+
+  /*---- File-type Associations ----*/
+
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "emmet.triggerExpansionOnTab": true,
+  "files.trimTrailingWhitespace": true,
+
+  /*---- Core Settings ----*/
+
+  "window.menuBarVisibility": "toggle",
+  "workbench.colorTheme": "Bluloco Light Italic",
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.startupEditor": "welcomePage",
+  "workbench.list.smoothScrolling": true,
+  "editor.fontFamily": "ClincherCode NF",
+  "editor.formatOnType": true,
+  "editor.minimap.maxColumn": 50,
+  "editor.minimap.enabled": true,
+  "editor.suggestSelection": "first",
+  "editor.tabSize": 2,
+  "editor.fontLigatures": true,
+  "editor.cursorSmoothCaretAnimation": true,
+  "editor.smoothScrolling": true,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "name": "Comment",
+        "scope": [
+          "comment",
+          "comment.block",
+          "comment.block.documentation",
+          "comment.line",
+          "comment.line.double-slash",
+          "punctuation.definition.comment"
+        ],
+        "settings": {
+          "fontStyle": "italic"
+        }
+      }
+    ]
+  },
+  "powershell.powerShellDefaultVersion": "Windows PowerShell (x64)",
+  "powershell.enableProfileLoading": false,
+  "powershell.integratedConsole.showOnStartup": false,
+  "terminal.integrated.fontFamily": "RecMonoSemicasual NF",
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.rendererType": "dom",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell"
+    },
+    "Command Prompt": {
+      "path": ["${env:windir}\\System32\\cmd.exe"]
+    },
+    "MSys2": {
+      "path": "C:\\MSys2\\msys2_shell.cmd",
+      "args": ["-defterm", "-no-start", "-here", "-use-full-path"]
+    },
+    "MinGW": {
+      "path": "C:\\MSys2\\msys2_shell.cmd",
+      "args": ["-defterm", "-no-start", "-here", "-mingw"]
+    }
+  },
+  "remote.SSH.remotePlatform": {
+    "104.211.92.154": "linux",
+    "ubuntuosboxes": "linux",
+    "ubuntuazure2": "linux"
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "git.enableCommitSigning": true
+}

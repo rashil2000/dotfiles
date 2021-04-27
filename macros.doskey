@@ -1,0 +1,11 @@
+;= Override WSL Bash
+bash="C:\Users\RashilGandhi\.local\bin\bash.exe" $*
+;=
+msvc="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+l=colortool -q some-light.ini
+d=colortool -q campbell.ini
+:q=exit
+h=cd /d C:\Users\RashilGandhi
+ghd=cd /d D:\Data\GitHub
+prd=cd /d D:\Data\Projects
+acd=cd /d D:\Data\Documents\Academics\Semester 6

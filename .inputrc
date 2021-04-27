@@ -1,0 +1,7 @@
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+$if clink [
+	set history-point-at-end-of-anchored-search on
+] $endif
