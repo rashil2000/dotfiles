@@ -10,9 +10,9 @@
 ## # Please put the following line in the beginning of .bashrc
 ## # Note: Please replace $HOME/.local/share/blesh with the path to your ble.sh
 ## [[ $- == *i* ]] && "$HOME/.local/share/blesh/ble.sh" --noattach
-## 
+##
 ## # Your bashrc contents should come between the two lines.
-## 
+##
 ## # Please put the following line in the end of .bashrc
 ## [[ ${BLE_VERSION-} ]] && ble-attach
 ## ```
@@ -207,7 +207,7 @@
 ## history is shared with the other Bash ble.sh sessions with the history
 ## sharing turned on.
 
-#bleopt history_share=
+bleopt history_share=1
 
 
 ## The following setting controls the behavior of the widget
@@ -690,3 +690,7 @@ blehook/eval-after-load keymap_vi blerc/vim-load-hook
 #bleopt internal_exec_type=gexec
 #bleopt internal_suppress_bash_output=1
 #bleopt internal_ignoreeof_trap='Use "exit" to leave the shell.'
+
+## My settings
+ble-bind -m 'nsearch' -f 'C-m' 'nsearch/accept-line'
+ble-bind -m 'nsearch' -f 'C-[' 'nsearch/cancel'
