@@ -692,5 +692,5 @@ blehook/eval-after-load keymap_vi blerc/vim-load-hook
 #bleopt internal_ignoreeof_trap='Use "exit" to leave the shell.'
 
 ## My settings
-ble-bind -m 'nsearch' -f 'C-m' 'nsearch/accept-line'
-ble-bind -m 'nsearch' -f 'C-[' 'nsearch/cancel'
+ble-bind -f up 'history-search-backward hide-status:immediate-accept:point=end'
+ble-bind -f down 'history-search-forward hide-status:immediate-accept:point=end'
