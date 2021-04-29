@@ -8,6 +8,9 @@ case $- in
         # Initialize ble.sh
         if [ -f /d/Data/GitHub/akinomyoga/ble.sh/out/ble.sh ]; then
             . /d/Data/GitHub/akinomyoga/ble.sh/out/ble.sh --noattach
+            bleopt history_share=1
+            ble-bind -f up 'history-search-backward hide-status:immediate-accept:point=end'
+            ble-bind -f down 'history-search-forward hide-status:immediate-accept:point=end'
         fi
     ;;
       *)
