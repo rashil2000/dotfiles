@@ -56,6 +56,7 @@
           // "acrylicOpacity": 0.8,
           // "useAcrylic": true,
           // "experimental.pixelShaderPath": "D:\\Data\\Pictures\\crt.hlsl",
+          // "fontWeight": "semi-bold", // For VictorMono only
           "bellStyle": "none",
           "colorScheme": "some-light",
           "fontFace": "Consolas NF",
@@ -66,11 +67,11 @@
       "list": [
           {
               "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-              "name": "Command"
+              "name": "Cmd"
           },
           {
               "colorScheme": "Bluloco Light",
-              "fontFace": "RecMonoSemicasual NF",
+              "fontFace": "CaskaydiaCove NF",
               "fontSize": 11,
               "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
               "name": "PowerShell"
@@ -83,16 +84,15 @@
           {
               "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
               "hidden": true,
-              "name": "PowerShell Core",
-              "source": "Windows.Terminal.PowershellCore"
+              "name": "PowerShell Core"
           },
           {
               "colorScheme": "Tango Light",
-              "commandline": "C:/MSys2/usr/bin/bash -l",
+              "commandline": "D:/MSys2/usr/bin/bash --login",
               "guid": "{17da3cac-b318-431e-8a3e-7fcdefe6d114}",
               "fontFace": "ClincherCode NF",
               "fontSize": 11,
-              "icon": "D:/Data/Pictures/Icons/unix.ico",
+              "icon": "D:/Data/Pictures/Icons/bash.ico",
               "name": "Bash"
           },
           {
@@ -113,9 +113,8 @@
           },
           {
               "commandline": "ssh ubuntuazure2",
-              "fontFace": "VictorMono NF",
+              "fontFace": "RecMonoSemicasual NF",
               "fontSize": 11,
-              "fontWeight": "semi-bold",
               "colorScheme": "Light Owl",
               "guid": "{9f80d682-c62b-40a3-a8f3-40990da15ef2}",
               "icon": "D:/Data/Pictures/Icons/ubuntuazure.ico",
@@ -167,7 +166,7 @@
           "purple": "#6D1BED",
           "red": "#C90E42",
           "selectionBackground": "#000000",
-          "white": "#000000",
+          "white": "#757575",
           "yellow": "#D54D17"
       },
       {

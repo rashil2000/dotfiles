@@ -4,18 +4,18 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*)
-        # Initialize ble.sh
-        if [ -f /d/Data/GitHub/akinomyoga/ble.sh/out/ble.sh ]; then
-            . /d/Data/GitHub/akinomyoga/ble.sh/out/ble.sh --noattach
-            bleopt history_share=1
-            ble-bind -f up 'history-search-backward hide-status:immediate-accept:point=end'
-            ble-bind -f down 'history-search-forward hide-status:immediate-accept:point=end'
-        fi
-    ;;
-      *)
-        return
-    ;;
+*i*)
+  # Initialize ble.sh
+  if [ -f /d/Data/GitHub/akinomyoga/ble.sh/out/ble.sh ]; then
+    . /d/Data/GitHub/akinomyoga/ble.sh/out/ble.sh --noattach
+    bleopt history_share=1
+    ble-bind -f up 'history-search-backward hide-status:immediate-accept:point=end'
+    ble-bind -f down 'history-search-forward hide-status:immediate-accept:point=end'
+  fi
+  ;;
+*)
+  return
+  ;;
 esac
 
 # Prevent file overwrite on stdout redirection
@@ -37,10 +37,6 @@ bind "set completion-ignore-case on"
 # Treat hyphens and underscores as equivalent
 bind "set completion-map-case on"
 
-# Display matches for ambiguous patterns at first tab press
-bind "set show-all-if-ambiguous on"
-bind "TAB: menu-complete"
-
 # Immediately add a trailing slash when autocompleting symlinks to directories
 bind "set mark-symlinked-directories on"
 
@@ -61,12 +57,7 @@ HISTFILESIZE=20000
 HISTCONTROL="erasedups:ignoreboth"
 
 # Don't record some commands
-export HISTIGNORE="&:[ ]*:exit:ls:ll:bg:fg:history:clear"
-
-# Use standard ISO 8601 timestamp
-# %F equivalent to %Y-%m-%d
-# %T equivalent to %H:%M:%S (24-hours format)
-HISTTIMEFORMAT='%F %T '
+export HISTIGNORE="&:[ ]*:exit:ls:ll:bg:fg:history:clear:dir"
 
 # Save multi-line commands as one command
 shopt -s cmdhist
@@ -86,11 +77,11 @@ shopt -s histappend
 ## BETTER DIRECTORY NAVIGATION ##
 
 # Prepend cd to directory names automatically
-shopt -s autocd 2> /dev/null
+shopt -s autocd 2>/dev/null
 # Correct spelling errors during tab-completion
-shopt -s dirspell 2> /dev/null
+shopt -s dirspell 2>/dev/null
 # Correct spelling errors in arguments supplied to cd
-shopt -s cdspell 2> /dev/null
+shopt -s cdspell 2>/dev/null
 
 # This defines where cd looks for targets
 # Add the directories you want to have fast access to, separated by colon
@@ -117,24 +108,24 @@ shopt -s globstar
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r /etc/DIR_COLORS && eval "$(dircolors -b /etc/DIR_COLORS)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
+  test -r /etc/DIR_COLORS && eval "$(dircolors -b /etc/DIR_COLORS)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  alias dir='dir --color=auto'
+  alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-    alias diff='diff --color=auto'
-    alias ip='ip --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+  alias diff='diff --color=auto'
+  alias ip='ip --color=auto'
 
-    export LESS_TERMCAP_mb=$'\E[1;31m'  # begin blink
-    export LESS_TERMCAP_md=$'\E[1;36m'  # begin bold
-    export LESS_TERMCAP_me=$'\E[0m'     # reset bold/blink
-    export LESS_TERMCAP_so=$'\E[01;33m' # begin reverse video
-    export LESS_TERMCAP_se=$'\E[0m'     # reset reverse video
-    export LESS_TERMCAP_us=$'\E[1;32m'  # begin underline
-    export LESS_TERMCAP_ue=$'\E[0m'     # reset underline
+  export LESS_TERMCAP_mb=$'\E[1;31m'  # begin blink
+  export LESS_TERMCAP_md=$'\E[1;36m'  # begin bold
+  export LESS_TERMCAP_me=$'\E[0m'     # reset bold/blink
+  export LESS_TERMCAP_so=$'\E[01;33m' # begin reverse video
+  export LESS_TERMCAP_se=$'\E[0m'     # reset reverse video
+  export LESS_TERMCAP_us=$'\E[1;32m'  # begin underline
+  export LESS_TERMCAP_ue=$'\E[0m'     # reset underline
 fi
 
 # colored GCC warnings and errors
@@ -151,15 +142,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # An "alert" alias for long running commands.  Use like so: $ sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
@@ -171,38 +153,13 @@ alias ncdu='ncdu --color dark'
 alias prd='cd /d/Data/Projects'
 alias ghd='cd /d/Data/GitHub'
 alias acd='cd /d/Data/Documents/Academics/Semester\ 6'
-list-package-sizes() {
-  dpkg-query -Wf '${db:Status-Status} ${Installed-Size}\t${Package}\n' | sed -ne 's/^installed //p'| sort -n
-}
-purge-package-cache() {
-  dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge
-}
-glog() {
-    git --no-pager log --all --color=always --graph --abbrev-commit --decorate \
-        --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' | \
-        sed -E \
-            -e 's/\|(\x1b\[[0-9;]*m)+\\(\x1b\[[0-9;]*m)+ /├\1─╮\2/' \
-            -e 's/(\x1b\[[0-9;]+m)\|\x1b\[m\1\/\x1b\[m /\1├─╯\x1b\[m/' \
-            -e 's/\|(\x1b\[[0-9;]*m)+\\(\x1b\[[0-9;]*m)+/├\1╮\2/' \
-            -e 's/(\x1b\[[0-9;]+m)\|\x1b\[m\1\/\x1b\[m/\1├╯\x1b\[m/' \
-            -e 's/╮(\x1b\[[0-9;]*m)+\\/╮\1╰╮/' \
-            -e 's/╯(\x1b\[[0-9;]*m)+\//╯\1╭╯/' \
-            -e 's/(\||\\)\x1b\[m   (\x1b\[[0-9;]*m)/╰╮\2/' \
-            -e 's/(\x1b\[[0-9;]*m)\\/\1╮/g' \
-            -e 's/(\x1b\[[0-9;]*m)\//\1╯/g' \
-            -e 's/^\*|(\x1b\[m )\*/\1⎬/g' \
-            -e 's/(\x1b\[[0-9;]*m)\|/\1│/g' \
-        | command less -r +'/[^/]HEAD'
-}
 
 # Change to a safe location
 startpath=$(pwd)
 [[ $startpath == '/d/Data/Projects/Scripts' || $startpath == '/c/Program Files/WindowsApps/Microsoft.WindowsTerminal_1.4.3243.0_x64__8wekyb3d8bbwe' ]] && cd
 
 # Enable Starship prompt
-if [ -f ~/.local/share/starship.bash ]; then
-  . ~/.local/share/starship.bash
-fi
+[ -f ~/.local/share/starship.bash ] && . ~/.local/share/starship.bash || true
 
 # Startup info
 read msyskernelname msyskernelrelease <<<$(uname -sr)
@@ -214,3 +171,6 @@ echo "(c) Minimal System 2 - $msyskernelrelease"
 
 # Attach to ble.sh
 [[ ${BLE_VERSION-} ]] && ble-attach
+
+# FZF Key bindings
+[ -f ~/.local/share/fzf/key-bindings.bash ] && . ~/.local/share/fzf/key-bindings.bash || true

@@ -6,6 +6,7 @@ set number
 syntax enable
 set autoindent
 set nocompatible
+set title
 set mouse=a
 set tabstop=2           " The width of a TAB is set to 2. Still it is a \t. It is just that Vim will interpret it to be having a width of 2.
 set shiftwidth=2        " Indents will have a width of 2
@@ -15,7 +16,6 @@ set smarttab
 set clipboard=unnamed
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 call plug#begin(stdpath('data') . '/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -40,7 +40,7 @@ call plug#end()
 
 
 " Colorscheme configuration
-set guifont=Consolas\ NF:h16
+set guifont=ClincherCode\ NF:h11
 if (has("termguicolors"))
  set termguicolors
 endif
@@ -80,8 +80,6 @@ nnoremap <M-h> <C-w>h
 nnoremap <M-j> <C-w>j
 nnoremap <M-k> <C-w>k
 nnoremap <M-l> <C-w>l
-" Shift-Tab will cycle buffers
-nnoremap <silent> <S-TAB> :bnext<CR>
 " Better tabbing
 vnoremap < <gv
 vnoremap > >gv
@@ -91,7 +89,7 @@ let g:floaterm_keymap_new    = '<F7>'
 let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F12>'
-let g:floaterm_shell         = 'powershell -nol'
+let g:floaterm_shell         = 'powershell'
 let g:floaterm_autoclose     = 1
 let g:floaterm_wintype       = 'normal'
 let g:floaterm_height        = 0.2
@@ -117,6 +115,7 @@ let g:startify_lists = [
 let g:startify_bookmarks = [
   \ { 'p': 'D:\Data\Documents\WindowsPowershell\Microsoft.PowerShell_profile.ps1' },
   \ { 'i': $MYVIMRC },
+  \ { 't': 'term://powershell' },
   \ 'D:\Data\GitHub',
   \ 'D:\Data\Projects',
   \ ]

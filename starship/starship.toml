@@ -24,20 +24,20 @@ format = "[$symbol$percentage]($style) "
 
 [[battery.display]]
 threshold = 20
-style = "bold red"
+style = "italic red"
 
 [[battery.display]]
 threshold = 80
-style = "bold green"
+style = "italic green"
 
 [[battery.display]]
 threshold = 100
-style = "bold yellow"
+style = "italic yellow"
 
 [time]
 disabled = false
 format = "[$time]($style) - "
-style = "cyan"
+style = "italic cyan"
 
 [username]
 show_always = true
@@ -45,9 +45,9 @@ style_user = "blue"
 
 [shell]
 format = "\\[$indicator\\] "
-powershell_indicator = "pwsh"
-bash_indicator = "bash"
-# unknown_indicator = "cmd"
+powershell_indicator = "[pwsh](yellow)"
+bash_indicator = "[bash](yellow)"
+unknown_indicator = "[cmd](yellow)"
 disabled = false
 
 [directory]
@@ -56,10 +56,10 @@ read_only = ""
 truncation_symbol = "…/"
 
 [package]
-display_private =	true
 symbol = " "
 
 [git_branch]
+style = 'italic purple'
 symbol = " "
 
 [git_commit]
