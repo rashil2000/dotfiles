@@ -1,7 +1,7 @@
 -- Set some variables
 os.setenv('WTSettings', 'C:\\Users\\RashilGandhi\\AppData\\Local\\Packages\\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\\LocalState\\settings.json')
 os.setenv('ClinkReadlineHistory', 'C:\\Users\\RashilGandhi\\AppData\\Local\\clink\\clink_history')
-os.setenv('ClinkInit', 'D:\\Data\\Projects\\Scripts\\init.lua')
+os.setenv('ClinkInit', 'C:\\Users\\RashilGandhi\\AppData\\Local\\clink\\init.lua')
 
 -- Enable Starship prompt
 local custom_prompt = clink.promptfilter(5)
