@@ -23,7 +23,7 @@ Function msvc {
 }
 
 <# Line Editing Options #>
-Set-PSReadLineOption -EditMode Emacs -PredictionSource History -MaximumHistoryCount 10000 -HistorySearchCursorMovesToEnd -Colors @{ListPredictionSelected="$([char]0x1b)[48;5;243m"}
+Set-PSReadLineOption -EditMode Emacs -PredictionSource History -MaximumHistoryCount 10000 -HistorySearchCursorMovesToEnd -Colors @{ ListPredictionSelected = "$([char]0x1b)[48;5;243m" }
 if ($false) {
   Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
   Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
