@@ -147,10 +147,6 @@ alias prd='cd /d/Data/Projects'
 alias ghd='cd /d/Data/GitHub'
 alias acd='cd /d/Data/Documents/Academics/Semester\ 6'
 
-# Change to a safe location
-startpath=$(pwd)
-[[ $startpath == '/d/Data/Projects/Scripts' || $startpath == '/c/Program Files/WindowsApps/Microsoft.WindowsTerminal_1.4.3243.0_x64__8wekyb3d8bbwe' ]] && cd
-
 # Enable Starship prompt
 [ -f ~/.local/share/starship.bash ] && . ~/.local/share/starship.bash || true
 
