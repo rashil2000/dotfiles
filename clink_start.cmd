@@ -15,3 +15,4 @@ doskey prd=cd /d D:\Data\Projects
 doskey acd=cd /d D:\Data\Documents\Academics\Semester 6
 doskey dir=exa -la --icons --git --group-directories-first $*
 doskey msvc="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+doskey msys=D:\Data\Projects\Scripts\msys-env.bat $*
