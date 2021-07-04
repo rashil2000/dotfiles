@@ -16,10 +16,10 @@ format = """\
   """
 
 [battery]
-full_symbol = ""
-discharging_symbol = "•" # ""
-charging_symbol = ""
-unknown_symbol = "" # ""
+full_symbol = "•"
+discharging_symbol = ""
+charging_symbol = ""
+unknown_symbol = "!"
 format = "[$symbol$percentage]($style) "
 
 [[battery.display]]
@@ -41,7 +41,7 @@ style = "italic cyan"
 
 [username]
 show_always = true
-style_user = "blue"
+style_user = "bold blue"
 
 [shell]
 format = "\\[$indicator\\] "

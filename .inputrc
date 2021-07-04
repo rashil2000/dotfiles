@@ -4,6 +4,9 @@
 "\e[1;5C": forward-word
 "\e[1;5D": backward-word
 $if clink [
+	set visible-stats on
+	set colored-completion-prefix on
+	set colored-stats on
 	set history-point-at-end-of-anchored-search on
 	C-r: "luafunc:fzf_history"
 	TAB: "luafunc:fzf_complete"

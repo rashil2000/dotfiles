@@ -83,11 +83,6 @@ shopt -s dirspell 2>/dev/null
 # Correct spelling errors in arguments supplied to cd
 shopt -s cdspell 2>/dev/null
 
-# This defines where cd looks for targets
-# Add the directories you want to have fast access to, separated by colon
-# Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projec
-CDPATH="."
-
 # This allows you to bookmark your favorite places across the file system
 # Define a variable containing a path and you will be able to cd into it regardless of the directory you're in
 shopt -s cdable_vars
@@ -146,10 +141,8 @@ fi
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Custom Aliases
-alias dir='ls -AlF --group-directories-first --human-readable'
+alias dir='exa -la --icons --git --group-directories-first'
 alias :q='exit'
-alias history='history | less'
-alias ncdu='ncdu --color dark'
 alias prd='cd /d/Data/Projects'
 alias ghd='cd /d/Data/GitHub'
 alias acd='cd /d/Data/Documents/Academics/Semester\ 6'
@@ -173,4 +166,8 @@ echo "(c) Minimal System 2 - $msyskernelrelease"
 [[ ${BLE_VERSION-} ]] && ble-attach
 
 # FZF Key bindings
+export FZF_DEFAULT_OPTS="--exact --no-sort --reverse --cycle"
 [ -f ~/.local/share/fzf/key-bindings.bash ] && . ~/.local/share/fzf/key-bindings.bash || true
+
+# Node Version Switcher
+[ -f ~/Scoop/apps/nvs/current/nvs.sh ] && . ~/Scoop/apps/nvs/current/nvs.sh || true

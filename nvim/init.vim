@@ -40,7 +40,6 @@ call plug#end()
 
 
 " Colorscheme configuration
-set guifont=ClincherCode\ NF:h11
 if (has("termguicolors"))
  set termguicolors
 endif
@@ -89,7 +88,7 @@ let g:floaterm_keymap_new    = '<F7>'
 let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F12>'
-let g:floaterm_shell         = 'powershell'
+let g:floaterm_shell         = 'pwsh'
 let g:floaterm_autoclose     = 1
 let g:floaterm_wintype       = 'normal'
 let g:floaterm_height        = 0.2
@@ -113,9 +112,9 @@ let g:startify_lists = [
   \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
   \ ]
 let g:startify_bookmarks = [
-  \ { 'p': 'D:\Data\Documents\WindowsPowershell\Microsoft.PowerShell_profile.ps1' },
+  \ { 'p': 'D:\Data\GitHub\rashil2000\dotfiles\Microsoft.PowerShell_profile.ps1' },
   \ { 'i': $MYVIMRC },
-  \ { 't': 'term://powershell' },
+  \ { 't': 'term://pwsh' },
   \ 'D:\Data\GitHub',
   \ 'D:\Data\Projects',
   \ ]

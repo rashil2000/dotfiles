@@ -45,7 +45,7 @@
   "editor.cursorSmoothCaretAnimation": true,
   "editor.smoothScrolling": true,
   "editor.scrollBeyondLastLine": false,
-  "editor.scrollBeyondLastColumn": 0,
+  "editor.scrollBeyondLastColumn": 2,
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
@@ -68,6 +68,7 @@
   "powershell.enableProfileLoading": false,
   "powershell.integratedConsole.showOnStartup": false,
   "terminal.integrated.fontFamily": "CaskaydiaCove NF",
+  "terminal.integrated.tabs.enabled": false,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.scrollback": 10000,
   "terminal.integrated.defaultProfile.windows": "PowerShell",
