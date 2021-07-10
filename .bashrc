@@ -18,61 +18,37 @@ case $- in
   ;;
 esac
 
-# Prevent file overwrite on stdout redirection
-# Use `>|` to force redirection to an existing file
-set -o noclobber
-
 # Automatically trim long paths in the prompt
 PROMPT_DIRTRIM=3
 
 # Set history lengths
 HISTSIZE=10000
 HISTFILESIZE=20000
-
 # Avoid duplicate entries
 HISTCONTROL="erasedups:ignoreboth"
-
 # Don't record some commands
 export HISTIGNORE="&:[ ]*:exit:ls:ll:bg:fg:history:clear:dir"
 
-# Save multi-line commands as one command
-shopt -s cmdhist
+# Prevent file overwrite on stdout redirection
+# Use `>|` to force redirection to an existing file
+set -o noclobber
 
-# use readline on history
-shopt -s histreedit
-
-# load history line onto readline buffer for editing
-shopt -s histverify
-
-# save history with newlines instead of ; where possible
-shopt -s lithist
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-## BETTER DIRECTORY NAVIGATION ##
-
-# Prepend cd to directory names automatically
-shopt -s autocd 2>/dev/null
-# Correct spelling errors during tab-completion
-shopt -s dirspell 2>/dev/null
-# Correct spelling errors in arguments supplied to cd
-shopt -s cdspell 2>/dev/null
-
-# This allows you to bookmark your favorite places across the file system
-# Define a variable containing a path and you will be able to cd into it regardless of the directory you're in
-shopt -s cdable_vars
-
-# Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-shopt -s globstar
+# cmdhist      - save multi-line commands as one command
+# histreedit   - use readline on history
+# histverify   - load history line onto readline buffer for editing
+# lithist      - save history with newlines instead of ; where possible
+# histappend   - append to the history file, don't overwrite it
+# autocd       - prepend cd to directory names automatically
+# dirspell     - correct spelling errors during tab-completion
+# cdspell      - correct spelling errors in arguments supplied to cd
+# nocaseglob   - case-insensitive globbing (used in pathname expansion)
+# cdable_vars  - This allows you to bookmark your favorite places across the file system
+#                Define a variable containing a path and you will be able to cd into it regardless of the directory you're in
+# checkwinsize - check the window size after each command and, if necessary,
+#                update the values of LINES and COLUMNS.
+# globstar     - If set, the pattern "**" used in a pathname expansion context will
+#                match all files and zero or more directories and subdirectories.
+shopt -s cmdhist histreedit histverify lithist histappend autocd dirspell cdspell nocaseglob cdable_vars checkwinsize globstar 2>/dev/null
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -97,10 +73,10 @@ if [ -x /usr/bin/dircolors ]; then
   export LESS_TERMCAP_se=$'\E[0m'     # reset reverse video
   export LESS_TERMCAP_us=$'\E[1;32m'  # begin underline
   export LESS_TERMCAP_ue=$'\E[0m'     # reset underline
-fi
 
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+  # colored GCC warnings and errors
+  export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
