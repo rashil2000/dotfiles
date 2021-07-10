@@ -1,13 +1,26 @@
-"\t": menu-complete
 "\e[A": history-search-backward
 "\e[B": history-search-forward
-"\e[1;5C": forward-word
-"\e[1;5D": backward-word
-$if clink [
-	set visible-stats on
-	set colored-completion-prefix on
-	set colored-stats on
-	set history-point-at-end-of-anchored-search on
+# Suffix each returned file completion with a character denoting its type, in a similar way to 'ls' with -F
+set visible-stats on
+# Display common prefix of set of possible completions using a different color
+set colored-completion-prefix on
+# Display possible completions using different colors to indicate their file type
+set colored-stats on
+
+$if clink
+	"\t": clink-select-complete
 	C-r: "luafunc:fzf_history"
-	TAB: "luafunc:fzf_complete"
-] $endif
+	C-t: "luafunc:fzf_file"
+	# Puts the cursor at the end of the line when using 'history-search-forward' or 'history-search-backward'
+	set history-point-at-end-of-anchored-search on
+$endif
+
+$if bash
+	"\t": menu-complete
+	# Perform file completion in a case insensitive fashion
+	set completion-ignore-case on
+	# Treat hyphens and underscores as equivalent
+	set completion-map-case on
+	# Immediately add a trailing slash when autocompleting symlinks to directories
+	set mark-symlinked-directories on
+$endif

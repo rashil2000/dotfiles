@@ -25,31 +25,7 @@ set -o noclobber
 # Automatically trim long paths in the prompt
 PROMPT_DIRTRIM=3
 
-## Readline bindings ##
-
-# Enable history expansion with space
-# E.g. typing !!<space> will replace the !! with your last command
-bind Space:magic-space
-
-# Perform file completion in a case insensitive fashion
-bind "set completion-ignore-case on"
-
-# Treat hyphens and underscores as equivalent
-bind "set completion-map-case on"
-
-# Immediately add a trailing slash when autocompleting symlinks to directories
-bind "set mark-symlinked-directories on"
-
-# Suffix each returned file completion with a character denoting its type, in a similar way to 'ls' with -F
-bind "set visible-stats on"
-
-# Display common prefix of set of possible completions using a different color
-bind "set colored-completion-prefix on"
-
-# Display possible completions using different colors to indicate their file type
-bind "set colored-stats on"
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+# Set history lengths
 HISTSIZE=10000
 HISTFILESIZE=20000
 
@@ -146,6 +122,10 @@ alias :q='exit'
 alias prd='cd /d/Data/Projects'
 alias ghd='cd /d/Data/GitHub'
 alias acd='cd /d/Data/Documents/Academics/Semester\ 6'
+
+# Change to a safe location
+startpath=$(pwd)
+[[ $startpath == '/d/Data/Projects/Scripts' || $startpath == '/c/Windows/System32' ]] && cd
 
 # Enable Starship prompt
 [ -f ~/.local/share/starship.bash ] && . ~/.local/share/starship.bash || true

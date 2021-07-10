@@ -140,7 +140,7 @@ let g:ackprg = 'rg --vimgrep --type-not sql --smart-case'
 " Auto close the Quickfix list after pressing '<enter>' on a list item
 let g:ack_autoclose = 1
 
-" Any empty ack search will search for the work the cursor is on
+" Any empty ack search will search for the word the cursor is on
 let g:ack_use_cword_for_empty_search = 1
 
 " Don't jump to first match
@@ -168,7 +168,44 @@ autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | end
 nnoremap <silent> <C-b> :CocCommand explorer<CR>
 
 " List of completion extensions
-let g:coc_global_extensions = ['coc-emmet', 'coc-highlight', 'coc-css', 'coc-explorer', 'coc-rls', 'coc-sh', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-powershell']
+let g:coc_global_extensions = ['coc-emmet',
+  \ 'coc-highlight',
+  \ 'coc-css',
+  \ 'coc-explorer',
+  \ 'coc-rls',
+  \ 'coc-sh',
+  \ 'coc-vimlsp',
+  \ 'coc-html',
+  \ 'coc-json',
+  \ 'coc-prettier',
+  \ 'coc-tsserver',
+  \ 'coc-powershell'
+  \]
+
+" User configuration object
+let g:coc_user_config = {
+  \ "diagnostic.virtualText": v:true,
+  \
+  \ "explorer.file.showHiddenFiles": v:true,
+  \ "explorer.width": 30,
+  \ "explorer.icon.enableNerdfont": v:true,
+  \ "explorer.keyMappings": {
+  \   "<cr>": [
+  \     "expandable?",
+  \     [
+  \       "expanded?",
+  \       "collapse",
+  \       "expand"
+  \     ],
+  \     "open"
+  \   ],
+  \   "v": "open:vsplit"
+  \ },
+  \
+  \ "powershell.integratedConsole.showOnStartup": v:false,
+	\
+	\ "sh.commandPath": "C:/Users/RashilGandhi/AppData/Local/coc/extensions/node_modules/coc-sh/node_modules/.bin/bash-language-server.cmd"
+  \}
 
 " if hidden is not set, TextEdit might fail.
 set hidden

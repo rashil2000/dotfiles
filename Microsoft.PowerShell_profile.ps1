@@ -40,9 +40,8 @@ C:\Users\RashilGandhi\scoop\apps\ripgrep\current\complete\_rg.ps1
 C:\Users\RashilGandhi\scoop\apps\hyperfine\current\_hyperfine.ps1
 C:\Users\RashilGandhi\scoop\apps\fd\current\_fd.ps1
 C:\Users\RashilGandhi\scoop\apps\bottom\current\completion\_btm.ps1
+C:\Users\RashilGandhi\scoop\apps\mdcat\current\completions\_mdcat.ps1
 D:\Data\Projects\Scripts\Completions\_starship.ps1
-D:\Data\Projects\Scripts\Completions\_procs.ps1
-D:\Data\Projects\Scripts\Completions\_mdcat.ps1
 Invoke-Expression (Get-Content D:\Data\Projects\Scripts\Completions\_gh.ps1 -Raw)
 
 <# Import Modules #>
