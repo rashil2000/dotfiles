@@ -29,10 +29,7 @@ HISTCONTROL="erasedups:ignoreboth"
 # Don't record some commands
 export HISTIGNORE="&:[ ]*:exit:ls:ll:bg:fg:history:clear:dir"
 
-# Prevent file overwrite on stdout redirection
-# Use `>|` to force redirection to an existing file
-set -o noclobber
-
+# Set some handy shell options
 # cmdhist      - save multi-line commands as one command
 # histreedit   - use readline on history
 # histverify   - load history line onto readline buffer for editing
