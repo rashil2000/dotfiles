@@ -2,12 +2,15 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# Check if on MSys2
+[ -f /usr/bin/msys-2.0.dll ] && DATA_DIR=$(cygpath "$DATA_DIR") || true
+
 # If not running interactively, don't do anything
 case $- in
 *i*)
   # Initialize ble.sh
-  if [ -f /d/Data/GitHub/akinomyoga/ble.sh/out/ble.sh ]; then
-    . /d/Data/GitHub/akinomyoga/ble.sh/out/ble.sh --noattach
+  if [ -f $DATA_DIR/GitHub/akinomyoga/ble.sh/out/ble.sh ]; then
+    . $DATA_DIR/GitHub/akinomyoga/ble.sh/out/ble.sh --noattach
     bleopt history_share=1
     ble-bind -f up 'history-search-backward hide-status:immediate-accept:point=end'
     ble-bind -f down 'history-search-forward hide-status:immediate-accept:point=end'
@@ -92,27 +95,22 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Custom Aliases
 alias dir='exa -la --icons --git --group-directories-first'
 alias :q='exit'
-alias prd='cd /d/Data/Projects'
-alias ghd='cd /d/Data/GitHub'
-alias acd='cd /d/Data/Documents/Academics/Semester\ 6'
-
-# Change to a safe location
-startpath=$(pwd)
-[[ $startpath == '/d/Data/Projects/Scripts' || $startpath == '/c/Windows/System32' ]] && cd
-
-# Enable Starship prompt
-[ -f ~/.local/share/starship.bash ] && . ~/.local/share/starship.bash || true
+alias prd="cd $DATA_DIR/Projects"
+alias ghd="cd $DATA_DIR/GitHub"
+alias acd="cd $DATA_DIR/Documents/Academics"
 
 # Startup info
-read msyskernelname msyskernelrelease <<<$(uname -sr)
-echo "Microsoft Windows [$msyskernelname]"
-echo "(c) Minimal System 2 - $msyskernelrelease"
+if [ -f /usr/bin/msys-2.0.dll ]; then
+  read msyskernelname msyskernelrelease <<<$(uname -sr)
+  echo "Microsoft Windows [$msyskernelname]"
+  echo "(c) Minimal System 2 - $msyskernelrelease"
+fi
 # if [[ -v __shell_start ]]; then
 #   echo -e "\nLoading personal and system profiles took $(($(date +%s%3N) - __shell_start))ms."
 # fi
 
-# Attach to ble.sh
-[[ ${BLE_VERSION-} ]] && ble-attach
+# Enable Starship prompt
+[ -f ~/.local/share/starship.bash ] && . ~/.local/share/starship.bash || true
 
 # FZF Key bindings
 export FZF_DEFAULT_OPTS="--exact --no-sort --reverse --cycle"
@@ -120,3 +118,6 @@ export FZF_DEFAULT_OPTS="--exact --no-sort --reverse --cycle"
 
 # Node Version Switcher
 [ -f ~/Scoop/apps/nvs/current/nvs.sh ] && . ~/Scoop/apps/nvs/current/nvs.sh || true
+
+# Attach to ble.sh
+[[ ${BLE_VERSION-} ]] && ble-attach

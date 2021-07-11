@@ -112,11 +112,11 @@ let g:startify_lists = [
   \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
   \ ]
 let g:startify_bookmarks = [
-  \ { 'p': 'D:\Data\GitHub\rashil2000\dotfiles\Microsoft.PowerShell_profile.ps1' },
+  \ { 'p': $DATA_DIR . '/GitHub/rashil2000/dotfiles/Microsoft.PowerShell_profile.ps1' },
   \ { 'i': $MYVIMRC },
   \ { 't': 'term://pwsh' },
-  \ 'D:\Data\GitHub',
-  \ 'D:\Data\Projects',
+  \ $DATA_DIR . '/GitHub',
+  \ $DATA_DIR . '/Projects',
   \ ]
 let g:startify_custom_header = [
   \ '  /$$   /$$                     /$$    /$$ /$$                     /$$     /$$        ',
@@ -168,12 +168,12 @@ autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | end
 nnoremap <silent> <C-b> :CocCommand explorer<CR>
 
 " List of completion extensions
-let g:coc_global_extensions = ['coc-emmet',
+let g:coc_global_extensions = [
+  \ 'coc-emmet',
   \ 'coc-highlight',
   \ 'coc-css',
   \ 'coc-explorer',
   \ 'coc-rls',
-  \ 'coc-sh',
   \ 'coc-vimlsp',
   \ 'coc-html',
   \ 'coc-json',
@@ -203,8 +203,6 @@ let g:coc_user_config = {
   \ },
   \
   \ "powershell.integratedConsole.showOnStartup": v:false,
-	\
-	\ "sh.commandPath": "C:/Users/RashilGandhi/AppData/Local/coc/extensions/node_modules/coc-sh/node_modules/.bin/bash-language-server.cmd"
   \}
 
 " if hidden is not set, TextEdit might fail.

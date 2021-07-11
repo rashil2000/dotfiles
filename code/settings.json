@@ -1,6 +1,19 @@
 {
   /*---- Extension-specific Settings ----*/
 
+  // TypeScript
+  "javascript.updateImportsOnFileMove.enabled": "always",
+
+  // Emmet
+  "emmet.triggerExpansionOnTab": true,
+
+  // Git
+  "git.enableCommitSigning": true,
+
+  // PowerShell
+  "powershell.enableProfileLoading": false,
+  "powershell.integratedConsole.showOnStartup": false,
+
   // VSCode Vibrancy
   "vscode_vibrancy.opacity": 0.6,
   "vscode_vibrancy.theme": "Light (Only Subbar)",
@@ -9,7 +22,7 @@
   "csv-preview.capitalizeHeaders": false,
   "csv-preview.lineNumbers": "ordinal",
 
-  /*---- File-type Associations ----*/
+  /*---- File-type Formatters ----*/
 
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
@@ -23,17 +36,14 @@
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "emmet.triggerExpansionOnTab": true,
-  "files.trimTrailingWhitespace": true,
 
   /*---- Core Settings ----*/
 
+  "files.trimTrailingWhitespace": true,
   "window.menuBarVisibility": "toggle",
   "window.dialogStyle": "custom",
   "workbench.colorTheme": "Bluloco Light Italic",
   "workbench.iconTheme": "vscode-icons",
-  "workbench.startupEditor": "welcomePage",
   "workbench.list.smoothScrolling": true,
   "editor.fontFamily": "RecMonoSemicasual NF",
   "editor.formatOnType": true,
@@ -64,14 +74,11 @@
       }
     ]
   },
-  "powershell.powerShellDefaultVersion": "Windows PowerShell (x64)",
-  "powershell.enableProfileLoading": false,
-  "powershell.integratedConsole.showOnStartup": false,
+  "diffEditor.ignoreTrimWhitespace": false,
   "terminal.integrated.fontFamily": "CaskaydiaCove NF",
   "terminal.integrated.tabs.enabled": false,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.scrollback": 10000,
-  "terminal.integrated.defaultProfile.windows": "PowerShell",
   "terminal.integrated.profiles.windows": {
     "PowerShell": {
       "source": "PowerShell",
@@ -92,12 +99,5 @@
       "icon": "terminal-bash",
       "env": { "MSYSTEM": "MINGW64" }
     }
-  },
-  "remote.SSH.remotePlatform": {
-    "104.211.92.154": "linux",
-    "ubuntuosboxes": "linux",
-    "ubuntuazure2": "linux"
-  },
-  "diffEditor.ignoreTrimWhitespace": false,
-  "git.enableCommitSigning": true
+  }
 }
