@@ -40,9 +40,7 @@ Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow -Function BackwardWord
 Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
 
 <# Import Completions #>
-"~/Scoop/apps/ripgrep/current/complete/_rg.ps1", `
 "~/Scoop/apps/hyperfine/current/_hyperfine.ps1", `
-"~/Scoop/apps/fd/current/_fd.ps1", `
 "~/Scoop/apps/bottom/current/completion/_btm.ps1", `
 "~/Scoop/apps/mdcat/current/completions/_mdcat.ps1", `
 "~/.local/share/starship.ps1", `
