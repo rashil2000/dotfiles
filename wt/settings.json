@@ -67,18 +67,18 @@
     },
     "list": [
       {
+        "colorScheme": "Bluloco Light",
+        "fontFace": "CaskaydiaCove NF",
+        "fontSize": 11,
+        "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}"
+      },
+      {
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
         "name": "Cmd"
       },
       {
         "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
         "hidden": true
-      },
-      {
-        "colorScheme": "Bluloco Light",
-        "fontFace": "CaskaydiaCove NF",
-        "fontSize": 11,
-        "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}"
       },
       {
         "colorScheme": "Tango Light",
@@ -90,7 +90,17 @@
         "name": "Bash"
       },
       {
+        "commandline": "nvim",
+        "fontFace": "RecMonoSemicasual NF",
+        "fontSize": 11,
+        "colorScheme": "Bluloco Light",
+        "guid": "{9f80d682-c62b-40a3-a8f3-40996da15ef2}",
+        "icon": "D:/Data/Pictures/Icons/neovim.ico",
+        "name": "Neovim"
+      },
+      {
         "guid": "{46ca431a-3a87-5fb3-83cd-11ececc031d2}",
+        "hidden": true,
         "icon": "D:/Data/Pictures/Icons/kali-menu.ico",
         "fontFace": "DankMono NF",
         "name": "Kali (WSL)",

@@ -28,7 +28,7 @@ Set-PSReadLineOption `
   -MaximumHistoryCount 10000 `
   -HistorySearchCursorMovesToEnd `
   -Colors @{ ListPredictionSelected = "$([char]0x1b)[48;5;243m" }
-if ($false) {
+if ($Host.UI.RawUI.WindowSize.Width -lt 54 -or $Host.UI.RawUI.WindowSize.Height -lt 15) {
   Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
   Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 } else {
@@ -40,6 +40,7 @@ Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow -Function BackwardWord
 Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
 
 <# Import Completions #>
+"~/Scoop/apps/ripgrep/current/complete/_rg.ps1", `
 "~/Scoop/apps/hyperfine/current/_hyperfine.ps1", `
 "~/Scoop/apps/bottom/current/completion/_btm.ps1", `
 "~/Scoop/apps/mdcat/current/completions/_mdcat.ps1", `

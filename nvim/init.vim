@@ -7,12 +7,15 @@ syntax enable
 set autoindent
 set nocompatible
 set title
-set mouse=a
-set tabstop=2           " The width of a TAB is set to 2. Still it is a \t. It is just that Vim will interpret it to be having a width of 2.
-set shiftwidth=2        " Indents will have a width of 2
-set softtabstop=2       " Sets the number of columns for TAB
-set expandtab           " Expand TABs to spaces
+set mouse=a               " Enable mouse in all modes (hold shift to disable)
+set fillchars=eob:\ ,     " Replace end-of-buffer i.e. tilde with space
+set tabstop=2             " The width of a TAB (\t) is set to 2
+set shiftwidth=2          " Indents will have a width of 2
+set softtabstop=2         " Sets the number of columns for TAB
+set expandtab             " Expand TABs to spaces
 set smarttab
+set lazyredraw            " Improve scrolling performance when navigating through large results
+set ignorecase smartcase  " Ignore case only when the pattern contains no capital letters
 set clipboard=unnamed
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
@@ -22,22 +25,50 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'sheerun/vim-polyglot'
   Plug 'junegunn/limelight.vim'
   Plug 'junegunn/goyo.vim'
-  Plug 'junegunn/gv.vim'
   Plug 'ayu-theme/ayu-vim'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'ryanoasis/vim-devicons'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-fugitive'
-  Plug 'mhinz/vim-signify'
   Plug 'mhinz/vim-startify'
   Plug 'jiangmiao/auto-pairs'
   Plug 'alvan/vim-closetag'
-  Plug 'mileszs/ack.vim'
   Plug 'voldikss/vim-floaterm'
-  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+  Plug 'mg979/vim-visual-multi'
 call plug#end()
 
+
+" Use ctrl+hjkl to resize windows
+nnoremap <C-j>    :resize -2<CR>
+nnoremap <C-k>    :resize +2<CR>
+nnoremap <C-h>    :vertical resize -2<CR>
+nnoremap <C-l>    :vertical resize +2<CR>
+" Use alt+hjkl to move between split/vsplit panels
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+nnoremap <M-h> <C-w>h
+nnoremap <M-j> <C-w>j
+nnoremap <M-k> <C-w>k
+nnoremap <M-l> <C-w>l
+" Better tabbing
+vnoremap < <gv
+vnoremap > >gv
+" Remap tab navigation as buffer navigation
+map <silent> gt :bn<cr>
+map <silent> gT :bp<cr>
+" Swap functionality of ctrl-r and r
+nnoremap r <C-r>
+nnoremap <C-r> r
+" Scroll faster
+nnoremap <C-e> 10<C-e>
+nnoremap <C-y> 10<C-y>
+" Toggle line wrap
+nnoremap <silent> <A-z> :set wrap!<CR>
+" Change working directory
+nnoremap <Leader>cd :cd %:p:h \| pwd<CR>
 
 " Colorscheme configuration
 if (has("termguicolors"))
@@ -57,45 +88,52 @@ let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
+" Goyo + Limelight configuration
+let g:goyo_width = '70%'
+let g:limelight_conceal_ctermfg = 'gray'
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+nnoremap <silent> <Leader>gl :silent! Goyo<CR>
+
 " Tags completion
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb,*.md'
+
+" Visual Multi mappings
+" Start marking using \\ (Leader) + \
+nmap   <C-LeftMouse>         <Plug>(VM-Mouse-Cursor)
+nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)  
+nmap   <M-C-RightMouse>      <Plug>(VM-Mouse-Column)
 
 " Nerd Commenter
 filetype plugin indent on
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
-" Use ctrl+hjkl to resize windows
-nnoremap <C-j>    :resize -2<CR>
-nnoremap <C-k>    :resize +2<CR>
-nnoremap <C-h>    :vertical resize -2<CR>
-nnoremap <C-l>    :vertical resize +2<CR>
-" Use alt+hjkl to move between split/vsplit panels
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
-nnoremap <M-h> <C-w>h
-nnoremap <M-j> <C-w>j
-nnoremap <M-k> <C-w>k
-nnoremap <M-l> <C-w>l
-" Better tabbing
-vnoremap < <gv
-vnoremap > >gv
-
 " Floaterm configuration
-let g:floaterm_keymap_new    = '<F7>'
-let g:floaterm_keymap_prev   = '<F8>'
-let g:floaterm_keymap_next   = '<F9>'
+let g:floaterm_keymap_new    = '<F9>'
+let g:floaterm_keymap_prev   = '<F7>'
+let g:floaterm_keymap_next   = '<F8>'
 let g:floaterm_keymap_toggle = '<F12>'
 let g:floaterm_shell         = 'pwsh'
 let g:floaterm_autoclose     = 1
-let g:floaterm_wintype       = 'normal'
+let g:floaterm_wintype       = 'split'
 let g:floaterm_height        = 0.2
 nnoremap <silent> <F10> :FloatermNew --wintype=floating --height=0.6<CR>
 tnoremap <silent> <F10> <C-\><C-n>:FloatermNew --wintype=floating --height=0.6<CR>
-nnoremap <silent> <C-f> :FloatermNew --wintype=floating --height=0.6 vifm<CR>
-tnoremap <silent> <C-f> <C-\><C-n>:FloatermNew --wintype=floating --height=0.6 vifm<CR>
+" Pick files using Vifm
+nnoremap <silent> <C-f> :FloatermNew --wintype=floating --height=0.6 --title=Vifm\ Picker vifm<CR>
+" Search inside files in current workspace (Use :noh to clear highlight)
+nnoremap <silent> <leader>/ :FloatermNew --wintype=floating --height=0.6 --title=Ripgrep\ Search rg<CR>
+" Search files in current workspace
+let $FZF_DEFAULT_COMMAND = "rg --hidden --files"
+nnoremap <silent> <C-p> :FloatermNew --wintype=floating --height=0.6 --title=Fzf\ Search fzf<CR>
+" Autocmd
+function s:floatermSettings()
+  setlocal nonumber norelativenumber  " Disable line numbers
+  setlocal winblend=10                " Set transparency
+endfunction
+autocmd FileType floaterm call s:floatermSettings()
+
 
 "" Startify configuration
 let g:startify_session_dir = stdpath('data') . '/sessions'
@@ -106,15 +144,15 @@ let g:startify_fortune_use_unicode = 1
 let g:startify_session_persistence = 1
 let g:startify_enable_special = 0
 let g:startify_lists = [
-  \ { 'type': 'files',     'header': ['   Files']            },
-  \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
   \ { 'type': 'sessions',  'header': ['   Sessions']       },
+  \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
+  \ { 'type': 'files',     'header': ['   Files']            },
   \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
   \ ]
 let g:startify_bookmarks = [
-  \ { 'p': $DATA_DIR . '/GitHub/rashil2000/dotfiles/Microsoft.PowerShell_profile.ps1' },
-  \ { 'i': $MYVIMRC },
-  \ { 't': 'term://pwsh' },
+  \ $MYVIMRC,
+  \ 'term://pwsh',
+  \ $DATA_DIR . '/GitHub/rashil2000/dotfiles/Microsoft.PowerShell_profile.ps1',
   \ $DATA_DIR . '/GitHub',
   \ $DATA_DIR . '/Projects',
   \ ]
@@ -129,34 +167,6 @@ let g:startify_custom_header = [
   \ ' |__/  \__/ \_______/ \______/     \_/    |__/|__/ |__/ |__/          |__/  \______/  ',
   \]
 
-
-"" Use silver_searcher for searching with ack.vim ⚡️
-let g:ackprg = 'ag --vimgrep'
-
-" Auto close the Quickfix list after pressing '<enter>' on a list item. (:copen, :ccl)
-let g:ack_autoclose = 1
-
-" Any empty ack search will search for the word the cursor is on
-let g:ack_use_cword_for_empty_search = 1
-
-" Highlight the searched term.
-let g:ackhighlight = 1
-
-" Fold the results in quickfix by file name.
-let g:ack_autofold_results = 1
-
-" Don't jump to first match
-cnoreabbrev Ack Ack!
-cnoreabbrev AckFile AckFile!
-
-" Map <leader>/ so we're ready to search keyword in files
-nnoremap <Leader>/ :Ack!<Space>
-" Map <leader>m/ so we're ready to search keyword in filenames
-nnoremap <Leader>m/ :AckFile!<Space>
-
-" Navigate quickfix list with ease
-nnoremap <silent> [q :cprevious<CR>
-nnoremap <silent> ]q :cnext<CR>
 
 
 "" Custom configuration file for coc.nvim
@@ -174,6 +184,8 @@ nnoremap <silent> <C-b> :CocCommand explorer<CR>
 
 " List of completion extensions
 let g:coc_global_extensions = [
+  \ 'coc-lists',
+  \ 'coc-git',
   \ 'coc-emmet',
   \ 'coc-highlight',
   \ 'coc-css',
@@ -190,6 +202,7 @@ let g:coc_global_extensions = [
 " User configuration object
 let g:coc_user_config = {
   \ "diagnostic.virtualText": v:true,
+  \ "session.directory": stdpath('data') . '/sessions',
   \
   \ "explorer.file.showHiddenFiles": v:true,
   \ "explorer.width": 30,
@@ -261,7 +274,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window
+" Use K to show documentation in preview window (Use <C-ww> to move inside)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
@@ -306,7 +319,6 @@ omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
 " Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <TAB> <Plug>(coc-range-select)
 xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Use `:Format` to format current buffer
@@ -338,3 +350,9 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" Show most recently used files
+nnoremap <silent> <space>m  :<C-u>CocList mru<cr>
+" Show sessions
+nnoremap <silent> <space>r  :<C-u>CocList sessions<cr>
+" Show recent commands
+nnoremap <silent> <F2>  :<C-u>CocList cmdhistory<cr>
