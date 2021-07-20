@@ -1,0 +1,85 @@
+[user]
+    email = rashil2000@gmail.com
+    name = Rashil Gandhi
+[core]
+    editor = nvim
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[commit]
+    gpgSign = true
+[tag]
+    gpgSign = true
+[init]
+    defaultBranch = main
+[diff]
+    colorMoved = default
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    features = line-numbers decorations hoopoe
+    whitespace-error-style = 22 reverse
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+[credential "helperselector"]
+    selected = manager-core
+
+
+[delta "calochortus-lyallii"]
+    # author: https://github.com/manojkarthick
+    commit-decoration-style = none
+    dark = true
+    file-added-label = [+]
+    file-copied-label = [C]
+    file-decoration-style = none
+    file-modified-label = [M]
+    file-removed-label = [-]
+    file-renamed-label = [R]
+    file-style = 232 bold 184
+    hunk-header-decoration-style = none
+    hunk-header-file-style = "#999999"
+    hunk-header-line-number-style = bold "#03a4ff"
+    hunk-header-style = file line-number syntax
+    line-numbers = true
+    line-numbers-left-style = black
+    line-numbers-minus-style = "#B10036"
+    line-numbers-plus-style = "#03a4ff"
+    line-numbers-right-style = black
+    line-numbers-zero-style = "#999999"
+    minus-emph-style = syntax bold "#780000"
+    minus-style = syntax "#400000"
+    plus-emph-style = syntax bold "#007800"
+    plus-style = syntax "#004000"
+    whitespace-error-style = "#280050" reverse
+    zero-style = syntax
+    syntax-theme = Nord
+[delta "hoopoe"]
+    # author: https://github.com/dandavison
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
+    light = true
+    minus-emph-style = normal "#ffc0c0"
+    minus-empty-line-marker-style = normal "#ffe0e0"
+    minus-non-emph-style = normal "#ffe0e0"
+    minus-style = normal "#ffe0e0"
+    plus-emph-style = syntax "#a0efa0"
+    plus-empty-line-marker-style = normal "#d0ffd0"
+    plus-non-emph-style = syntax "#d0ffd0"
+    plus-style = syntax "#d0ffd0"
+    syntax-theme = GitHub
+    zero-style = syntax

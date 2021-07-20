@@ -74,8 +74,14 @@ nnoremap <Leader>cd :cd %:p:h \| pwd<CR>
 if (has("termguicolors"))
  set termguicolors
 endif
-let ayucolor="light"
-let g:airline_theme="ayu_light"
+" Detect OS app theme
+if split(systemlist('reg query "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme')[2])[2][2]
+  let ayucolor="light"
+  let g:airline_theme="ayu_light"
+else
+  let ayucolor="dark"
+  let g:airline_theme="ayu_dark"
+endif
 colorscheme ayu
 highlight Comment cterm=italic gui=italic
 highlight Normal ctermbg=none guibg=none
@@ -101,7 +107,7 @@ let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb,*.md'
 " Visual Multi mappings
 " Start marking using \\ (Leader) + \
 nmap   <C-LeftMouse>         <Plug>(VM-Mouse-Cursor)
-nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)  
+nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)
 nmap   <M-C-RightMouse>      <Plug>(VM-Mouse-Column)
 
 " Nerd Commenter
