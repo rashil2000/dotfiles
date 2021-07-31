@@ -25,9 +25,8 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'sheerun/vim-polyglot'
   Plug 'junegunn/limelight.vim'
   Plug 'junegunn/goyo.vim'
-  Plug 'ayu-theme/ayu-vim'
+  Plug 'rashil2000/ayu-vim'
   Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
   Plug 'ryanoasis/vim-devicons'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-fugitive'
@@ -36,6 +35,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'alvan/vim-closetag'
   Plug 'voldikss/vim-floaterm'
   Plug 'mg979/vim-visual-multi'
+  Plug 'wfxr/minimap.vim'
 call plug#end()
 
 
@@ -56,9 +56,11 @@ nnoremap <M-l> <C-w>l
 " Better tabbing
 vnoremap < <gv
 vnoremap > >gv
-" Remap tab navigation as buffer navigation
-map <silent> gt :bn<cr>
-map <silent> gT :bp<cr>
+" Faster buffer navigation
+map <silent> <F4> :bn<cr>
+tnoremap <silent> <F4> <C-\><C-n>:bn<CR>
+map <silent> <F3> :bp<cr>
+tnoremap <silent> <F3> <C-\><C-n>:bp<CR>
 " Swap functionality of ctrl-r and r
 nnoremap r <C-r>
 nnoremap <C-r> r
@@ -77,10 +79,8 @@ endif
 " Detect OS app theme
 if split(systemlist('reg query "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme')[2])[2][2]
   let ayucolor="light"
-  let g:airline_theme="ayu_light"
 else
   let ayucolor="dark"
-  let g:airline_theme="ayu_dark"
 endif
 colorscheme ayu
 highlight Comment cterm=italic gui=italic
@@ -104,11 +104,16 @@ nnoremap <silent> <Leader>gl :silent! Goyo<CR>
 " Tags completion
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb,*.md'
 
+" Minimap settings
+nnoremap <silent> <Leader>mm :MinimapToggle<CR>
+let g:minimap_git_colors = 1
+let g:minimap_highlight_search = 1
+
 " Visual Multi mappings
 " Start marking using \\ (Leader) + \
-nmap   <C-LeftMouse>         <Plug>(VM-Mouse-Cursor)
-nmap   <C-RightMouse>        <Plug>(VM-Mouse-Word)
-nmap   <M-C-RightMouse>      <Plug>(VM-Mouse-Column)
+nmap <C-LeftMouse>    <Plug>(VM-Mouse-Cursor)
+nmap <C-RightMouse>   <Plug>(VM-Mouse-Word)
+nmap <M-C-RightMouse> <Plug>(VM-Mouse-Column)
 
 " Nerd Commenter
 filetype plugin indent on

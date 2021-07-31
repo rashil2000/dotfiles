@@ -1,11 +1,8 @@
 local wezterm = require 'wezterm';
 
-local color_val
-local success, stdout, stderr = wezterm.run_child_process({"reg", "query", "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "/v", "AppsUseLightTheme"})
-local is_light = tonumber(wezterm.truncate_left(wezterm.split_by_newlines(stdout)[3],1))
-if is_light == 0 then
-	color_val = {
-		-- BlulocoDark
+local theme_config = {
+	dark = {
+		-- custom_name = "BlulocoDarkMod",
 		foreground = "#b9c0cb",
 		background = "#000000",
 		cursor_bg = "#ffcc00",
@@ -45,10 +42,9 @@ if is_light == 0 then
 				intensity = "Bold",
 			}
 		}
-	}
-else
-	color_val = {
-		-- BlulocoLight
+	},
+	light = {
+		-- custom_name = "BlulocoLightMod",
 		foreground = "#373a41",
 		background = "#ffffff",
 		cursor_bg = "#f32759",
@@ -89,6 +85,15 @@ else
 			}
 		}
 	}
+}
+
+function check_theme()
+	local success, stdout, stderr = wezterm.run_child_process({"reg", "query", "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "/v", "AppsUseLightTheme"})
+	if tonumber(wezterm.truncate_left(wezterm.split_by_newlines(stdout)[3],1)) == 0 then
+		return theme_config.dark
+	else
+		return theme_config.light
+	end
 end
 
 return {
@@ -111,6 +116,6 @@ return {
 	enable_scroll_bar = true,
 	font = wezterm.font("RecMonoSemicasual NF", {weight="Medium"}),
 	font_size = 11.0,
-	colors = color_val
+	colors = check_theme()
 }
 

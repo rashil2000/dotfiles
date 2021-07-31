@@ -43,7 +43,7 @@ Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
 "~/Scoop/apps/ripgrep/current/complete/_rg.ps1", `
 "~/Scoop/apps/hyperfine/current/_hyperfine.ps1", `
 "~/Scoop/apps/bottom/current/completion/_btm.ps1", `
-"~/Scoop/apps/mdcat/current/completions/_mdcat.ps1", `
+"~/Scoop/apps/code-minimap/current/completions/powershell/_code-minimap.ps1", `
 "~/.local/share/starship.ps1", `
 "$Env:DATA_DIR/Projects/Scripts/Completions/_starship.ps1" `
   | ForEach-Object { if (Test-Path $_) { & $_ } }
