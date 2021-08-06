@@ -76,17 +76,28 @@ nnoremap <Leader>cd :cd %:p:h \| pwd<CR>
 if (has("termguicolors"))
  set termguicolors
 endif
-" Detect OS app theme
-if split(systemlist('reg query "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme')[2])[2][2]
-  let ayucolor="light"
-else
-  let ayucolor="dark"
-endif
-colorscheme ayu
-highlight Comment cterm=italic gui=italic
-highlight Normal ctermbg=none guibg=none
-highlight SignColumn ctermbg=none guibg=none
-highlight LineNr ctermbg=none guibg=none
+" Set/toggle theme
+function ThemeSetter()
+  if !exists("g:ayucolor")
+    if split(systemlist('reg query "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme')[2])[2][2]
+      let g:ayucolor="light"
+    else
+      let g:ayucolor="dark"
+    endif
+  elseif g:ayucolor=="light"
+    let g:ayucolor="dark"
+  elseif g:ayucolor=="dark"
+    let g:ayucolor="light"
+  endif
+  colorscheme ayu
+  highlight Comment cterm=italic gui=italic
+  highlight Normal ctermbg=none guibg=none
+  highlight SignColumn ctermbg=none guibg=none
+  highlight LineNr ctermbg=none guibg=none
+endfunction
+nnoremap <Leader>ts :call ThemeSetter()<CR>
+call ThemeSetter()
+
 " Airline settings
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
