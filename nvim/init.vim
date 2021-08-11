@@ -49,10 +49,6 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
-nnoremap <M-h> <C-w>h
-nnoremap <M-j> <C-w>j
-nnoremap <M-k> <C-w>k
-nnoremap <M-l> <C-w>l
 " Better tabbing
 vnoremap < <gv
 vnoremap > >gv
@@ -79,7 +75,7 @@ endif
 " Set/toggle theme
 function ThemeSetter()
   if !exists("g:ayucolor")
-    if split(systemlist('reg query "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme')[2])[2][2]
+    if !has('win32') || split(systemlist('reg query "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme')[2])[2][2]
       let g:ayucolor="light"
     else
       let g:ayucolor="dark"
@@ -124,7 +120,7 @@ let g:minimap_highlight_search = 1
 " Start marking using \\ (Leader) + \
 nmap <C-LeftMouse>    <Plug>(VM-Mouse-Cursor)
 nmap <C-RightMouse>   <Plug>(VM-Mouse-Word)
-nmap <M-C-RightMouse> <Plug>(VM-Mouse-Column)
+nmap <A-C-RightMouse> <Plug>(VM-Mouse-Column)
 
 " Nerd Commenter
 filetype plugin indent on
@@ -140,15 +136,12 @@ let g:floaterm_shell         = 'pwsh'
 let g:floaterm_autoclose     = 1
 let g:floaterm_wintype       = 'split'
 let g:floaterm_height        = 0.2
+let g:floaterm_opener        = 'edit'
+" Open a floating terminal
 nnoremap <silent> <F10> :FloatermNew --wintype=floating --height=0.6<CR>
 tnoremap <silent> <F10> <C-\><C-n>:FloatermNew --wintype=floating --height=0.6<CR>
-" Pick files using Vifm
+" Pick folder/files using Vifm
 nnoremap <silent> <C-f> :FloatermNew --wintype=floating --height=0.6 --title=Vifm\ Picker vifm<CR>
-" Search inside files in current workspace (Use :noh to clear highlight)
-nnoremap <silent> <leader>/ :FloatermNew --wintype=floating --height=0.6 --title=Ripgrep\ Search rg<CR>
-" Search files in current workspace
-let $FZF_DEFAULT_COMMAND = "rg --hidden --files"
-nnoremap <silent> <C-p> :FloatermNew --wintype=floating --height=0.6 --title=Fzf\ Search fzf<CR>
 " Autocmd
 function s:floatermSettings()
   setlocal nonumber norelativenumber  " Disable line numbers
@@ -165,29 +158,44 @@ let g:startify_change_to_vcs_root = 1
 let g:startify_fortune_use_unicode = 1
 let g:startify_session_persistence = 1
 let g:startify_enable_special = 0
+function s:currdir()
+  let workdir = getcwd()
+  return [ { 'line': '<'.workdir.'>', 'path': workdir } ]
+endfunction
+let g:startify_skiplist = [ 'COMMIT_EDITMSG' ]
 let g:startify_lists = [
-  \ { 'type': 'sessions',  'header': ['   Sessions']       },
-  \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
-  \ { 'type': 'files',     'header': ['   Files']            },
-  \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-  \ ]
+  \ { 'type': 'bookmarks', 'header': ['   Bookmarks'] },
+  \ { 'type': function('s:currdir'), 'header': ['   Recents in current directory'], 'indices': ['d'] },
+  \ { 'type': 'dir' },
+  \]
 let g:startify_bookmarks = [
   \ $MYVIMRC,
-  \ 'term://pwsh',
   \ $DATA_DIR . '/GitHub/rashil2000/dotfiles/Microsoft.PowerShell_profile.ps1',
   \ $DATA_DIR . '/GitHub',
   \ $DATA_DIR . '/Projects',
-  \ ]
-let g:startify_custom_header = [
-  \ '  /$$   /$$                     /$$    /$$ /$$                     /$$     /$$        ',
-  \ ' | $$$ | $$                    | $$   | $$|__/                    |  $$   /$$/        ',
-  \ ' | $$$$| $$  /$$$$$$   /$$$$$$ | $$   | $$ /$$ /$$$$$$/$$$$        \  $$ /$$//$$$$$$  ',
-  \ ' | $$ $$ $$ /$$__  $$ /$$__  $$|  $$ / $$/| $$| $$_  $$_  $$        \  $$$$//$$__  $$ ',
-  \ ' | $$  $$$$| $$$$$$$$| $$  \ $$ \  $$ $$/ | $$| $$ \ $$ \ $$         \  $$/| $$  \ $$ ',
-  \ ' | $$\  $$$| $$_____/| $$  | $$  \  $$$/  | $$| $$ | $$ | $$          | $$ | $$  | $$ ',
-  \ ' | $$ \  $$|  $$$$$$$|  $$$$$$/   \  $/   | $$| $$ | $$ | $$          | $$ |  $$$$$$/ ',
-  \ ' |__/  \__/ \_______/ \______/     \_/    |__/|__/ |__/ |__/          |__/  \______/  ',
   \]
+let g:startify_custom_header = startify#center([
+  \ '  /$$   /$$                     /$$    /$$ /$$               ',
+  \ ' | $$$ | $$                    | $$   | $$|__/               ',
+  \ ' | $$$$| $$  /$$$$$$   /$$$$$$ | $$   | $$ /$$ /$$$$$$/$$$$  ',
+  \ ' | $$ $$ $$ /$$__  $$ /$$__  $$|  $$ / $$/| $$| $$_  $$_  $$ ',
+  \ ' | $$  $$$$| $$$$$$$$| $$  \ $$ \  $$ $$/ | $$| $$ \ $$ \ $$ ',
+  \ ' | $$\  $$$| $$_____/| $$  | $$  \  $$$/  | $$| $$ | $$ | $$ ',
+  \ ' | $$ \  $$|  $$$$$$$|  $$$$$$/   \  $/   | $$| $$ | $$ | $$ ',
+  \ ' |__/  \__/ \_______/ \______/     \_/    |__/|__/ |__/ |__/ ',
+  \ '                                                             ',
+  \])
+let g:startify_custom_footer = startify#center([
+  \ '                                                                      ',
+  \ '                     .==::.                .::==.                     ',
+  \ '                   .=***-:-++.  _-**-_  .++-:-***=.                   ',
+  \ ' .+*=*-::::::::::::*+-/: *=*-/+=-:/\:-=+\-*=* :\-+*::::::::::::-*=*+. ',
+  \ '  -===::::::::::::+\-:.*+-:*/--*+-ΦΦ-+*--\*:-+*.:-/+::::::::::::===-  ',
+  \ '                  ·====- ..++.:==*\/*==:.++.. -====·                  ',
+  \ '                            ˙-+ΨΨ%--%ΨΨ+-˙                            ',
+  \ '                               \+*==*+/                               ',
+  \ '                                 ˙::˙                                 ',
+  \])
 
 
 
@@ -365,7 +373,7 @@ nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>r  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
@@ -375,6 +383,10 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Show most recently used files
 nnoremap <silent> <space>m  :<C-u>CocList mru<cr>
 " Show sessions
-nnoremap <silent> <space>r  :<C-u>CocList sessions<cr>
-" Show recent commands
-nnoremap <silent> <F2>  :<C-u>CocList cmdhistory<cr>
+nnoremap <silent> <space>s  :<C-u>CocList sessions<cr>
+" Show coc-lists
+nnoremap <silent> <F2>      :<C-u>CocList<cr>
+" Search inside files in current workspace
+nnoremap <silent> <leader>/ :<C-u>CocList grep<CR>
+" Search files in current workspace
+nnoremap <silent> <C-p>     :<C-u>CocList files<CR>
