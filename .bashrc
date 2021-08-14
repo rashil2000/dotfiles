@@ -113,7 +113,6 @@ fi
 [ -f ~/.local/share/starship.bash ] && . ~/.local/share/starship.bash || true
 
 # FZF Key bindings
-export FZF_DEFAULT_OPTS="--exact --no-sort --reverse --cycle"
 [ -f ~/.local/share/fzf/key-bindings.bash ] && . ~/.local/share/fzf/key-bindings.bash || true
 
 # Node Version Switcher

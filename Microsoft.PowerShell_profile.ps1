@@ -27,7 +27,15 @@ Set-PSReadLineOption `
   -PredictionSource History `
   -MaximumHistoryCount 10000 `
   -HistorySearchCursorMovesToEnd `
-  -Colors @{ ListPredictionSelected = "$([char]0x1b)[48;5;243m" }
+  -Colors @{ ListPredictionSelected = "$([char]0x1b)[48;5;243m" } `
+  -AddToHistoryHandler {
+    Param([string]$line)
+    if ($line -in "exit", "dir", ":q", "clear", "history") {
+      return $False
+    } else {
+      return $True
+    }
+  }
 if ($Host.UI.RawUI.WindowSize.Width -lt 54 -or $Host.UI.RawUI.WindowSize.Height -lt 15) {
   Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
   Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
@@ -47,7 +55,17 @@ Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
 "~/.local/share/starship.ps1", `
 "$Env:DATA_DIR/Projects/Scripts/Completions/_starship.ps1" `
   | ForEach-Object { if (Test-Path $_) { & $_ } }
-Invoke-Expression (Get-Content "$Env:DATA_DIR/Projects/Scripts/Completions/_gh.ps1" -Raw)
+
+<# Miscellaneous Settings #>
+if ($PSVersionTable.PSVersion.Major -gt 5) {
+  Set-MarkdownOption `
+    -LinkForegroundColor "[5;4;38;5;117m" `
+    -ItalicsForegroundColor "[3m"
+}
+if (Test-Path "$Env:DATA_DIR/Projects/Scripts/Completions/_gh.ps1") {
+  Invoke-Expression (Get-Content "$Env:DATA_DIR/Projects/Scripts/Completions/_gh.ps1" -Raw)
+}
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 
 <# Import Modules #>
 Import-Module Terminal-Icons, scoop-completion, npm-completion, posh-cargo, posh-git, kmt.winget.autocomplete -ErrorAction Ignore

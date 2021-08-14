@@ -40,19 +40,18 @@ format = "[$time]($style) - "
 style = "italic cyan"
 
 [username]
-show_always = true
-style_user = "bold blue"
+# show_always = true
 
 [shell]
-format = "\\[$indicator\\] "
-powershell_indicator = "[pwsh](yellow)"
-bash_indicator = "[bash](yellow)"
-unknown_indicator = "[cmd](yellow)"
+format = "\\[$indicator\\] at "
+powershell_indicator = "[pwsh](bold blue)"
+bash_indicator = "[bash](bold blue)"
+unknown_indicator = "[cmd](bold blue)"
 disabled = false
 
 [directory]
 truncate_to_repo = true
-read_only = ""
+read_only = " "
 truncation_symbol = "…/"
 
 [package]
