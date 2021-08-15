@@ -2,15 +2,13 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# Check if on MSys2
-[ -f /usr/bin/msys-2.0.dll ] && DATA_DIR=$(cygpath "$DATA_DIR") || true
 
 # If not running interactively, don't do anything
 case $- in
 *i*)
   # Initialize ble.sh
-  if [ -f $DATA_DIR/GitHub/akinomyoga/ble.sh/out/ble.sh ]; then
-    . $DATA_DIR/GitHub/akinomyoga/ble.sh/out/ble.sh --noattach
+  if [ -f ~/GitHub/akinomyoga/ble.sh/out/ble.sh ]; then
+    . ~/GitHub/akinomyoga/ble.sh/out/ble.sh --noattach
     bleopt history_share=1
     ble-bind -f up 'history-search-backward hide-status:immediate-accept:point=end'
     ble-bind -f down 'history-search-forward hide-status:immediate-accept:point=end'
@@ -95,11 +93,10 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Custom Aliases
 alias dir='exa -la --icons --git --group-directories-first'
 alias :q='exit'
-alias prd="cd $DATA_DIR/Projects"
-alias ghd="cd $DATA_DIR/GitHub"
-alias acd="cd $DATA_DIR/Documents/Academics"
+alias ghd="cd ~/GitHub"
+alias acd="cd ~/Documents/Academics"
 
-# Startup info
+# Startup info (Check if on MSys2)
 if [ -f /usr/bin/msys-2.0.dll ]; then
   read msyskernelname msyskernelrelease <<<$(uname -sr)
   echo "Microsoft Windows [$msyskernelname]"

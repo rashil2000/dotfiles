@@ -170,9 +170,9 @@ let g:startify_lists = [
   \]
 let g:startify_bookmarks = [
   \ $MYVIMRC,
-  \ $DATA_DIR . '/GitHub/rashil2000/dotfiles/Microsoft.PowerShell_profile.ps1',
-  \ $DATA_DIR . '/GitHub',
-  \ $DATA_DIR . '/Projects',
+  \ '~/GitHub/rashil2000/dotfiles/Microsoft.PowerShell_profile.ps1',
+  \ '~/GitHub',
+  \ '~/Documents/Academics',
   \]
 let g:startify_custom_header = startify#center([
   \ '  /$$   /$$                     /$$    /$$ /$$               ',
@@ -233,6 +233,19 @@ let g:coc_global_extensions = [
 let g:coc_user_config = {
   \ "diagnostic.virtualText": v:true,
   \ "session.directory": stdpath('data') . '/sessions',
+  \ "list.source.files.command": "rg",
+  \ "list.source.files.args": [
+  \   "--color", "never",
+  \   "--files",
+  \   "--iglob", "!{.git}",
+  \   "--hidden",
+  \   "--follow"
+  \ ],
+  \ "list.source.grep.args": [
+  \   "--iglob", "!{.git}",
+  \   "--hidden",
+  \   "--follow"
+  \ ],
   \
   \ "explorer.file.showHiddenFiles": v:true,
   \ "explorer.width": 30,

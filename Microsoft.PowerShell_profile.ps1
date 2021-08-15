@@ -8,9 +8,8 @@ Set-Alias pls PowerColorLS
 Set-Alias mcm Measure-Command
 Function :q { exit }
 Function h { Set-Location ~ }
-Function ghd { Set-Location $Env:DATA_DIR\GitHub }
-Function prd { Set-Location $Env:DATA_DIR\Projects }
-Function acd { Set-Location $Env:DATA_DIR\Documents\Academics }
+Function ghd { Set-Location ~/GitHub }
+Function acd { Set-Location ~/Documents/Academics }
 Function dir { Get-ChildItem -Attributes !System -Force @args }
 Function msvc {
   Import-Module "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\BuildTools\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"
@@ -18,7 +17,7 @@ Function msvc {
   Write-Host "[Enter-VsDevShell] Environment initialized for: 'x64'"
 }
 Function msys {
-  & "$Env:DATA_DIR\Projects\Scripts\msys-env.ps1" @args
+  & "~\GitHub\rashil2000\Scripts\msys-env.ps1" @args
 }
 
 <# Line Editing Options #>
@@ -53,7 +52,7 @@ Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
 "~/Scoop/apps/bottom/current/completion/_btm.ps1", `
 "~/Scoop/apps/code-minimap/current/completions/powershell/_code-minimap.ps1", `
 "~/.local/share/starship.ps1", `
-"$Env:DATA_DIR/Projects/Scripts/Completions/_starship.ps1" `
+"~/GitHub/rashil2000/Scripts/Completions/_starship.ps1" `
   | ForEach-Object { if (Test-Path $_) { & $_ } }
 
 <# Miscellaneous Settings #>
@@ -62,8 +61,8 @@ if ($PSVersionTable.PSVersion.Major -gt 5) {
     -LinkForegroundColor "[5;4;38;5;117m" `
     -ItalicsForegroundColor "[3m"
 }
-if (Test-Path "$Env:DATA_DIR/Projects/Scripts/Completions/_gh.ps1") {
-  Invoke-Expression (Get-Content "$Env:DATA_DIR/Projects/Scripts/Completions/_gh.ps1" -Raw)
+if (Test-Path "~/GitHub/rashil2000/Scripts/Completions/_gh.ps1") {
+  Invoke-Expression (Get-Content "~/GitHub/rashil2000/Scripts/Completions/_gh.ps1" -Raw)
 }
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 

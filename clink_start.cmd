@@ -8,9 +8,8 @@ for /f "tokens=1,2 delims=#" %%a in ('"prompt #$H#$E# & echo on & for %%b in (1)
 :: Aliases and functions
 doskey :q=exit
 doskey h=cd /d %UserProfile%
-doskey ghd=cd /d %DATA_DIR%\GitHub
-doskey prd=cd /d %DATA_DIR%\Projects
-doskey acd=cd /d %DATA_DIR%\Documents\Academics
+doskey ghd=cd /d %UserProfile%\GitHub
+doskey acd=cd /d %UserProfile%\Documents\Academics
 doskey dir=exa -la --icons --git --group-directories-first $*
 doskey msvc="%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
-doskey msys=%DATA_DIR%\Projects\Scripts\msys-env.bat $1 $2
+doskey msys=%UserProfile%\GitHub\rashil2000\Scripts\msys-env.bat $1 $2
