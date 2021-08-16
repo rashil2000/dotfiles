@@ -2,6 +2,7 @@ format = """\
   $battery\
   $time\
   $username\
+  $env_var\
   $shell\
   $directory\
   $package\
@@ -39,8 +40,9 @@ disabled = false
 format = "[$time]($style) - "
 style = "italic cyan"
 
-[username]
-# show_always = true
+[env_var]
+variable = "WSL_DISTRO_NAME"
+format = "\\([$env_value]($style)\\) "
 
 [shell]
 format = "\\[$indicator\\] at "
