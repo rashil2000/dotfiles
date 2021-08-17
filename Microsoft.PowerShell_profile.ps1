@@ -52,6 +52,7 @@ Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
 "~/Scoop/apps/bottom/current/completion/_btm.ps1", `
 "~/Scoop/apps/code-minimap/current/completions/powershell/_code-minimap.ps1", `
 "~/.local/share/starship.ps1", `
+"~/GitHub/rashil2000/Scripts/Completions/_rustup.ps1", `
 "~/GitHub/rashil2000/Scripts/Completions/_starship.ps1" `
   | ForEach-Object { if (Test-Path $_) { & $_ } }
 
