@@ -1,0 +1,273 @@
+{
+  "$schema": "https://aka.ms/terminal-profiles-schema",
+  // Add custom actions and keybindings to this array.
+  // To unbind a key combination from your defaults.json, set the command to "unbound".
+  // To learn more about actions and keybindings, visit https://aka.ms/terminal-keybindings
+  "actions": [
+    // Copy and paste are bound to Ctrl+Shift+C and Ctrl+Shift+V in your defaults.json.
+    // These two lines additionally bind them to Ctrl+C and Ctrl+V.
+    // To learn more about selection, visit https://aka.ms/terminal-selection
+    //{ "command": {"action": "copy", "singleLine": false }, "keys": "ctrl+c" },
+    //{ "command": "paste", "keys": "ctrl+v" },
+    // Press Ctrl+Shift+F to open the search box
+    {
+      "command": "find",
+      "keys": "ctrl+shift+f"
+    },
+    // Press Alt+Shift+D to open a new pane.
+    // - "split": "auto" makes this pane open in the direction that provides the most surface area.
+    // - "splitMode": "duplicate" makes the new pane use the focused pane's profile.
+    // To learn more about panes, visit https://aka.ms/terminal-panes
+    {
+      "command": {
+        "action": "splitPane",
+        "split": "auto",
+        "splitMode": "duplicate"
+      },
+      "keys": "alt+shift+d"
+    },
+    // Open Settings UI
+    {
+      "command": {
+        "action": "openSettings",
+        "target": "settingsFile"
+      },
+      "keys": "ctrl+shift+,"
+    },
+    // Press Shift+F11 to hide/show title bar
+    {
+      "command": "toggleFocusMode",
+      "keys": "shift+f11"
+    },
+    // Toggle experimental shaders
+    {
+      "command": "toggleShaderEffects",
+      "keys": "shift+f10"
+    }
+  ],
+  "copyFormatting": "none",
+  "copyOnSelect": false,
+  "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+  "initialCols": 90,
+  "showTabsInTitlebar": true,
+  "theme": "light",
+  "tabSwitcherMode": "mru",
+  "profiles": {
+    "defaults": {
+      // "acrylicOpacity": 0.8,
+      // "useAcrylic": true,
+      // "experimental.pixelShaderPath": "%UserProfile%\\Pictures\\crt.hlsl",
+      "antialiasingMode": "cleartype",
+      "bellStyle": "none",
+      "colorScheme": "some-light",
+      "fontFace": "Consolas NF",
+      "hidden": false,
+      "padding": "16, 16, 0, 16",
+      "cursorShape": "filledBox"
+    },
+    "list": [
+      {
+        "colorScheme": "Bluloco Light",
+        "fontFace": "CaskaydiaCove NF",
+        "fontSize": 11,
+        "tabColor": "#fafafa",
+        "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}"
+      },
+      {
+        "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+        "name": "Cmd"
+      },
+      {
+        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+        "hidden": true
+      },
+      {
+        "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+        "hidden": true
+      },
+      {
+        "colorScheme": "Tango Light",
+        "commandline": "bash",
+        "guid": "{17da3cac-b318-431e-8a3e-7fcdefe6d114}",
+        "fontFace": "ClincherCode NF",
+        "fontSize": 11,
+        "icon": "%UserProfile%\\Pictures\\Icons\\bash.ico",
+        "name": "Bash"
+      },
+      {
+        "commandline": "nvim",
+        "fontFace": "RecMonoSemicasual NF",
+        "fontSize": 11,
+        "colorScheme": "Bluloco Light",
+        "tabColor": "#fafafa",
+        "padding": "16, 16, 16, 16",
+        "scrollbarState": "hidden",
+        "guid": "{9f80d682-c62b-40a3-a8f3-40996da15ef2}",
+        "icon": "%UserProfile%\\Pictures\\Icons\\neovim.ico",
+        "name": "Neovim"
+      },
+      {
+        "commandline": "vifm .",
+        "fontFace": "FuraMono NF",
+        "fontSize": 11,
+        "colorScheme": "Tango Light",
+        "padding": "16, 16, 16, 16",
+        "scrollbarState": "hidden",
+        "guid": "{9f44d682-c62b-40a3-a8f3-40996da15ef2}",
+        "icon": "%UserProfile%\\Pictures\\Icons\\explorer.ico",
+        "name": "Vifm"
+      },
+      {
+        "commandline": "gsudo btm",
+        "fontFace": "OperatorMono NF",
+        "fontSize": 11,
+        "fontWeight": "semi-bold",
+        "padding": "16, 16, 16, 16",
+        "scrollbarState": "hidden",
+        "guid": "{9f80d682-c78b-40a3-a8f3-40996da15ef2}",
+        "icon": "%UserProfile%\\Pictures\\Icons\\top.ico",
+        "name": "Bottom"
+      },
+      {
+        "commandline": "ncspot",
+        "fontFace": "BlexMono NF",
+        "fontSize": 11,
+        "colorScheme": "Bluloco Light",
+        "tabColor": "#fafafa",
+        "padding": "16, 16, 16, 16",
+        "scrollbarState": "hidden",
+        "guid": "{9f80d682-c62b-12a3-a8f3-40996da15ef2}",
+        "icon": "%UserProfile%\\Pictures\\Icons\\spotify.ico",
+        "name": "Ncspot"
+      },
+      {
+        "guid": "{46ca431a-3a87-5fb3-83cd-11ececc031d2}",
+        "hidden": true,
+        "icon": "%UserProfile%\\Pictures\\Icons\\kali-menu.ico",
+        "fontFace": "DankMono NF",
+        "name": "Kali (WSL)",
+        "source": "Windows.Terminal.Wsl"
+      },
+      {
+        "guid": "{e4574889-4e80-52c5-a8be-f50561d4d10a}",
+        "hidden": true,
+        "icon": "%UserProfile%\\Pictures\\Icons\\archlinux.ico",
+        "fontFace": "DankMono NF",
+        "name": "Arch (WSL)",
+        "source": "Windows.Terminal.Wsl"
+      },
+      {
+        "commandline": "ssh macosvmware",
+        "fontFace": "BlexMono NF",
+        "fontSize": 11,
+        "hidden": true,
+        "guid": "{9f80d682-c62b-40a3-a8f3-41230da15ef2}",
+        "icon": "%UserProfile%\\Pictures\\Icons\\macos.ico",
+        "name": "macOS (VMware)"
+      },
+      {
+        "commandline": "ssh ubuntuvmware",
+        "fontFace": "BlexMono NF",
+        "fontSize": 11,
+        "hidden": true,
+        "guid": "{9f80d682-c62b-40a3-a8f3-40990da15ef2}",
+        "icon": "%UserProfile%\\Pictures\\Icons\\Ubuntu.ico",
+        "name": "Ubuntu (VMware)"
+      }
+    ]
+  },
+  "schemes": [
+    {
+      "name": "Bluloco Dark",
+      "background": "#0f1419",
+      "black": "#4A505D",
+      "blue": "#285BFF",
+      "brightBlack": "#61697A",
+      "brightBlue": "#199FFD",
+      "brightCyan": "#50ACAE",
+      "brightGreen": "#37BD58",
+      "brightPurple": "#FC58F6",
+      "brightRed": "#FC4A6D",
+      "brightWhite": "#FFFFFF",
+      "brightYellow": "#F6BE48",
+      "cursorColor": "#FFFFFF",
+      "cyan": "#366F9A",
+      "foreground": "#ABB2BF",
+      "green": "#23974A",
+      "purple": "#8C62FD",
+      "red": "#F81141",
+      "selectionBackground": "#FFFFFF",
+      "white": "#A1B8DF",
+      "yellow": "#FD7E57"
+    },
+    {
+      "name": "Bluloco Light",
+      "background": "#fafafa",
+      "black": "#373a41",
+      "blue": "#275fe4",
+      "brightBlack": "#676a77",
+      "brightBlue": "#0099e1",
+      "brightCyan": "#6d93bb",
+      "brightGreen": "#3cbc66",
+      "brightPurple": "#ce33c0",
+      "brightRed": "#ff6480",
+      "brightWhite": "#d3d3d3",
+      "brightYellow": "#c5a332",
+      "cursorColor": "#f32759",
+      "cyan": "#27618d",
+      "foreground": "#373a41",
+      "green": "#23974a",
+      "purple": "#823ff1",
+      "red": "#d52753",
+      "selectionBackground": "#daf0ff",
+      "white": "#babbc2",
+      "yellow": "#df631c"
+    },
+    {
+      "name": "some-light",
+      "background": "#FFFFFF",
+      "black": "#FFFFFF",
+      "blue": "#3971ED",
+      "brightBlack": "#B4B7B4",
+      "brightBlue": "#969896",
+      "brightCyan": "#E013D0",
+      "brightGreen": "#E0E0E0",
+      "brightPurple": "#282A2E",
+      "brightRed": "#F96A38",
+      "brightWhite": "#1D1F21",
+      "brightYellow": "#C5C8C6",
+      "cursorColor": "#000000",
+      "cyan": "#149BDA",
+      "foreground": "#373B41",
+      "green": "#198844",
+      "purple": "#A36AC7",
+      "red": "#CC342B",
+      "selectionBackground": "#000000",
+      "white": "#373B41",
+      "yellow": "#FBA922"
+    },
+    {
+      "name": "synthwave",
+      "background": "#220036",
+      "black": "#580051",
+      "blue": "#743ECA",
+      "brightBlack": "#59C2FF",
+      "brightBlue": "#00D9FF",
+      "brightCyan": "#E7FFFF",
+      "brightGreen": "#F949FF",
+      "brightPurple": "#FF00BF",
+      "brightRed": "#FF4D00",
+      "brightWhite": "#FDF6E3",
+      "brightYellow": "#C20092",
+      "cursorColor": "#F949FF",
+      "cyan": "#2AA198",
+      "foreground": "#FFA600",
+      "green": "#FF00F2",
+      "purple": "#D33682",
+      "red": "#DC322F",
+      "selectionBackground": "#C20092",
+      "white": "#6A008A",
+      "yellow": "#FF5E00"
+    }
+  ]
+}
