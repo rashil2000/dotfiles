@@ -12,6 +12,11 @@ case $- in
     bleopt history_share=1
     ble-bind -f up 'history-search-backward hide-status:immediate-accept:point=end'
     ble-bind -f down 'history-search-forward hide-status:immediate-accept:point=end'
+    # FZF Key bindings
+    if [ -d ~/GitHub/junegunn/fzf ] ; then
+      _ble_contrib_fzf_base=~/GitHub/junegunn/fzf
+      ble-import -d contrib/fzf-key-bindings
+    fi
   fi
   ;;
 *)
@@ -36,17 +41,14 @@ export HISTIGNORE="&:[ ]*:exit:ls:ll:bg:fg:history:clear:dir"
 # histverify   - load history line onto readline buffer for editing
 # lithist      - save history with newlines instead of ; where possible
 # histappend   - append to the history file, don't overwrite it
-# autocd       - prepend cd to directory names automatically
 # dirspell     - correct spelling errors during tab-completion
 # cdspell      - correct spelling errors in arguments supplied to cd
 # nocaseglob   - case-insensitive globbing (used in pathname expansion)
-# cdable_vars  - This allows you to bookmark your favorite places across the file system
-#                Define a variable containing a path and you will be able to cd into it regardless of the directory you're in
 # checkwinsize - check the window size after each command and, if necessary,
 #                update the values of LINES and COLUMNS.
 # globstar     - If set, the pattern "**" used in a pathname expansion context will
 #                match all files and zero or more directories and subdirectories.
-shopt -s cmdhist histreedit histverify lithist histappend autocd dirspell cdspell nocaseglob cdable_vars checkwinsize globstar 2>/dev/null
+shopt -s cmdhist histreedit histverify lithist histappend dirspell cdspell nocaseglob checkwinsize globstar 2>/dev/null
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -84,6 +86,8 @@ if ! shopt -oq posix; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
+  elif [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
+    . /usr/local/etc/profile.d/bash_completion.sh
   fi
 fi
 
@@ -93,6 +97,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Custom Aliases
 alias dir='exa -la --icons --git --group-directories-first'
 alias :q='exit'
+alias h="cd ~"
 alias ghd="cd ~/GitHub"
 alias acd="cd ~/Documents/Academics"
 
@@ -108,9 +113,6 @@ fi
 
 # Enable Starship prompt
 [ -f ~/.local/share/starship.bash ] && . ~/.local/share/starship.bash || true
-
-# FZF Key bindings
-[ -f ~/.local/share/fzf/key-bindings.bash ] && . ~/.local/share/fzf/key-bindings.bash || true
 
 # Node Version Switcher
 [ -f ~/Scoop/apps/nvs/current/nvs.sh ] && . ~/Scoop/apps/nvs/current/nvs.sh || true
