@@ -60,9 +60,6 @@ tnoremap <silent> <F3> <C-\><C-n>:bp<CR>
 " Swap functionality of ctrl-r and r
 nnoremap r <C-r>
 nnoremap <C-r> r
-" Scroll faster
-nnoremap <C-e> 10<C-e>
-nnoremap <C-y> 10<C-y>
 " Toggle line wrap
 nnoremap <silent> <A-z> :set wrap!<CR>
 " Change working directory
@@ -141,7 +138,7 @@ let g:floaterm_opener        = 'edit'
 nnoremap <silent> <F10> :FloatermNew --wintype=floating --height=0.6<CR>
 tnoremap <silent> <F10> <C-\><C-n>:FloatermNew --wintype=floating --height=0.6<CR>
 " Pick folder/files using Vifm
-nnoremap <silent> <C-f> :FloatermNew --wintype=floating --height=0.6 --title=Vifm\ Picker vifm<CR>
+nnoremap <silent> <C-y> :FloatermNew --wintype=floating --height=0.6 --title=Vifm\ Picker vifm<CR>
 " Autocmd
 function s:floatermSettings()
   setlocal nonumber norelativenumber  " Disable line numbers
@@ -210,7 +207,7 @@ augroup END
 " Automaticaly close nvim if Explorer is only thing left open
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 " Toggle
-nnoremap <silent> <C-b> :CocCommand explorer<CR>
+nnoremap <silent> <C-e> :CocCommand explorer<CR>
 
 " List of completion extensions
 let g:coc_global_extensions = [
@@ -233,11 +230,11 @@ let g:coc_global_extensions = [
 let g:coc_user_config = {
   \ "diagnostic.virtualText": v:true,
   \ "session.directory": stdpath('data') . '/sessions',
-  \ "list.source.files.command": "rg",
+  \ "list.source.files.command": "fd",
   \ "list.source.files.args": [
   \   "--color", "never",
-  \   "--files",
-  \   "--iglob", "!{.git}",
+  \   "--type", "file",
+  \   "--exclude", ".git",
   \   "--hidden",
   \   "--follow"
   \ ],

@@ -17,7 +17,7 @@ Function msvc {
   Write-Host "[Enter-VsDevShell] Environment initialized for: 'x64'"
 }
 Function msys {
-  & "~\GitHub\rashil2000\Scripts\msys-env.ps1" @args
+  . "~\GitHub\rashil2000\Scripts\msys-env.ps1" @args
 }
 
 <# Line Editing Options #>
@@ -29,11 +29,7 @@ Set-PSReadLineOption `
   -Colors @{ ListPredictionSelected = "$([char]0x1b)[48;5;243m" } `
   -AddToHistoryHandler {
     Param([string]$line)
-    if ($line -in "exit", "dir", ":q", "clear", "history") {
-      return $False
-    } else {
-      return $True
-    }
+    $line -notin "exit", "dir", ":q", "cls", "history"
   }
 if ($Host.UI.RawUI.WindowSize.Width -lt 54 -or $Host.UI.RawUI.WindowSize.Height -lt 15) {
   Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
@@ -47,14 +43,10 @@ Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow -Function BackwardWord
 Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
 
 <# Import Completions #>
-"~/Scoop/apps/ripgrep/current/complete/_rg.ps1", `
-"~/Scoop/apps/hyperfine/current/_hyperfine.ps1", `
-"~/Scoop/apps/bottom/current/completion/_btm.ps1", `
-"~/Scoop/apps/code-minimap/current/completions/powershell/_code-minimap.ps1", `
-"~/.local/share/starship.ps1", `
-"~/GitHub/rashil2000/Scripts/Completions/_rustup.ps1", `
-"~/GitHub/rashil2000/Scripts/Completions/_starship.ps1" `
-  | ForEach-Object { if (Test-Path $_) { & $_ } }
+if (Test-Path "~/GitHub/rashil2000/Scripts/Completions" -PathType Container) {
+  Get-ChildItem "~/GitHub/rashil2000/Scripts/Completions/*.ps1" `
+    | ForEach-Object { . $_ }
+}
 
 <# Miscellaneous Settings #>
 if ($PSVersionTable.PSVersion.Major -gt 5) {
@@ -62,10 +54,10 @@ if ($PSVersionTable.PSVersion.Major -gt 5) {
     -LinkForegroundColor "[5;4;38;5;117m" `
     -ItalicsForegroundColor "[3m"
 }
-if (Test-Path "~/GitHub/rashil2000/Scripts/Completions/_gh.ps1") {
-  Invoke-Expression (Get-Content "~/GitHub/rashil2000/Scripts/Completions/_gh.ps1" -Raw)
-}
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+
+<# Enable Starship prompt #>
+. "~/.local/share/starship.ps1"
 
 <# Import Modules #>
 Import-Module Terminal-Icons, scoop-completion, npm-completion, posh-cargo, posh-git, kmt.winget.autocomplete -ErrorAction Ignore

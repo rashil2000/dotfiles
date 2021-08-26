@@ -11,6 +11,7 @@ $if clink
 	"\t": clink-select-complete
 	C-r: "luafunc:fzf_history"
 	C-t: "luafunc:fzf_file"
+	M-c: "luafunc:fzf_directory"
 	# Puts the cursor at the end of the line when using 'history-search-forward' or 'history-search-backward'
 	set history-point-at-end-of-anchored-search on
 $endif

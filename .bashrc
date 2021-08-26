@@ -3,25 +3,20 @@
 # for examples
 
 # If not running interactively, don't do anything
-case $- in
-*i*)
-  # Initialize ble.sh
-  if [ -f ~/GitHub/akinomyoga/ble.sh/out/ble.sh ]; then
-    . ~/GitHub/akinomyoga/ble.sh/out/ble.sh --noattach
-    bleopt history_share=1
-    ble-bind -f up 'history-search-backward hide-status:immediate-accept:point=end'
-    ble-bind -f down 'history-search-forward hide-status:immediate-accept:point=end'
-    # FZF Key bindings
-    if [ -d ~/GitHub/junegunn/fzf ] ; then
-      _ble_contrib_fzf_base=~/GitHub/junegunn/fzf
-      ble-import -d contrib/fzf-key-bindings
-    fi
+[[ "$-" != *i* ]] && return
+
+# Initialize ble.sh
+if [ -f ~/GitHub/akinomyoga/ble.sh/out/ble.sh ]; then
+  . ~/GitHub/akinomyoga/ble.sh/out/ble.sh --noattach
+  bleopt history_share=1
+  ble-bind -f up 'history-search-backward hide-status:immediate-accept:point=end'
+  ble-bind -f down 'history-search-forward hide-status:immediate-accept:point=end'
+  # FZF Key bindings
+  if [ -d ~/GitHub/junegunn/fzf ] ; then
+    _ble_contrib_fzf_base=~/GitHub/junegunn/fzf
+    ble-import -d contrib/fzf-key-bindings
   fi
-  ;;
-*)
-  return
-  ;;
-esac
+fi
 
 # Automatically trim long paths in the prompt
 PROMPT_DIRTRIM=3
@@ -35,7 +30,6 @@ HISTCONTROL="erasedups:ignoreboth"
 export HISTIGNORE="&:[ ]*:exit:ls:ll:bg:fg:history:clear:dir"
 
 # Set some handy shell options
-# cmdhist      - save multi-line commands as one command
 # histreedit   - use readline on history
 # histverify   - load history line onto readline buffer for editing
 # lithist      - save history with newlines instead of ; where possible
@@ -43,9 +37,8 @@ export HISTIGNORE="&:[ ]*:exit:ls:ll:bg:fg:history:clear:dir"
 # dirspell     - correct spelling errors during tab-completion
 # cdspell      - correct spelling errors in arguments supplied to cd
 # nocaseglob   - case-insensitive globbing (used in pathname expansion)
-# checkwinsize - check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
 # globstar     - If set, the pattern "**" used in a pathname expansion context will match all files and zero or more directories and subdirectories.
-shopt -s cmdhist histreedit histverify lithist histappend dirspell cdspell nocaseglob checkwinsize globstar 2>/dev/null
+shopt -s histreedit histverify lithist histappend dirspell cdspell nocaseglob globstar 2>/dev/null
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -75,9 +68,6 @@ if [ -x /usr/bin/dircolors ]; then
   export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 fi
 
-# An "alert" alias for long running commands.  Use like so: $ sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # Custom Aliases
 alias dir='exa -la --icons --git --group-directories-first'
 alias :q='exit'
@@ -97,9 +87,6 @@ fi
 
 # Enable Starship prompt
 [ -f ~/.local/share/starship.bash ] && . ~/.local/share/starship.bash || true
-
-# Node Version Switcher
-[ -f ~/Scoop/apps/nvs/current/nvs.sh ] && . ~/Scoop/apps/nvs/current/nvs.sh || true
 
 # Attach to ble.sh
 [[ ${BLE_VERSION-} ]] && ble-attach
