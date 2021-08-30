@@ -22,6 +22,7 @@ fi
 PROMPT_DIRTRIM=3
 
 # Set history lengths
+HISTFILE=~/.cache/.bash_history
 HISTSIZE=10000
 HISTFILESIZE=20000
 # Avoid duplicate entries
@@ -74,6 +75,9 @@ alias :q='exit'
 alias h="cd ~"
 alias ghd="cd ~/GitHub"
 alias acd="cd ~/Documents/Academics"
+mkcd() { mkdir -p "$@" && cd "$@"; }
+gccd() { git clone "git@github.com:$1/$2.git" && cd $2; }
+. ~/.nvs/nvs.sh 2>/dev/null || true
 
 # Startup info (Check if on MSys2)
 if [ -f /usr/bin/msys-2.0.dll ]; then

@@ -1,0 +1,41 @@
+# name: Paths to load Lua scripts from
+# type: string
+clink.path = C:\Users\RashilGandhi\AppData\Local\clink\;C:\Users\RashilGandhi\Scoop\apps\clink-completions\current\
+
+# name: Auto-answer terminate prompt
+# type: enum
+# options: off,answer_yes,answer_no
+cmd.auto_answer = answer_yes
+
+# name: Argument color
+# type: color
+color.arg = bright blue
+
+# name: Argmatcher color
+# type: color
+color.argmatcher = green
+
+# name: Shell command completions
+# type: color
+color.cmd = bright yellow
+
+# name: Filtered completion color
+# type: color
+color.filtered = underline
+
+# name: Flag color
+# type: color
+color.flag = magenta
+
+# name: Hidden file completions
+# type: color
+color.hidden = yellow
+
+# name: Commands not automatically added to the history
+# type: string
+history.dont_add_to_history_cmds = exit history cls dir :q
+
+# name: Share history between instances
+# type: boolean
+history.shared = True
+

@@ -6,6 +6,7 @@ Remove-Item -Force -ErrorAction Ignore Alias:lp, Alias:sc, Alias:curl, Alias:wge
   Alias:h, Alias:r, Alias:ls, Alias:cp, Alias:mv, Alias:ps, Alias:rm, Alias:man, Alias:pwd, Alias:cat, Alias:kill, Alias:diff, Alias:clear, Alias:mount, Alias:sleep
 Set-Alias pls PowerColorLS
 Set-Alias mcm Measure-Command
+Set-Alias nvs ~/.nvs/nvs.ps1
 Function :q { exit }
 Function h { Set-Location ~ }
 Function ghd { Set-Location ~/GitHub }
@@ -16,8 +17,14 @@ Function msvc {
   Enter-VsDevShell 0a68dd02 -DevCmdArguments '-arch=x64'
   Write-Host "[Enter-VsDevShell] Environment initialized for: 'x64'"
 }
-Function msys {
-  . "~\GitHub\rashil2000\Scripts\msys-env.ps1" @args
+Function msys { . "~\GitHub\rashil2000\scripts\msys-env.ps1" @args }
+Function mkcd {
+  New-Item @args -ItemType Directory -Force
+  Set-Location @args
+}
+Function gccd {
+  git clone "git@github.com:$($args[0])/$($args[1]).git"
+  Set-Location $args[1]
 }
 
 <# Line Editing Options #>
@@ -29,7 +36,7 @@ Set-PSReadLineOption `
   -Colors @{ ListPredictionSelected = "$([char]0x1b)[48;5;243m" } `
   -AddToHistoryHandler {
     Param([string]$line)
-    $line -notin "exit", "dir", ":q", "cls", "history"
+    $line -notin 'exit', 'dir', ':q', 'cls', 'history', '$pwd'
   }
 if ($Host.UI.RawUI.WindowSize.Width -lt 54 -or $Host.UI.RawUI.WindowSize.Height -lt 15) {
   Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
@@ -43,8 +50,8 @@ Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow -Function BackwardWord
 Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
 
 <# Import Completions #>
-if (Test-Path "~/GitHub/rashil2000/Scripts/Completions" -PathType Container) {
-  Get-ChildItem "~/GitHub/rashil2000/Scripts/Completions/*.ps1" `
+if (Test-Path "~/GitHub/rashil2000/scripts/completions" -PathType Container) {
+  Get-ChildItem "~/GitHub/rashil2000/scripts/completions/_*.ps1" `
     | ForEach-Object { . $_ }
 }
 
@@ -57,7 +64,9 @@ if ($PSVersionTable.PSVersion.Major -gt 5) {
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 
 <# Enable Starship prompt #>
-. "~/.local/share/starship.ps1"
+if (Test-Path "~/.local/share/starship.ps1" -PathType Leaf) {
+  . "~/.local/share/starship.ps1"
+}
 
 <# Import Modules #>
 Import-Module Terminal-Icons, scoop-completion, npm-completion, posh-cargo, posh-git, kmt.winget.autocomplete -ErrorAction Ignore

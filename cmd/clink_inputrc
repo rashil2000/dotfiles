@@ -1,0 +1,23 @@
+# History searching
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Enable completion menu
+"\t": clink-select-complete
+
+# Puts the cursor at the end of the line when using 'history-search-forward' or 'history-search-backward'
+set history-point-at-end-of-anchored-search on
+
+# Suffix each returned file completion with a character denoting its type, in a similar way to 'ls' with -F
+set visible-stats on
+
+# Display common prefix of set of possible completions using a different color
+set colored-completion-prefix on
+
+# Display possible completions using different colors to indicate their file type
+set colored-stats on
+
+# Enable fzf keybindings
+C-r: "luafunc:fzf_history"
+C-t: "luafunc:fzf_file"
+M-c: "luafunc:fzf_directory"

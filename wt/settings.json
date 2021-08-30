@@ -50,6 +50,7 @@
   "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
   "initialCols": 90,
   "showTabsInTitlebar": true,
+  "useAcrylicInTabRow": true,
   "theme": "light",
   "tabSwitcherMode": "mru",
   "profiles": {
@@ -59,6 +60,7 @@
       // "experimental.pixelShaderPath": "%UserProfile%\\Pictures\\crt.hlsl",
       "antialiasingMode": "cleartype",
       "bellStyle": "none",
+      "intenseTextStyle": "bold",
       "colorScheme": "some-light",
       "fontFace": "Consolas NF",
       "hidden": false,
@@ -70,12 +72,12 @@
         "colorScheme": "Bluloco Light",
         "fontFace": "CaskaydiaCove NF",
         "fontSize": 11,
-        "tabColor": "#fafafa",
+        "tabColor": "#f9f9f9",
         "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}"
       },
       {
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-        "name": "Cmd"
+        "name": "Command"
       },
       {
         "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
@@ -99,7 +101,7 @@
         "fontFace": "RecMonoSemicasual NF",
         "fontSize": 11,
         "colorScheme": "Bluloco Light",
-        "tabColor": "#fafafa",
+        "tabColor": "#f9f9f9",
         "padding": "16, 16, 16, 16",
         "scrollbarState": "hidden",
         "guid": "{9f80d682-c62b-40a3-a8f3-40996da15ef2}",
@@ -133,7 +135,7 @@
         "fontFace": "BlexMono NF",
         "fontSize": 11,
         "colorScheme": "Bluloco Light",
-        "tabColor": "#fafafa",
+        "tabColor": "#f9f9f9",
         "padding": "16, 16, 16, 16",
         "scrollbarState": "hidden",
         "guid": "{9f80d682-c62b-12a3-a8f3-40996da15ef2}",
@@ -179,7 +181,7 @@
   "schemes": [
     {
       "name": "Bluloco Dark",
-      "background": "#0f1419",
+      "background": "#282c34",
       "black": "#4A505D",
       "blue": "#285BFF",
       "brightBlack": "#61697A",
@@ -202,7 +204,7 @@
     },
     {
       "name": "Bluloco Light",
-      "background": "#fafafa",
+      "background": "#f9f9f9",
       "black": "#373a41",
       "blue": "#275fe4",
       "brightBlack": "#676a77",

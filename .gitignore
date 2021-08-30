@@ -1,1 +1,2 @@
-wt/settings.json.*.backup
+wt/*
+wt/settings.json
