@@ -16,6 +16,7 @@ set expandtab             " Expand TABs to spaces
 set smarttab
 set lazyredraw            " Improve scrolling performance when navigating through large results
 set ignorecase smartcase  " Ignore case only when the pattern contains no capital letters
+set secure exrc           " Project-specific settings
 set clipboard=unnamed
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
@@ -167,7 +168,7 @@ let g:startify_lists = [
   \]
 let g:startify_bookmarks = [
   \ $MYVIMRC,
-  \ '~/GitHub/rashil2000/dotfiles/Microsoft.PowerShell_profile.ps1',
+  \ '~/GitHub/rashil2000/dotfiles/pwsh/Microsoft.PowerShell_profile.ps1',
   \ '~/GitHub',
   \ '~/Documents/Academics',
   \]

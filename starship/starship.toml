@@ -40,13 +40,18 @@ disabled = false
 format = "[$time]($style) - "
 style = "italic cyan"
 
-[env_var]
-variable = "WSL_DISTRO_NAME"
-format = "\\([$env_value]($style)\\) "
+[env_var.WSL_DISTRO_NAME]
+format = "[$env_value]($style) "
+style = "underline purple"
+
+[env_var.MSYSTEM]
+format = "[$env_value]($style) "
+style = "underline purple"
 
 [shell]
 format = "\\[$indicator\\] at "
 powershell_indicator = "[pwsh](bold blue)"
+zsh_indicator = "[zsh](bold blue)"
 bash_indicator = "[bash](bold blue)"
 unknown_indicator = "[cmd](bold blue)"
 disabled = false

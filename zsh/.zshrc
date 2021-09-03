@@ -14,10 +14,15 @@ bindkey '^[[Z' undo                               # shift + tab undo last action
 
 # better search defaults
 autoload -Uz history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^[[A" history-beginning-search-backward-end  # up to search history
-bindkey "^[[B" history-beginning-search-forward-end   # down to search history
+zle -N history-beginning-search-backward-end history-search-end # up to search history
+zle -N history-beginning-search-forward-end history-search-end  # down to search history
+if [ -f /usr/bin/msys-2.0.dll ]; then
+    bindkey "^[[A" history-beginning-search-backward-end
+    bindkey "^[[B" history-beginning-search-forward-end
+else
+    bindkey "^[OA" history-beginning-search-backward-end
+    bindkey "^[OB" history-beginning-search-forward-end
+fi
 
 # enable completion features
 fpath=(~/GitHub/rashil2000/scripts/completions $fpath)    # User-defined completions
@@ -47,7 +52,8 @@ HISTORY_IGNORE="(exit|ls|pwd|bg|fg|history|clear|dir)"
 # notify                 : report the status of background jobs immediately
 # numericglobsort        : sort filenames numerically when it makes sense
 # promptsubst            : enable command substitution in prompt
-setopt hist_expire_dups_first hist_ignore_dups hist_ignore_space hist_verify share_history interactivecomments magicequalsubst nonomatch notify numericglobsort promptsubst
+# globdots               : match paths beginning with a dot
+setopt hist_expire_dups_first hist_ignore_dups hist_ignore_space hist_verify share_history interactivecomments magicequalsubst nonomatch notify numericglobsort promptsubst globdots
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -82,7 +88,6 @@ alias dir='exa -la --icons --git --group-directories-first'
 alias h='cd ~'
 alias ghd='cd ~/GitHub'
 alias acd='cd ~/Documents/Academics/Semester\ 6'
-. ~/.nvs/nvs.sh 2>/dev/null || true
 mkcd() { mkdir -p "$@" && cd "$@"; }
 gccd() { git clone "git@github.com:$1/$2.git" && cd $2; }
 
@@ -109,7 +114,7 @@ fi
 # startup info (Check if on MSys2)
 if [ -f /usr/bin/msys-2.0.dll ]; then
     read msyskernelname msyskernelrelease <<< $(uname -sr)
-    echo "Microsoft Windows [$msyskernelname]"
+    echo "Microsoft Windows [Version ${msyskernelname#*-}]"
     echo "(c) Minimal System 2 - $msyskernelrelease"
 fi
 if [[ -v __shell_start ]]; then
