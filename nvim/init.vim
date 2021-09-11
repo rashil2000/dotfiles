@@ -88,6 +88,7 @@ function ThemeSetter()
   highlight Normal ctermbg=none guibg=none
   highlight SignColumn ctermbg=none guibg=none
   highlight LineNr ctermbg=none guibg=none
+  highlight FloatermBorder ctermbg=none guibg=none
 endfunction
 nnoremap <Leader>ts :call ThemeSetter()<CR>
 call ThemeSetter()
@@ -130,7 +131,9 @@ let g:floaterm_keymap_new    = '<F9>'
 let g:floaterm_keymap_prev   = '<F7>'
 let g:floaterm_keymap_next   = '<F8>'
 let g:floaterm_keymap_toggle = '<F12>'
-let g:floaterm_shell         = 'pwsh'
+if executable('pwsh')
+  let g:floaterm_shell       = 'pwsh'
+endif
 let g:floaterm_autoclose     = 1
 let g:floaterm_wintype       = 'split'
 let g:floaterm_height        = 0.2
@@ -160,6 +163,11 @@ function s:currdir()
   let workdir = getcwd()
   return [ { 'line': '<'.workdir.'>', 'path': workdir } ]
 endfunction
+
+function! StartifyEntryFormat()
+  return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+endfunction
+
 let g:startify_skiplist = [ 'COMMIT_EDITMSG' ]
 let g:startify_lists = [
   \ { 'type': 'bookmarks', 'header': ['   Bookmarks'] },

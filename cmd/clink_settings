@@ -1,7 +1,3 @@
-# name: Paths to load Lua scripts from
-# type: string
-clink.path = C:\Users\RashilGandhi\AppData\Local\clink\;C:\Users\RashilGandhi\Scoop\apps\clink-completions\current\
-
 # name: Auto-answer terminate prompt
 # type: enum
 # options: off,answer_yes,answer_no

@@ -110,8 +110,9 @@
       },
       {
         "commandline": "vifm .",
-        "fontFace": "FuraMono NF",
+        "fontFace": "VictorMono NF",
         "fontSize": 11,
+        "fontWeight": "semi-bold",
         "colorScheme": "Tango Light",
         "padding": "16, 16, 16, 16",
         "scrollbarState": "hidden",

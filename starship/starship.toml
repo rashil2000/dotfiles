@@ -51,7 +51,6 @@ style = "underline purple"
 [shell]
 format = "\\[$indicator\\] at "
 powershell_indicator = "[pwsh](bold blue)"
-zsh_indicator = "[zsh](bold blue)"
 bash_indicator = "[bash](bold blue)"
 unknown_indicator = "[cmd](bold blue)"
 disabled = false

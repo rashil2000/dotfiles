@@ -9,6 +9,7 @@ Set-Alias mcm Measure-Command
 Set-Alias nvs ~/.nvs/nvs.ps1
 Function :q { exit }
 Function h { Set-Location ~ }
+Function d { Set-Location ~/Desktop }
 Function ghd { Set-Location ~/GitHub }
 Function acd { Set-Location ~/Documents/Academics }
 Function dir { Get-ChildItem -Attributes !System -Force @args }

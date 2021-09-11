@@ -354,7 +354,9 @@ filextype */
 "
 " Or leave it for automatic detection
 "
-fileviewer *[^/] bat --color always --wrap never --pager never %c -p
+if executable('bat')
+    fileviewer *[^/] bat --color always --wrap never --pager never %c -p
+endif
 
 " Displaying pictures in terminal
 "
@@ -396,7 +398,11 @@ set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
 " Sample mappings
 
 " Start shell in current directory
-nnoremap s :shell<cr>
+if !executable('pwsh')
+    nnoremap s :shell<cr>
+else
+    nnoremap s :!pwsh<cr>
+endif
 
 " Display sorting dialog
 nnoremap S :sort<cr>
@@ -411,7 +417,11 @@ nnoremap o :!gvim --remote-tab-silent %f<cr>
 nnoremap O :!gvim %f<cr>
 
 " Open file in the background using its default program
-nnoremap gb :file &<cr>l
+if !has('win')
+    nnoremap gb :file &<cr>l
+else
+    nnoremap gb :!explorer %"f &<cr>
+endif
 
 " Interaction with system clipboard
 if has('win')
