@@ -31,6 +31,10 @@ color.hidden = yellow
 # type: string
 history.dont_add_to_history_cmds = exit history cls dir :q
 
+# name: The number of history lines to save
+# type: integer
+history.max_lines = 10000
+
 # name: Share history between instances
 # type: boolean
 history.shared = True

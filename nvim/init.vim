@@ -17,9 +17,11 @@ set smarttab
 set lazyredraw            " Improve scrolling performance when navigating through large results
 set ignorecase smartcase  " Ignore case only when the pattern contains no capital letters
 set secure exrc           " Project-specific settings
+set nofoldenable          " Disable automatic folding
 set clipboard=unnamed
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType * setlocal foldmethod=syntax
 
 call plug#begin(stdpath('data') . '/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -248,7 +250,7 @@ let g:coc_user_config = {
   \   "--follow"
   \ ],
   \ "list.source.grep.args": [
-  \   "--iglob", "!{.git}",
+  \   "--iglob", "!{.git,package-lock.json,yarn.lock,Cargo.lock}",
   \   "--hidden",
   \   "--follow"
   \ ],

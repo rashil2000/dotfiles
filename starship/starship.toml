@@ -1,59 +1,22 @@
 format = """\
-  $battery\
-  $time\
   $username\
-  $env_var\
-  $shell\
   $directory\
   $package\
   $git_branch\
   $git_commit\
   $git_state\
   $git_status\
+  $fill\
   $cmd_duration\
+  [ in](bright white)\
+  $env_var\
+  $shell\
+  $battery\
+  $time\
   $line_break\
   $jobs\
   $character\
   """
-
-[battery]
-full_symbol = "•"
-discharging_symbol = ""
-charging_symbol = ""
-unknown_symbol = "!"
-format = "[$symbol$percentage]($style) "
-
-[[battery.display]]
-threshold = 20
-style = "italic red"
-
-[[battery.display]]
-threshold = 80
-style = "italic green"
-
-[[battery.display]]
-threshold = 100
-style = "italic yellow"
-
-[time]
-disabled = false
-format = "[$time]($style) - "
-style = "italic cyan"
-
-[env_var.WSL_DISTRO_NAME]
-format = "[$env_value]($style) "
-style = "underline purple"
-
-[env_var.MSYSTEM]
-format = "[$env_value]($style) "
-style = "underline purple"
-
-[shell]
-format = "\\[$indicator\\] at "
-powershell_indicator = "[pwsh](bold blue)"
-bash_indicator = "[bash](bold blue)"
-unknown_indicator = "[cmd](bold blue)"
-disabled = false
 
 [directory]
 truncate_to_repo = true
@@ -83,6 +46,52 @@ modified = "!×${count} "
 staged = "+×${count} "
 renamed = "»×${count} "
 deleted = "✘×${count} "
+
+[fill]
+symbol = " "
+
+[cmd_duration]
+format = " took [$duration]($style)"
+
+[env_var.WSL_DISTRO_NAME]
+format = " [$env_value]($style)"
+style = "underline purple"
+
+[env_var.MSYSTEM]
+format = " [$env_value]($style)"
+style = "underline purple"
+
+[shell]
+format = " \\[$indicator\\] at"
+powershell_indicator = "[pwsh](bold blue)"
+fish_indicator = "[fish](bold blue)"
+bash_indicator = "[bash](bold blue)"
+unknown_indicator = "[cmd](bold blue)"
+disabled = false
+
+[battery]
+full_symbol = "•"
+discharging_symbol = ""
+charging_symbol = ""
+unknown_symbol = "!"
+format = " [$symbol$percentage]($style)"
+
+[[battery.display]]
+threshold = 20
+style = "italic red"
+
+[[battery.display]]
+threshold = 80
+style = "italic green"
+
+[[battery.display]]
+threshold = 100
+style = "italic yellow"
+
+[time]
+disabled = false
+format = " [$time]($style)"
+style = "italic cyan"
 
 # [memory_usage]
 # format = "$symbol[${ram}( | ${swap})]($style) "
