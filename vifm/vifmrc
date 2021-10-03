@@ -341,6 +341,11 @@ filextype */
         \ {View in thunar}
         \ Thunar %f &,
 
+" Displaying pictures in terminal
+if executable('viu')
+    fileviewer *.png,*.jpeg,*.jpg viu -w %pw -s -t %"c
+endif
+
 " Syntax highlighting in preview
 "
 " Explicitly set highlight type for some extensions
@@ -357,10 +362,6 @@ filextype */
 if executable('bat')
     fileviewer *[^/] bat --color always --wrap never --pager never %c -p
 endif
-
-" Displaying pictures in terminal
-"
-" fileviewer *.jpg,*.png shellpic %c
 
 " Open all other files with default system programs (you can also remove all
 " :file[x]type commands above to ensure they don't interfere with system-wide

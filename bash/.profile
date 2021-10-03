@@ -11,8 +11,8 @@
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
-    if [ -f "$HOME/.config/bash/.bashrc" ]; then
-        . "$HOME/.config/bash/.bashrc"
+    if [ -f "$HOME/.bashrc" ]; then
+        . "$HOME/.bashrc"
     fi
 fi
 
@@ -38,10 +38,8 @@ export LESS_TERMCAP_ue=$'\E[0m'     # reset underline
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Some environment variables
-export INPUTRC="$HOME/.config/bash/.inputrc"
-export COLORTERM='truecolor'
 export FZF_DEFAULT_OPTS='--exact --no-sort --reverse --cycle --height 40%'
-export FZF_CTRL_T_COMMAND='fdfind -H -L -E .git -t f'
-export FZF_ALT_C_COMMAND='fdfind -H -L -E .git -t d'
+export FZF_CTRL_T_COMMAND='fd -H -L -E .git -t f'
+export FZF_ALT_C_COMMAND='fd -H -L -E .git -t d'
 export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range=:500 {}"'
 export FZF_ALT_C_OPTS='--preview "exa -a --icons --group-directories-first --color=always {}"'

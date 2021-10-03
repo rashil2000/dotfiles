@@ -22,7 +22,6 @@ fi
 PROMPT_DIRTRIM=3
 
 # Set history lengths
-HISTFILE=~/.cache/.bash_history
 HISTSIZE=10000
 HISTFILESIZE=20000
 # Avoid duplicate entries

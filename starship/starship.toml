@@ -95,11 +95,8 @@ style = "italic cyan"
 
 # [memory_usage]
 # format = "$symbol[${ram}( | ${swap})]($style) "
-# show_percentage = true
-# show_swap = true
 # threshold = -1
 # symbol = " "
-# style = "bold dimmed white"
 # disabled = false
 
 [aws]
