@@ -1,5 +1,5 @@
 " vim: filetype=vifm :
-" Sample configuration file for vifm (last updated: 2 June, 2019)
+" Sample configuration file for vifm (last updated: 31 August, 2021)
 " You can edit this file by hand.
 " The " character at the beginning of a line comments out the line.
 " Blank lines are ignored.
@@ -39,11 +39,6 @@ set history=100
 
 set nofollowlinks
 
-" With this option turned on you can run partially entered commands with
-" unambiguous beginning using :! (e.g. :!Te instead of :!Terminal or :!Te<tab>).
-
-" set fastrun
-
 " Natural sort of (version) numbers within text.
 
 set sortnumbers
@@ -58,13 +53,9 @@ set undolevels=100
 set vimhelp
 
 " If you would like to run an executable file when you
-" press return on the file name set this.
+" press Enter, l or Right Arrow, set this.
 
 set norunexec
-
-" Selected color scheme
-
-colorscheme solarized-dark
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
@@ -135,12 +126,12 @@ mark h ~/
 
 command! df df -h %m 2> /dev/null
 command! diff vim -d %f %F
-command! zip zip -r %f.zip %f
+command! zip zip -r %c.zip %f
 command! run !! ./%f
 command! make !!make %a
 command! mkcd :mkdir %a | cd %a
 command! vgrep vim "+grep %a"
-command! reload :write | restart
+command! reload :write | restart full
 
 " ------------------------------------------------------------------------------
 
@@ -149,7 +140,7 @@ command! reload :write | restart
 " :filetype pattern1,pattern2 defaultprogram,program2
 " :fileviewer pattern1,pattern2 consoleviewer
 " The other programs for the file type can be accessed with the :file command
-" The command macros %f, %F, %d, %F may be used in the commands.
+" The command macros like %f, %F, %d, %D may be used in the commands.
 " The %a macro is ignored.  To use a % you must put %%.
 
 " For automated FUSE mounts, you must register an extension with :file[x]type
@@ -171,73 +162,76 @@ command! reload :write | restart
 " program.
 
 " Pdf
-filextype *.pdf zathura %c %i &, apvlv %c, xpdf %c
-fileviewer *.pdf pdftotext -nopgbrk %c -
+filextype {*.pdf},<application/pdf> zathura %c %i &, apvlv %c, xpdf %c
+fileviewer {*.pdf},<application/pdf> pdftotext -nopgbrk %c -
 
 " PostScript
-filextype *.ps,*.eps,*.ps.gz
+filextype {*.ps,*.eps,*.ps.gz},<application/postscript>
         \ {View in zathura}
         \ zathura %f,
         \ {View in gv}
         \ gv %c %i &,
 
 " Djvu
-filextype *.djvu
+filextype {*.djvu},<image/vnd.djvu>
         \ {View in zathura}
         \ zathura %f,
         \ {View in apvlv}
         \ apvlv %f,
 
 " Audio
-filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus
+filetype {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus},
+        \<audio/*>
        \ {Play using ffplay}
        \ ffplay -nodisp -autoexit %c,
        \ {Play using MPlayer}
        \ mplayer %f,
-fileviewer *.mp3 mp3info
-fileviewer *.flac soxi
+fileviewer {*.mp3},<audio/mpeg> mp3info
+fileviewer {*.flac},<audio/flac> soxi
 
 " Video
-filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
-         \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
-         \*.as[fx]
+filextype {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
+          \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
+          \*.as[fx]},
+         \<video/*>
         \ {View using ffplay}
         \ ffplay -fs -autoexit %f,
         \ {View using Dragon}
         \ dragon %f:p,
         \ {View using mplayer}
         \ mplayer %f,
-fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
-          \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
-          \*.as[fx]
+fileviewer {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
+           \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
+           \*.as[fx]},
+          \<video/*>
          \ ffprobe -pretty %c 2>&1
 
 " Web
-filextype *.html,*.htm
+filextype {*.html,*.htm},<text/html>
         \ {Open with dwb}
         \ dwb %f %i &,
         \ {Open with firefox}
         \ firefox %f &,
         \ {Open with uzbl}
         \ uzbl-browser %f %i &,
-filetype *.html,*.htm links, lynx
+filetype {*.html,*.htm},<text/html> links, lynx
 
 " Object
-filetype *.o nm %f | less
+filetype {*.o},<application/x-object> nm %f | less
 
 " Man page
-filetype *.[1-8] man ./%c
-fileviewer *.[1-8] man ./%c | col -b
+filetype {*.[1-8]},<text/troff> man ./%c
+fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
 
 " Images
-filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
+filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
         \ {View in sxiv}
         \ sxiv %f,
         \ {View in gpicview}
         \ gpicview %c,
         \ {View in shotwell}
         \ shotwell,
-fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
+fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
          \ identify %f
 
 " OpenRaster
@@ -271,16 +265,17 @@ filetype *.sha512
        \ sha512sum -c %f %S,
 
 " GPG signature
-filetype *.asc
+filetype {*.asc},<application/pgp-signature>
        \ {Check signature}
        \ !!gpg --verify %c,
 
 " Torrent
-filetype *.torrent ktorrent %f &
-fileviewer *.torrent dumptorrent -v %c
+filetype {*.torrent},<application/x-bittorrent> ktorrent %f &
+fileviewer {*.torrent},<application/x-bittorrent> dumptorrent -v %c
 
 " FuseZipMount
-filetype *.zip,*.jar,*.war,*.ear,*.oxt,*.apkg
+filetype {*.zip,*.jar,*.war,*.ear,*.oxt,*.apkg},
+        \<application/zip,application/java-archive>
        \ {Mount with fuse-zip}
        \ FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINATION_DIR,
        \ {View contents}
@@ -290,22 +285,24 @@ filetype *.zip,*.jar,*.war,*.ear,*.oxt,*.apkg
 fileviewer *.zip,*.jar,*.war,*.ear,*.oxt zip -sf %c
 
 " ArchiveMount
-filetype *.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz
+filetype {*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz,*.tar.zst,*.tzst},
+        \<application/x-tar>
        \ {Mount with archivemount}
        \ FUSE_MOUNT|archivemount %SOURCE_FILE %DESTINATION_DIR,
 fileviewer *.tgz,*.tar.gz tar -tzf %c
 fileviewer *.tar.bz2,*.tbz2 tar -tjf %c
-fileviewer *.tar.txz,*.txz xz --list %c
-fileviewer *.tar tar -tf %c
+fileviewer *.tar.xz,*.txz tar -tJf %c
+fileviewer *.tar.zst,*.tzst tar -t --zstd -f %c
+fileviewer {*.tar},<application/x-tar> tar -tf %c
 
 " Rar2FsMount and rar archives
-filetype *.rar
+filetype {*.rar},<application/x-rar>
        \ {Mount with rar2fs}
        \ FUSE_MOUNT|rar2fs %SOURCE_FILE %DESTINATION_DIR,
-fileviewer *.rar unrar v %c
+fileviewer {*.rar},<application/x-rar> unrar v %c
 
 " IsoMount
-filetype *.iso
+filetype {*.iso},<application/x-iso9660-image>
        \ {Mount with fuseiso}
        \ FUSE_MOUNT|fuseiso %SOURCE_FILE %DESTINATION_DIR,
 
@@ -320,15 +317,22 @@ filetype *.ftp
        \ FUSE_MOUNT2|curlftpfs -o ftp_port=-,,disable_eprt %PARAM %DESTINATION_DIR %FOREGROUND,
 
 " Fuse7z and 7z archives
-filetype *.7z
+filetype {*.7z},<application/x-7z-compressed>
        \ {Mount with fuse-7z}
        \ FUSE_MOUNT|fuse-7z %SOURCE_FILE %DESTINATION_DIR,
-fileviewer *.7z 7z l %c
+fileviewer {*.7z},<application/x-7z-compressed> 7z l %c
 
 " Office files
-filextype *.odt,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx libreoffice %f &
-fileviewer *.doc catdoc %c
-fileviewer *.docx docx2txt.pl %f -
+filextype {*.odt,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx,*.ppt},
+         \<application/vnd.openxmlformats-officedocument.*,
+          \application/msword,
+          \application/vnd.ms-excel>
+        \ libreoffice %f &
+fileviewer {*.doc},<application/msword> catdoc %c
+fileviewer {*.docx},
+          \<application/
+           \vnd.openxmlformats-officedocument.wordprocessingml.document>
+         \ docx2txt.pl %f -
 
 " TuDu files
 filetype *.tudu tudu -f %c
@@ -360,7 +364,7 @@ endif
 " Or leave it for automatic detection
 "
 if executable('bat')
-    fileviewer *[^/] bat --color always --wrap never --pager never %c -p
+    fileviewer *[^/] bat --color always --wrap never --pager never %"c -p
 endif
 
 " Open all other files with default system programs (you can also remove all
@@ -373,7 +377,7 @@ endif
 " For OS X:
 " filetype * open
 " For Windows:
-" filetype * start, explorer
+" filetype * start, explorer %"f &
 
 " ------------------------------------------------------------------------------
 
@@ -392,7 +396,7 @@ set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
 
 " Filter-out build and temporary files
 "
-" filter! /^.*\.(lo|o|d|class|py[co])$|.*~$/
+" filter! {*.lo,*.o,*.d,*.class,*.pyc,*.pyo,.*~}
 
 " ------------------------------------------------------------------------------
 
@@ -453,7 +457,7 @@ nnoremap A cw
 nnoremap ,t :!xterm &<cr>
 
 " Open editor to edit vifmrc and apply settings after returning to vifm
-nnoremap ,c :write | edit $MYVIFMRC | restart<cr>
+nnoremap ,c :write | edit $MYVIFMRC | restart full<cr>
 " Open gvim to edit vifmrc
 nnoremap ,C :!gvim --remote-tab-silent $MYVIFMRC &<cr>
 
@@ -467,6 +471,14 @@ nnoremap <f5> :copy<cr>
 nnoremap <f6> :move<cr>
 nnoremap <f7> :mkdir<space>
 nnoremap <f8> :delete<cr>
+
+" Midnight commander alike mappings
+" Open current directory in the other pane
+nnoremap <a-i> :sync<cr>
+" Open directory under cursor in the other pane
+nnoremap <a-o> :sync %c<cr>
+" Swap panes
+nnoremap <c-u> <c-w>x
 
 " ------------------------------------------------------------------------------
 
@@ -596,3 +608,33 @@ set classify+=' ::*.7z,,*.apk,,*.bz2,,*.cpio,,*.deb,,*.gz,,*.gzip,,*.gem,,*.l
              \  ::*.twig::,
              \  ::*.vim,,*.vimrc::,
              \  ::*.xul::'
+
+
+" ***************************
+" Colors for vifm file manager
+" ***************************
+
+" Solarized Dark (based on github.com/vifm/vifm-colors/blob/master/solarized-dark.vifm)
+
+highlight clear
+highlight Win             cterm=none ctermfg=default    ctermbg=none
+
+highlight TopLine         cterm=none ctermfg=blue       ctermbg=none
+highlight TopLineSel      cterm=none ctermfg=blue       ctermbg=none
+highlight StatusLine      cterm=none ctermfg=blue       ctermbg=none
+highlight Border          cterm=none ctermfg=blue       ctermbg=none
+
+highlight Selected        cterm=bold ctermfg=green       ctermbg=none
+highlight CurrLine        cterm=bold,reverse ctermfg=default    ctermbg=default
+
+highlight WildMenu        cterm=underline,reverse ctermfg=white ctermbg=black
+highlight CmdLine         cterm=none ctermfg=white ctermbg=black
+highlight ErrorMsg        cterm=none ctermfg=red ctermbg=black
+
+highlight Directory       cterm=bold ctermfg=blue ctermbg=default
+highlight Link            cterm=none ctermfg=yellow ctermbg=default
+highlight BrokenLink      cterm=none ctermfg=red ctermbg=default
+highlight Socket          cterm=none ctermfg=magenta ctermbg=default
+highlight Device          cterm=none ctermfg=red ctermbg=default
+highlight Fifo            cterm=none ctermfg=cyan ctermbg=default
+highlight Executable      cterm=none ctermfg=green ctermbg=default
