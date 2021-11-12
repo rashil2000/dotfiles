@@ -1,4 +1,5 @@
 {
+  "$help": "https://aka.ms/terminal-documentation",
   "$schema": "https://aka.ms/terminal-profiles-schema",
   "actions": [
     {
@@ -46,7 +47,18 @@
       },
       {
         "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-        "hidden": true
+        "hidden": true,
+        "source": "Windows.Terminal.Azure"
+      },
+      {
+        "guid": "{78a4a475-2c08-5cf2-af86-7a56be611e63}",
+        "hidden": true,
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{6fbc3998-aec7-504a-a80b-10709b75bef7}",
+        "hidden": true,
+        "source": "Windows.Terminal.VisualStudio"
       },
       {
         "colorScheme": "Tango Light",
@@ -61,8 +73,7 @@
         "commandline": "nvim",
         "fontFace": "RecMonoSemicasual NF",
         "fontSize": 11,
-        "colorScheme": "Bluloco Light",
-        "tabColor": "#f9f9f9",
+        "colorScheme": "Tango Light",
         "padding": "16, 16, 16, 16",
         "scrollbarState": "hidden",
         "guid": "{9f80d682-c62b-40a3-a8f3-40996da15ef2}",

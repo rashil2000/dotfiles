@@ -39,6 +39,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'voldikss/vim-floaterm'
   Plug 'mg979/vim-visual-multi'
   Plug 'wfxr/minimap.vim'
+  " Plug 'github/copilot.vim'
 call plug#end()
 
 
@@ -228,7 +229,10 @@ let g:coc_global_extensions = [
   \ 'coc-highlight',
   \ 'coc-css',
   \ 'coc-explorer',
-  \ 'coc-rls',
+  \ 'coc-rust-analyzer',
+  \ 'coc-clangd',
+  \ 'coc-go',
+  \ 'coc-pyright',
   \ 'coc-vimlsp',
   \ 'coc-html',
   \ 'coc-json',
@@ -250,7 +254,7 @@ let g:coc_user_config = {
   \   "--follow"
   \ ],
   \ "list.source.grep.args": [
-  \   "--iglob", "!{.git,package-lock.json,yarn.lock,Cargo.lock}",
+  \   "--iglob", "!{.git,package-lock.json,yarn.lock,Pipfile.lock,Cargo.lock,go.sum}",
   \   "--hidden",
   \   "--follow"
   \ ],

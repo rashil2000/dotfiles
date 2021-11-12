@@ -26,6 +26,8 @@ export NVS_HOME="$HOME/.nvs"
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 # man page colors
+export LESS='--mouse'
+export LESS="$HOME/.cache/lesshst"
 export LESS_TERMCAP_mb=$'\E[1;31m'  # begin blink
 export LESS_TERMCAP_md=$'\E[1;36m'  # begin bold
 export LESS_TERMCAP_me=$'\E[0m'     # reset bold/blink

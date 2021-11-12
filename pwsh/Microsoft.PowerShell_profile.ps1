@@ -1,4 +1,4 @@
-if ($PSVersionTable.PSVersion.Major -le 5) { $OutputEncoding = New-Object System.Text.UTF8Encoding }
+if ($PSVersionTable.PSVersion.Major -le 5) { $OutputEncoding = [System.Text.Encoding]::UTF8 }
 
 <# Aliases and Functions #>
 Remove-Item -Force -ErrorAction Ignore Alias:lp, Alias:sc, Alias:curl, Alias:wget, `
