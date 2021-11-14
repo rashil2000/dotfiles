@@ -5,6 +5,11 @@
 ;= :: Some variables
 ;= set ClinkReadlineHistory=%LocalAppData%\clink\clink_history
 ;= set ClinkInit=%LocalAppData%\clink\clink_start.cmd
+;= set FZF_ALT_C_COMMAND=fd -H -L -E .git -t d
+;= set FZF_ALT_C_OPTS=--preview "exa -a --icons --group-directories-first --color=always {}"
+;= set FZF_CTRL_T_COMMAND=fd -H -L -E .git -t f
+;= set FZF_CTRL_T_OPTS=--preview "bat --color=always --line-range=:500 {}"
+;= set FZF_DEFAULT_OPTS=--exact --no-sort --reverse --cycle --height 40%%
 ;= for /f "tokens=1,2 delims=#" %%a in ('"prompt #$H#$E# & echo on & for %%b in (1) do rem"') do set ESC=%%b
 
 ;= :: Aliases and functions

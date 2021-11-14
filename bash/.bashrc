@@ -1,7 +1,3 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
@@ -11,16 +7,20 @@ if [ -f ~/GitHub/akinomyoga/ble.sh/out/ble.sh ]; then
   bleopt history_share=1
   ble-bind -f up 'history-search-backward hide-status:immediate-accept:point=end'
   ble-bind -f down 'history-search-forward hide-status:immediate-accept:point=end'
-  # FZF Key bindings
-  if [ -d ~/GitHub/junegunn/fzf ] ; then
+fi
+
+# FZF Key bindings
+if [ -d ~/GitHub/junegunn/fzf ]; then
+  if [[ ${BLE_VERSION-} ]]; then
     _ble_contrib_fzf_base=~/GitHub/junegunn/fzf
     ble-import -d contrib/fzf-key-bindings
+  else
+    . ~/GitHub/junegunn/fzf/shell/key-bindings.bash
   fi
 fi
 
 # Automatically trim long paths in the prompt
 PROMPT_DIRTRIM=3
-
 # Set history lengths
 HISTSIZE=10000
 HISTFILESIZE=20000
@@ -40,10 +40,10 @@ export HISTIGNORE="&:[ ]*:exit:ls:ll:bg:fg:history:clear:dir"
 # globstar     - If set, the pattern "**" used in a pathname expansion context will match all files and zero or more directories and subdirectories.
 shopt -s histreedit histverify lithist histappend dirspell cdspell nocaseglob globstar 2>/dev/null
 
-# make less more friendly for non-text input files, see lesspipe(1)
+# Make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# enable color support of common commands
+# Enable color support of common commands
 if [ -x /usr/bin/dircolors ]; then
   test -r /etc/DIR_COLORS && eval "$(dircolors -b /etc/DIR_COLORS)" || eval "$(dircolors -b)"
   alias ls='ls --color=auto'
@@ -65,17 +65,6 @@ alias ghd="cd ~/GitHub"
 alias acd="cd ~/Documents/Academics"
 mkcd() { mkdir -p "$@" && cd "$@"; }
 gccd() { git clone "git@github.com:$1/$2.git" && cd $2; }
-
-# Startup info
-if [ -f /usr/bin/msys-2.0.dll ]; then
-  read msyskernelname msyskernelrelease <<<$(uname -sr)
-  echo "Microsoft Windows [Version ${msyskernelname#*-}]
-(c) Minimal System 2 - $msyskernelrelease"
-elif [ -f /bin/cygwin1.dll ]; then
-  read cygkernelname cygkernelrelease <<<$(uname -sr)
-  echo "Microsoft Windows [Version ${cygkernelname#*-}]
-(c) Cygwin - $cygkernelrelease"
-fi
 
 # Enable Starship prompt
 [ -f ~/.local/share/starship.bash ] && . ~/.local/share/starship.bash || true

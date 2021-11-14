@@ -1,10 +1,4 @@
-if ($PSVersionTable.PSVersion.Major -le 5) { $OutputEncoding = [System.Text.Encoding]::UTF8 }
-
 <# Aliases and Functions #>
-Remove-Item -Force -ErrorAction Ignore Alias:lp, Alias:sc, Alias:curl, Alias:wget, `
-  Alias:fc, Alias:dir, Alias:sort, Alias:write, Alias:where, `
-  Alias:h, Alias:r, Alias:ls, Alias:cp, Alias:mv, Alias:ps, Alias:rm, Alias:man, Alias:pwd, Alias:cat, Alias:kill, Alias:diff, Alias:clear, Alias:mount, Alias:sleep
-Set-Alias pls PowerColorLS
 Set-Alias mcm Measure-Command
 Set-Alias nvs ~/.nvs/nvs.ps1
 Function :q { exit }
