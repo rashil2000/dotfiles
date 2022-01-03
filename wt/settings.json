@@ -32,8 +32,10 @@
     "list": [
       {
         "colorScheme": "Bluloco Light",
-        "fontFace": "CaskaydiaCove NF",
-        "fontSize": 11,
+        "font": {
+          "face": "Delugia",
+          "features": { "salt": 1 }
+        },
         "tabColor": "#f9f9f9",
         "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}"
       },
@@ -105,8 +107,8 @@
       },
       {
         "commandline": "ncspot",
-        "fontFace": "BlexMono NF",
-        "fontSize": 11,
+        "fontFace": "FantasqueSansMono NF",
+        "fontSize": 13,
         "colorScheme": "Bluloco Light",
         "tabColor": "#f9f9f9",
         "padding": "16, 16, 16, 16",
@@ -194,7 +196,7 @@
       "green": "#23974a",
       "purple": "#823ff1",
       "red": "#d52753",
-      "selectionBackground": "#daf0ff",
+      "selectionBackground": "#111111",
       "white": "#babbc2",
       "yellow": "#df631c"
     },
@@ -210,7 +212,7 @@
       "brightPurple": "#282A2E",
       "brightRed": "#F96A38",
       "brightWhite": "#1D1F21",
-      "brightYellow": "#C5C8C6",
+      "brightYellow": "#C5C332",
       "cursorColor": "#000000",
       "cyan": "#149BDA",
       "foreground": "#373B41",

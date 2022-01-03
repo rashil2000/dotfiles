@@ -18,6 +18,11 @@ format = """\
   $character\
   """
 
+right_format = """\
+  $status\
+  $memory_usage\
+  """
+
 [directory]
 truncate_to_repo = true
 read_only = " "
@@ -64,9 +69,8 @@ style = "underline purple"
 [shell]
 format = " \\[$indicator\\] at"
 powershell_indicator = "[pwsh](bold blue)"
-fish_indicator = "[fish](bold blue)"
 bash_indicator = "[bash](bold blue)"
-unknown_indicator = "[cmd](bold blue)"
+cmd_indicator = "[cmd](bold blue)"
 disabled = false
 
 [battery]
@@ -93,11 +97,16 @@ disabled = false
 format = " [$time]($style)"
 style = "italic cyan"
 
-# [memory_usage]
-# format = "$symbol[${ram}( | ${swap})]($style) "
-# threshold = -1
-# symbol = " "
-# disabled = false
+[status]
+disabled = false
+format = "[$symbol$status]($style)"
+symbol = "✕ "
+
+[memory_usage]
+format = " $symbol[${ram}]($style)"
+threshold = -1
+symbol = " "
+disabled = false
 
 [aws]
 symbol = " "

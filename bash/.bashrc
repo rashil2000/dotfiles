@@ -5,6 +5,8 @@
 if [ -f ~/GitHub/akinomyoga/ble.sh/out/ble.sh ]; then
   . ~/GitHub/akinomyoga/ble.sh/out/ble.sh --noattach
   bleopt history_share=1
+  ble-face auto_complete=bg=default
+  ble-face syntax_error=fg=196,bg=default
   ble-bind -f up 'history-search-backward hide-status:immediate-accept:point=end'
   ble-bind -f down 'history-search-forward hide-status:immediate-accept:point=end'
 fi

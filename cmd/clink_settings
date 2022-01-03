@@ -1,3 +1,7 @@
+# name: Enable automatic suggestions
+# type: boolean
+autosuggest.enable = True
+
 # name: Auto-answer terminate prompt
 # type: enum
 # options: off,answer_yes,answer_no
