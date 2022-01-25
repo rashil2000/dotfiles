@@ -14,8 +14,6 @@
     gpgSign = true
 [init]
     defaultBranch = main
-[diff]
-    colorMoved = default
 [credential "helperselector"]
     selected = manager-core
 

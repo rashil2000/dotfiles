@@ -18,20 +18,21 @@ Function mkcd {
   Set-Location @args
 }
 Function gccd {
-  git clone "git@github.com:$($args[0])/$($args[1]).git"
-  Set-Location $args[1]
+  git clone "git@github.com:$args.git"
+  if ($?) { Set-Location $args.Split('/')[1] }
 }
 
 <# Line Editing Options #>
 Set-PSReadLineOption `
   -EditMode Emacs `
   -PredictionSource History `
-  -MaximumHistoryCount 10000 `
+  -MaximumHistoryCount 50000 `
+  -ExtraPromptLineCount 2 `
   -HistorySearchCursorMovesToEnd `
   -Colors @{ ListPredictionSelected = "$([char]0x1b)[48;5;243m" } `
   -AddToHistoryHandler {
     Param([string]$line)
-    $line -notin 'exit', 'dir', ':q', 'cls', 'history', '$pwd'
+    $line -notin 'exit', 'dir', ':q', 'cls', 'history', 'Get-PSReadLineOption', '$PWD', '$PSVersionTable', '$Host.UI.RawUI.WindowSize'
   }
 if ($Host.UI.RawUI.WindowSize.Width -lt 54 -or $Host.UI.RawUI.WindowSize.Height -lt 15) {
   Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward

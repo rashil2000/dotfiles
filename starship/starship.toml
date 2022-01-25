@@ -57,6 +57,8 @@ symbol = " "
 
 [cmd_duration]
 format = " took [$duration]($style)"
+show_notifications = true
+min_time_to_notify = 60_000
 
 [env_var.WSL_DISTRO_NAME]
 format = " [$env_value]($style)"
@@ -67,10 +69,9 @@ format = " [$env_value]($style)"
 style = "underline purple"
 
 [shell]
-format = " \\[$indicator\\] at"
-powershell_indicator = "[pwsh](bold blue)"
-bash_indicator = "[bash](bold blue)"
-cmd_indicator = "[cmd](bold blue)"
+format = " \\[[$indicator]($style)\\] at"
+powershell_indicator = "pwsh"
+style = "bold blue"
 disabled = false
 
 [battery]

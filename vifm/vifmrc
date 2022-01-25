@@ -347,7 +347,7 @@ filextype */
 
 " Displaying pictures in terminal
 if executable('viu')
-    fileviewer *.png,*.jpeg,*.jpg viu -w %pw -s -t %"c
+    fileviewer *.png,*.jpeg,*.jpg,*.ico viu -w %pw -s -t %"c
 endif
 
 " Syntax highlighting in preview

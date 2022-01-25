@@ -66,7 +66,7 @@ alias d="cd ~/Desktop"
 alias ghd="cd ~/GitHub"
 alias acd="cd ~/Documents/Academics"
 mkcd() { mkdir -p "$@" && cd "$@"; }
-gccd() { git clone "git@github.com:$1/$2.git" && cd $2; }
+gccd() { git clone "git@github.com:$1.git" && cd "${1##*/}"; }
 
 # Enable Starship prompt
 [ -f ~/.local/share/starship.bash ] && . ~/.local/share/starship.bash || true

@@ -19,6 +19,10 @@ color.argmatcher = green
 # type: color
 color.cmd = bright yellow
 
+# name: Color for executable command word
+# type: color
+color.executable = sgr 38;5;32
+
 # name: Filtered completion color
 # type: color
 color.filtered = underline
@@ -30,6 +34,10 @@ color.flag = magenta
 # name: Hidden file completions
 # type: color
 color.hidden = yellow
+
+# name: Color for unrecognized command word
+# type: color
+color.unrecognized = sgr 38;5;203
 
 # name: Commands not automatically added to the history
 # type: string

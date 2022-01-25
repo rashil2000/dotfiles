@@ -403,7 +403,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Show most recently used files
-nnoremap <silent> <space>m  :<C-u>CocList mru<cr>
+nnoremap <silent> <space>m  :<C-u>CocList --no-sort mru -A<cr>
 " Show sessions
 nnoremap <silent> <space>s  :<C-u>CocList sessions<cr>
 " Show coc-lists

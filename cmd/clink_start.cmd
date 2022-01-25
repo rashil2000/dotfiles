@@ -26,7 +26,7 @@ msvc="%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\B
 msys=%UserProfile%\GitHub\rashil2000\Scripts\msys-env.bat $1 $2
 nvs=%UserProfile%\.nvs\nvs.cmd $*
 mkcd=mkdir $1 $T cd /d $1
-gccd=git clone git@github.com:$1/$2.git $T cd $2
+gccd=git clone git@github.com:$1.git && (for /f "tokens=1-2 delims=/" %a in ("$1") do @cd %b)
 
 ;= :end
 ;=
