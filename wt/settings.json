@@ -109,7 +109,7 @@
         "name": "Bottom"
       },
       {
-        "commandline": "spt",
+        "commandline": "ncspot",
         "fontFace": "FantasqueSansMono NF",
         "fontSize": 13,
         "colorScheme": "Bluloco Light",
@@ -118,7 +118,7 @@
         "scrollbarState": "hidden",
         "guid": "{9f80d682-c62b-12a3-a8f3-40996da15ef2}",
         "icon": "%UserProfile%\\Pictures\\Icons\\spotify.ico",
-        "name": "Spotify TUI"
+        "name": "Ncspot"
       },
       {
         "guid": "{46ca431a-3a87-5fb3-83cd-11ececc031d2}",
