@@ -64,12 +64,12 @@
       },
       {
         "colorScheme": "Tango Light",
-        "commandline": "bash",
+        "commandline": "fish",
         "guid": "{17da3cac-b318-431e-8a3e-7fcdefe6d114}",
         "fontFace": "ClincherCode NF",
         "fontSize": 11,
-        "icon": "%UserProfile%\\Pictures\\Icons\\bash.ico",
-        "name": "Bash"
+        "icon": "%UserProfile%\\Pictures\\Icons\\fish.ico",
+        "name": "Fish"
       },
       {
         "commandline": "nvim",

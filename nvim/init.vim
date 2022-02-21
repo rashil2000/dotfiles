@@ -221,8 +221,16 @@ autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | end
 " Toggle
 nnoremap <silent> <C-e> :CocCommand explorer<CR>
 
+" Enable dictionary completions for text files
+augroup TextSpell
+  autocmd!
+  autocmd FileType        markdown,text setlocal spell | setlocal dictionary=$COC_VIMCONFIG/words
+  autocmd BufRead,BufNewFile *.md,*.txt setlocal spell | setlocal dictionary=$COC_VIMCONFIG/words
+augroup END
+
 " List of completion extensions
 let g:coc_global_extensions = [
+  \ 'coc-dictionary',
   \ 'coc-lists',
   \ 'coc-git',
   \ 'coc-emmet',
