@@ -8,9 +8,9 @@ Function ghd { Set-Location ~/GitHub }
 Function acd { Set-Location ~/Documents/Academics }
 Function dir { Get-ChildItem -Attributes !System -Force @args }
 Function msvc {
-  Import-Module "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\BuildTools\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"
-  Enter-VsDevShell 0a68dd02 -DevCmdArguments '-arch=x64'
-  Write-Host "[Enter-VsDevShell] Environment initialized for: 'x64'"
+  Import-Module "${Env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"
+  Enter-VsDevShell 28a3fa59 -DevCmdArguments '-arch=x64'
+  Write-Host
 }
 Function msys { . "~\GitHub\rashil2000\scripts\msys-env.ps1" @args }
 Function mkcd {
@@ -34,14 +34,13 @@ Set-PSReadLineOption `
     Param([string]$line)
     $line -notin 'exit', 'dir', ':q', 'cls', 'history', 'Get-PSReadLineOption', '$PWD', '$PSVersionTable', '$Host.UI.RawUI.WindowSize'
   }
-if ($Host.UI.RawUI.WindowSize.Width -lt 54 -or $Host.UI.RawUI.WindowSize.Height -lt 15) {
-  Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-  Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-} else {
+if (-not ($Host.UI.RawUI.WindowSize.Width -lt 54 -or $Host.UI.RawUI.WindowSize.Height -lt 15)) {
   Set-PSReadLineOption -PredictionViewStyle ListView
   Set-PSReadlineKeyHandler -Key Escape -Function Undo
 }
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow -Function BackwardWord
 Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
 

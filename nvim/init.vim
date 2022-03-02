@@ -224,8 +224,8 @@ nnoremap <silent> <C-e> :CocCommand explorer<CR>
 " Enable dictionary completions for text files
 augroup TextSpell
   autocmd!
-  autocmd FileType        markdown,text setlocal spell | setlocal dictionary=$COC_VIMCONFIG/words
-  autocmd BufRead,BufNewFile *.md,*.txt setlocal spell | setlocal dictionary=$COC_VIMCONFIG/words
+  autocmd FileType        markdown,text setlocal spell linebreak | setlocal dictionary=$COC_VIMCONFIG/words
+  autocmd BufRead,BufNewFile *.md,*.txt setlocal spell linebreak | setlocal dictionary=$COC_VIMCONFIG/words
 augroup END
 
 " List of completion extensions

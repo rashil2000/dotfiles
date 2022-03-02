@@ -22,7 +22,7 @@ d=cd /d %UserProfile%\Desktop
 ghd=cd /d %UserProfile%\GitHub
 acd=cd /d %UserProfile%\Documents\Academics
 dir=exa -la --icons --git --group-directories-first $*
-msvc="%ProgramFiles(x86)%\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+msvc="%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x64
 msys=%UserProfile%\GitHub\rashil2000\Scripts\msys-env.bat $1 $2
 nvs=%UserProfile%\.nvs\nvs.cmd $*
 mkcd=mkdir $1 $T cd /d $1

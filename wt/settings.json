@@ -25,6 +25,8 @@
       "bellStyle": "none",
       "intenseTextStyle": "bold",
       "colorScheme": "some-light",
+      "backgroundImage": "%UserProfile%\\Documents\\Wallpapers\\ps-light.gif",
+      "backgroundImageOpacity": 0.3,
       "fontFace": "Consolas NF",
       "padding": "16, 16, 0, 16",
       "cursorShape": "filledBox"
@@ -41,6 +43,7 @@
       },
       {
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+        "startingDirectory": ".",
         "name": "Command"
       },
       {
@@ -106,7 +109,7 @@
         "name": "Bottom"
       },
       {
-        "commandline": "ncspot",
+        "commandline": "spt",
         "fontFace": "FantasqueSansMono NF",
         "fontSize": 13,
         "colorScheme": "Bluloco Light",
@@ -115,7 +118,7 @@
         "scrollbarState": "hidden",
         "guid": "{9f80d682-c62b-12a3-a8f3-40996da15ef2}",
         "icon": "%UserProfile%\\Pictures\\Icons\\spotify.ico",
-        "name": "Ncspot"
+        "name": "Spotify TUI"
       },
       {
         "guid": "{46ca431a-3a87-5fb3-83cd-11ececc031d2}",
