@@ -2,7 +2,7 @@
 
 if (!($IsWindows -or $PSVersionTable.PSVersion.Major -le 5)) { exit 1 }
 
-$DotDir = "E:\GitHub\rashil2000\dotfiles"
+$DotDir = "$Env:UserProfile\GitHub\rashil2000\dotfiles"
 $DocDir = [Environment]::GetFolderPath('MyDocuments')
 
 $dryrun = $true
@@ -25,7 +25,8 @@ if (!(Get-Command scoop -ErrorAction Ignore)) {
 }
 
 # Install apps
-scoop install fd ripgrep bat bottom vifm ncspot neovim delta python fzf gdu gh gsudo clangd clink clink-completions busybox-lean nodejs-lts
+scoop bucket add extras
+scoop install starship autohotkey fd ripgrep bat bottom vifm ncspot neovim delta python fzf gdu gh gsudo clangd clink clink-completions busybox-lean nodejs-lts
 
 # Setup configuration files
 @{
@@ -37,7 +38,7 @@ scoop install fd ripgrep bat bottom vifm ncspot neovim delta python fzf gdu gh g
     "$Env:LocalAppData\clink\clink_settings"                                               = "$DotDir\cmd\clink_settings"
     "$Env:LocalAppData\clink\clink_start.cmd"                                              = "$DotDir\cmd\clink_start.cmd"
     "$Env:LocalAppData\nvim\init.vim"                                                      = "$DotDir\nvim\init.vim"
-    "$Env:LocalAppData\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState" = "$DotDir\wt"
+    "$Env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"        = "$DotDir\wt"
 #   "$Env:UserProfile\.bashrc"                                                             = "$DotDir\bash\.bashrc"
     "$Env:UserProfile\.config\git\config"                                                  = "$DotDir\git\config"
     "$Env:UserProfile\.config\starship.toml"                                               = "$DotDir\starship\starship.toml"
