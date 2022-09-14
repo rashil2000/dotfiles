@@ -7,6 +7,16 @@ $DocDir = [Environment]::GetFolderPath('MyDocuments')
 
 $dryrun = $true
 
+# Setup Scoop
+if (!(Get-Command scoop -ErrorAction Ignore)) {
+    if ($Env:SCOOP) { Write-Host "Installing Scoop to $Env:SCOOP..." }
+    Invoke-RestMethod get.scoop.sh | Invoke-Expression
+}
+
+# Install apps
+scoop bucket add extras
+scoop install starship autohotkey fd ripgrep bat bottom vifm ncspot neovim delta python fzf gdu gh gsudo clangd clink clink-completions busybox-lean nodejs-lts
+
 # Download dotfiles
 if (!(Test-Path $DotDir)) {
     New-Item $DotDir -ItemType Directory -Force -WhatIf:$dryrun
@@ -18,34 +28,24 @@ if (!(Test-Path $DotDir)) {
     }
 }
 
-# Setup Scoop
-if (!(Get-Command scoop -ErrorAction Ignore)) {
-    if ($Env:SCOOP) { Write-Host "Installing Scoop to $Env:SCOOP..." }
-    Invoke-WebRequest get.scoop.sh -UseBasicParsing | Invoke-Expression
-}
-
-# Install apps
-scoop bucket add extras
-scoop install starship autohotkey fd ripgrep bat bottom vifm ncspot neovim delta python fzf gdu gh gsudo clangd clink clink-completions busybox-lean nodejs-lts
-
 # Setup configuration files
 @{
-    "$Env:AppData\bat\config"                                                              = "$DotDir\bat\config"
-    "$Env:AppData\bottom\bottom.toml"                                                      = "$DotDir\bottom\bottom.toml"
-    "$Env:AppData\ncspot\config.toml"                                                      = "$DotDir\ncspot\config.toml"
-    "$Env:AppData\Vifm\vifmrc"                                                             = "$DotDir\vifm\vifmrc"
-    "$Env:LocalAppData\clink\.inputrc"                                                     = "$DotDir\.inputrc"
-    "$Env:LocalAppData\clink\clink_settings"                                               = "$DotDir\cmd\clink_settings"
-    "$Env:LocalAppData\clink\clink_start.cmd"                                              = "$DotDir\cmd\clink_start.cmd"
-    "$Env:LocalAppData\nvim\init.vim"                                                      = "$DotDir\nvim\init.vim"
-    "$Env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"        = "$DotDir\wt"
-#   "$Env:UserProfile\.bashrc"                                                             = "$DotDir\bash\.bashrc"
-    "$Env:UserProfile\.config\git\config"                                                  = "$DotDir\git\config"
-    "$Env:UserProfile\.config\starship.toml"                                               = "$DotDir\starship\starship.toml"
-    "$Env:UserProfile\.config\tmux\tmux.conf"                                              = "$DotDir\tmux\tmux.conf"
-    "$DocDir\PowerShell\coc.vim_profile.ps1"                                               = "$DotDir\pwsh\Microsoft.PowerShell_profile.ps1"
-    "$DocDir\PowerShell\Microsoft.PowerShell_profile.ps1"                                  = "$DotDir\pwsh\Microsoft.PowerShell_profile.ps1"
-    "$DocDir\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"                           = "$DotDir\pwsh\Microsoft.PowerShell_profile.ps1"
+    "$Env:AppData\bat\config"                                                       = "$DotDir\bat\config"
+    "$Env:AppData\bottom\bottom.toml"                                               = "$DotDir\bottom\bottom.toml"
+    "$Env:AppData\ncspot\config.toml"                                               = "$DotDir\ncspot\config.toml"
+    "$Env:AppData\Vifm\vifmrc"                                                      = "$DotDir\vifm\vifmrc"
+    "$Env:LocalAppData\clink\.inputrc"                                              = "$DotDir\.inputrc"
+    "$Env:LocalAppData\clink\clink_settings"                                        = "$DotDir\cmd\clink_settings"
+    "$Env:LocalAppData\clink\clink_start.cmd"                                       = "$DotDir\cmd\clink_start.cmd"
+    "$Env:LocalAppData\nvim\init.vim"                                               = "$DotDir\nvim\init.vim"
+    "$Env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState" = "$DotDir\wt"
+#   "$Env:UserProfile\.bashrc"                                                      = "$DotDir\bash\.bashrc"
+    "$Env:UserProfile\.config\git\config"                                           = "$DotDir\git\config"
+    "$Env:UserProfile\.config\starship.toml"                                        = "$DotDir\starship\starship.toml"
+    "$Env:UserProfile\.config\tmux\tmux.conf"                                       = "$DotDir\tmux\tmux.conf"
+    "$DocDir\PowerShell\coc.vim_profile.ps1"                                        = "$DotDir\pwsh\Microsoft.PowerShell_profile.ps1"
+    "$DocDir\PowerShell\Microsoft.PowerShell_profile.ps1"                           = "$DotDir\pwsh\Microsoft.PowerShell_profile.ps1"
+    "$DocDir\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"                    = "$DotDir\pwsh\Microsoft.PowerShell_profile.ps1"
 }.GetEnumerator() | ForEach-Object {
     # Check symbolic link health
     if ((Test-Path $_.Name) `
