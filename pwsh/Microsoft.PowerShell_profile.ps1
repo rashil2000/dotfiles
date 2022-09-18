@@ -25,7 +25,6 @@ Function gccd {
 <# Line Editing Options #>
 Set-PSReadLineOption `
   -EditMode Emacs `
-  -PredictionSource History `
   -MaximumHistoryCount 50000 `
   -ExtraPromptLineCount 2 `
   -HistorySearchCursorMovesToEnd `
@@ -64,4 +63,4 @@ if (Test-Path "~/.local/share/starship.ps1" -PathType Leaf) {
 }
 
 <# Import Modules #>
-Import-Module Terminal-Icons, scoop-completion, npm-completion, posh-cargo, posh-git, kmt.winget.autocomplete -ErrorAction Ignore
+Import-Module CompletionPredictor, Terminal-Icons, scoop-completion, npm-completion, posh-cargo, posh-git, kmt.winget.autocomplete -ErrorAction Ignore

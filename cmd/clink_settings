@@ -2,6 +2,10 @@
 # type: boolean
 autosuggest.enable = True
 
+# name: Auto-update the Clink program files
+# type: boolean
+clink.autoupdate = False
+
 # name: Auto-answer terminate prompt
 # type: enum
 # options: off,answer_yes,answer_no

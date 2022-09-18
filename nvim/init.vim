@@ -38,7 +38,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'alvan/vim-closetag'
   Plug 'voldikss/vim-floaterm'
   Plug 'mg979/vim-visual-multi'
-  Plug 'wfxr/minimap.vim'
+  " Plug 'wfxr/minimap.vim'
   " Plug 'github/copilot.vim'
 call plug#end()
 
