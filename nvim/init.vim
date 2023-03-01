@@ -206,6 +206,12 @@ let g:startify_custom_footer = startify#center([
   \ '                                 ˙::˙                                 ',
   \])
 
+" Save current file with elevated permissions
+if has('win32')
+  command W execute 'silent! write !gsudo busybox tee % >     nul ' <bar> edit!
+else
+  command W execute 'silent! write ! sudo         tee % >/dev/null' <bar> edit!
+endif
 
 
 "" Custom configuration file for coc.nvim

@@ -11,6 +11,8 @@ battery = true
 
 tree = true
 
+enable_gpu_memory = true
+
 # Whether to hide the average cpu entry.
 #hide_avg_cpu = false
 

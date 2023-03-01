@@ -191,7 +191,7 @@ fileviewer {*.flac},<audio/flac> soxi
 
 " Video
 filextype {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
-          \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
+          \*.fl[icv],*.m2v,*.mov,*.webm,*.mts,*.m4v,*.r[am],*.qt,*.divx,
           \*.as[fx]},
          \<video/*>
         \ {View using ffplay}
@@ -201,7 +201,7 @@ filextype {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
         \ {View using mplayer}
         \ mplayer %f,
 fileviewer {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
-           \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
+           \*.fl[icv],*.m2v,*.mov,*.webm,*.mts,*.m4v,*.r[am],*.qt,*.divx,
            \*.as[fx]},
           \<video/*>
          \ ffprobe -pretty %c 2>&1
@@ -484,9 +484,17 @@ nnoremap <c-u> <c-w>x
 
 " Various customization examples
 
-" Use ag (the silver searcher) instead of grep
+" Use ripgrep instead of grep
 "
-" set grepprg='ag --line-numbers %i %a %s'
+if executable('rg')
+    set grepprg=rg\ --color=never\ -H.Ln\ --iglob\ !{.git,package-lock.json,yarn.lock,Pipfile.lock,Cargo.lock,go.sum}\ %i\ %a\ %s
+endif
+
+" Use fd instead of find
+"
+if executable('fd')
+    set findprg=fd\ --color=never\ -HL\ -E\ .git\ %p\ %s
+endif
 
 " Add additional place to look for executables
 "

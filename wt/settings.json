@@ -13,8 +13,52 @@
   ],
   "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
   "initialCols": 90,
-  "useAcrylicInTabRow": true,
-  "theme": "light",
+  "theme": "some-theme",
+  "themes": [
+      {
+          "name": "some-theme",
+          "tab": {
+              "background": "terminalBackground"
+          },
+          "window": {
+              "applicationTheme": "system",
+              "useMica": true
+          }
+      }
+  ],
+  "newTabMenu": [
+    {
+      "type": "folder",
+      "name": "Shells",
+      "icon": "%UserProfile%\\Pictures\\Icons\\Terminal.ico",
+      "entries": [
+        { "type": "profile", "profile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}" },
+        { "type": "profile", "profile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}" },
+        { "type": "profile", "profile": "{17da3cac-b318-431e-8a3e-7fcdefe6d114}" }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Apps",
+      "icon": "%UserProfile%\\Pictures\\Icons\\Apps.ico",
+      "entries": [
+        { "type": "profile", "profile": "{9f80d682-c62b-40a3-a8f3-40996da15ef2}" },
+        { "type": "profile", "profile": "{9f44d682-c62b-40a3-a8f3-40996da15ef2}" },
+        { "type": "profile", "profile": "{9f80d682-c78b-40a3-a8f3-40996da15ef2}" },
+        { "type": "profile", "profile": "{9f80d682-c62b-12a3-a8f3-40996da15ef2}" }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "WSL Shells",
+      "icon": "%UserProfile%\\Pictures\\Icons\\kali-menu.ico",
+      "entries": [
+        { "type": "profile", "profile": "{055a0521-1a05-40c5-bcb0-a50b309e00f5}" },
+        { "type": "profile", "profile": "{46ca431a-3a87-5fb3-83cd-11ececc031d2}" }
+      ]
+    },
+    { "type": "remainingProfiles" }
+  ],
   "tabSwitcherMode": "mru",
   "profiles": {
     "defaults": {
@@ -24,21 +68,27 @@
       "antialiasingMode": "cleartype",
       "bellStyle": "none",
       "intenseTextStyle": "bold",
-      "colorScheme": "some-light",
-      "backgroundImage": "%UserProfile%\\Documents\\Wallpapers\\light.jpg",
-      "backgroundImageOpacity": 0.2,
+      "colorScheme": {
+        "light": "some-light",
+        "dark": "Campbell"
+      },
+      // "backgroundImage": "%UserProfile%\\Documents\\Wallpapers\\light.jpg",
+      // "backgroundImageOpacity": 0.2,
       "fontFace": "Consolas NF",
       "padding": "16, 16, 0, 16",
       "cursorShape": "filledBox"
     },
     "list": [
       {
-        "colorScheme": "Bluloco Light",
+        "colorScheme": {
+          "light": "Bluloco Light",
+          "dark": "Bluloco Dark"
+        },
         "font": {
           "face": "Delugia",
           "features": { "salt": 1 }
         },
-        "tabColor": "#f9f9f9",
+        "startingDirectory": ".",
         "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}"
       },
       {
@@ -66,19 +116,25 @@
         "source": "Windows.Terminal.VisualStudio"
       },
       {
-        "colorScheme": "Tango Light",
-        "commandline": "fish",
+        "colorScheme": {
+          "light": "Tango Light",
+          "dark": "Tango Dark"
+        },
+        "commandline": "bash",
         "guid": "{17da3cac-b318-431e-8a3e-7fcdefe6d114}",
         "fontFace": "ClincherCode NF",
         "fontSize": 11,
-        "icon": "%UserProfile%\\Pictures\\Icons\\fish.ico",
-        "name": "Fish"
+        "icon": "%UserProfile%\\Pictures\\Icons\\unix.ico",
+        "name": "Bash"
       },
       {
         "commandline": "nvim",
         "fontFace": "RecMonoSemicasual NF",
         "fontSize": 11,
-        "colorScheme": "Tango Light",
+        "colorScheme": {
+          "light": "Tango Light",
+          "dark": "Tango Dark"
+        },
         "padding": "16, 16, 16, 16",
         "scrollbarState": "hidden",
         "guid": "{9f80d682-c62b-40a3-a8f3-40996da15ef2}",
@@ -90,7 +146,10 @@
         "fontFace": "VictorMono NF",
         "fontSize": 11,
         "fontWeight": "semi-bold",
-        "colorScheme": "Tango Light",
+        "colorScheme": {
+          "light": "Tango Light",
+          "dark": "Tango Dark"
+        },
         "padding": "16, 16, 16, 16",
         "scrollbarState": "hidden",
         "guid": "{9f44d682-c62b-40a3-a8f3-40996da15ef2}",
@@ -112,8 +171,10 @@
         "commandline": "ncspot",
         "fontFace": "FantasqueSansMono NF",
         "fontSize": 13,
-        "colorScheme": "Bluloco Light",
-        "tabColor": "#f9f9f9",
+        "colorScheme": {
+          "light": "Bluloco Light",
+          "dark": "Bluloco Dark"
+        },
         "padding": "16, 16, 16, 16",
         "scrollbarState": "hidden",
         "guid": "{9f80d682-c62b-12a3-a8f3-40996da15ef2}",
@@ -121,35 +182,23 @@
         "name": "Ncspot"
       },
       {
+        "commandline": "wsl --cd ~ pwsh -l",
+        "guid": "{055a0521-1a05-40c5-bcb0-a50b309e00f5}",
+        "icon": "%UserProfile%\\Pictures\\Icons\\pwsh.ico",
+        "fontFace": "DankMono NF",
+        "name": "PowerShell"
+      },
+      {
         "guid": "{46ca431a-3a87-5fb3-83cd-11ececc031d2}",
-        "hidden": true,
-        "icon": "%UserProfile%\\Pictures\\Icons\\kali-menu.ico",
+        "icon": "%UserProfile%\\Pictures\\Icons\\unix.ico",
         "fontFace": "DankMono NF",
-        "name": "Kali (WSL)",
+        "name": "Bash",
         "source": "Windows.Terminal.Wsl"
-      },
-      {
-        "guid": "{e4574889-4e80-52c5-a8be-f50561d4d10a}",
-        "hidden": true,
-        "icon": "%UserProfile%\\Pictures\\Icons\\archlinux.ico",
-        "fontFace": "DankMono NF",
-        "name": "Arch (WSL)",
-        "source": "Windows.Terminal.Wsl"
-      },
-      {
-        "commandline": "ssh macosvmware",
-        "fontFace": "BlexMono NF",
-        "fontSize": 11,
-        "hidden": true,
-        "guid": "{9f80d682-c62b-40a3-a8f3-41230da15ef2}",
-        "icon": "%UserProfile%\\Pictures\\Icons\\macos.ico",
-        "name": "macOS (VMware)"
       },
       {
         "commandline": "ssh ubuntuvmware",
         "fontFace": "BlexMono NF",
         "fontSize": 11,
-        "hidden": true,
         "guid": "{9f80d682-c62b-40a3-a8f3-40990da15ef2}",
         "icon": "%UserProfile%\\Pictures\\Icons\\Ubuntu.ico",
         "name": "Ubuntu (VMware)"

@@ -24,12 +24,13 @@ fi
 # Automatically trim long paths in the prompt
 PROMPT_DIRTRIM=3
 # Set history lengths
+HISTFILE=~/.local/share/bash/bash_history
 HISTSIZE=10000
 HISTFILESIZE=20000
 # Avoid duplicate entries
 HISTCONTROL="erasedups:ignoreboth"
 # Don't record some commands
-export HISTIGNORE="&:[ ]*:exit:ls:ll:bg:fg:history:clear:dir"
+HISTIGNORE="&:[ ]*:exit:ls:ll:bg:fg:history:clear:dir"
 
 # Set some handy shell options
 # histreedit   - use readline on history

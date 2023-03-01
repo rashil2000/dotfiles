@@ -30,7 +30,7 @@ if (!(Test-Path $DotDir)) {
 
 # Setup configuration files
 @{
-    "$Env:AppData\bat\config"                                                       = "$DotDir\bat\config"
+    "$Env:AppData\bat"                                                              = "$DotDir\bat"
     "$Env:AppData\bottom\bottom.toml"                                               = "$DotDir\bottom\bottom.toml"
     "$Env:AppData\ncspot\config.toml"                                               = "$DotDir\ncspot\config.toml"
     "$Env:AppData\Vifm\vifmrc"                                                      = "$DotDir\vifm\vifmrc"
