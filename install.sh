@@ -44,7 +44,4 @@ ln -sf $DOT_DIR/bottom/bottom.toml ~/.config/bottom/
 mkdir -p ~/.config/ncspot
 ln -sf $DOT_DIR/ncspot/config.toml ~/.config/ncspot/
 
-mkdir -p ~/.config/nvim
-ln -sf $DOT_DIR/nvim/init.vim ~/.config/nvim/
-curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
+ln -sf $DOT_DIR/nvim ~/.config/nvim

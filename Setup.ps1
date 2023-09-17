@@ -37,7 +37,7 @@ if (!(Test-Path $DotDir)) {
     "$Env:LocalAppData\clink\.inputrc"                                              = "$DotDir\.inputrc"
     "$Env:LocalAppData\clink\clink_settings"                                        = "$DotDir\cmd\clink_settings"
     "$Env:LocalAppData\clink\clink_start.cmd"                                       = "$DotDir\cmd\clink_start.cmd"
-    "$Env:LocalAppData\nvim\init.vim"                                               = "$DotDir\nvim\init.vim"
+    "$Env:LocalAppData\nvim"                                                        = "$DotDir\nvim"
     "$Env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState" = "$DotDir\wt"
 #   "$Env:UserProfile\.bashrc"                                                      = "$DotDir\bash\.bashrc"
     "$Env:UserProfile\.config\git\config"                                           = "$DotDir\git\config"
@@ -70,12 +70,6 @@ if (!(Test-Path $DotDir)) {
     if (!(Test-Path $_.Name)) {
         Copy-Item $_.Value $_.Name -WhatIf:$dryrun
     }
-}
-
-# Setup Neovim
-if (!(Test-Path "$Env:LocalAppData\nvim-data\site\autoload\plug.vim")) {
-    Invoke-WebRequest raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -UseBasicParsing |`
-        New-Item "$Env:LocalAppData\nvim-data\site\autoload\plug.vim" -Force -WhatIf:$dryrun
 }
 
 # Setup Starship
