@@ -7,7 +7,7 @@ DOT_DIR=~/GitHub/rashil2000/dotfiles
 mkdir -p $DOT_DIR
 git clone https://github.com/rashil2000/dotfiles $DOT_DIR
 mkdir -p ~/.config
-mkdir -p ~/.local/share
+mkdir -p ~/.local/share/bash
 ln -sf $DOT_DIR/.inputrc ~/
 
 ln -sf $DOT_DIR/bash/.bashrc ~/
@@ -36,8 +36,7 @@ ln -sf $DOT_DIR/pwsh/Microsoft.PowerShell_profile.ps1 ~/.config/powershell/
 mkdir -p ~/.config/vifm
 ln -sf $DOT_DIR/vifm/vifmrc ~/.config/vifm/
 
-mkdir -p ~/.config/bat
-ln -sf $DOT_DIR/bat/config ~/.config/bat/
+ln -sf $DOT_DIR/bat ~/.config/bat
 
 mkdir -p ~/.config/bottom
 ln -sf $DOT_DIR/bottom/bottom.toml ~/.config/bottom/

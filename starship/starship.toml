@@ -71,6 +71,7 @@ style = "underline purple"
 [shell]
 format = " \\[[$indicator]($style)\\] at"
 powershell_indicator = "pwsh"
+bash_indicator = "bash"
 style = "bold blue"
 disabled = false
 

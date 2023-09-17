@@ -45,3 +45,4 @@ export FZF_CTRL_T_COMMAND='fd -H -L -E .git -t f'
 export FZF_ALT_C_COMMAND='fd -H -L -E .git -t d'
 export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range=:500 {}"'
 export FZF_ALT_C_OPTS='--preview "exa -a --icons --group-directories-first --color=always {}"'
+export TMUX_SHELL=$(command -v pwsh || echo $SHELL)
