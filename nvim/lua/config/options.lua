@@ -4,4 +4,8 @@
 
 vim.g.mapleader = "\\"
 vim.opt.relativenumber = false
-vim.opt.background = "light"
+vim.cmd([[
+  if has('win32') && split(systemlist('reg query HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize /v AppsUseLightTheme')[2])[2][2]
+    set bg=light
+  endif
+]])

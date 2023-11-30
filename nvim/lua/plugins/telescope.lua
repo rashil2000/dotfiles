@@ -21,6 +21,7 @@ return {
           file_browser = {
             hidden = { file_browser = true, folder_browser = true },
             grouped = true,
+            follow_symlinks = true,
           },
         },
       })

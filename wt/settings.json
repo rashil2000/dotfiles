@@ -168,7 +168,7 @@
         "name": "Bottom"
       },
       {
-        "commandline": "ncspot",
+        "commandline": "spotify_player",
         "fontFace": "FantasqueSansMono NF",
         "fontSize": 13,
         "colorScheme": {
@@ -179,7 +179,7 @@
         "scrollbarState": "hidden",
         "guid": "{9f80d682-c62b-12a3-a8f3-40996da15ef2}",
         "icon": "%UserProfile%\\Pictures\\Icons\\spotify.ico",
-        "name": "Ncspot"
+        "name": "Spotify"
       },
       {
         "commandline": "wsl --cd ~ pwsh -l",
