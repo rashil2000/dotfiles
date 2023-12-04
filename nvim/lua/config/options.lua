@@ -3,6 +3,7 @@
 -- Add any additional options here
 
 vim.g.mapleader = "\\"
+vim.g.autoformat = false
 vim.opt.relativenumber = false
 vim.cmd([[
   if has('win32') && split(systemlist('reg query HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize /v AppsUseLightTheme')[2])[2][2]
