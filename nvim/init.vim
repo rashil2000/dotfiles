@@ -1,7 +1,7 @@
 set list
 set ruler
 set number
-"set cursorline
+set cursorline
 "set cursorcolumn
 syntax enable
 set autoindent
@@ -21,6 +21,8 @@ set nofoldenable          " Disable automatic folding
 set clipboard=unnamed
 set nobackup              " Some servers have issues with
 set nowritebackup         " backup files, see #649 in CoC
+set termguicolors         " Colorscheme configuration
+highlight Comment cterm=italic gui=italic
 set omnifunc=syntaxcomplete#Complete
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType * setlocal foldmethod=syntax
@@ -51,23 +53,8 @@ nnoremap <C-r> r
 nnoremap <silent> <A-z> :set wrap!<CR>
 " Change working directory
 nnoremap <Leader>cd :cd %:p:h \| pwd<CR>
-
-" Colorscheme configuration
-if (has("termguicolors"))
- set termguicolors
-endif
-if has('win32') && split(systemlist('reg query "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v AppsUseLightTheme')[2])[2][2]
-  let &background = 'light'
-endif
 " Toggle theme
-function ThemeSetter()
-  let &background = (&background == 'dark' ? 'light' : 'dark')
-  highlight Comment cterm=italic gui=italic
-  highlight Normal ctermbg=none guibg=none
-  highlight SignColumn ctermbg=none guibg=none
-  highlight LineNr ctermbg=none guibg=none
-endfunction
-nnoremap <Leader>ts :call ThemeSetter()<CR>
+nnoremap <silent> <Leader>ts :let &background = (&background == 'dark' ? 'light' : 'dark')<CR>
 
 " Tags completion
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb,*.md'
@@ -79,3 +66,14 @@ else
   command W execute 'silent! write ! sudo         tee % >/dev/null' <bar> edit!
 endif
 
+" File explorer
+if &columns < 90
+  let g:netrw_winsize = 50 " if the screen is small, occupy half
+else
+  let g:netrw_winsize = 30 " else take 30%
+endif
+let g:netrw_keepdir = 0    " Keep current directory and browsing directory synced. This helps avoid the move files error.
+let g:netrw_liststyle = 3  " Tree style listing
+let g:netrw_banner = 0     " Hide banner. Use I inside Netrw to show it temporarily.
+nnoremap <leader>ef :Lexplore %:p:h<CR>
+nnoremap <Leader>ed :Lexplore<CR>

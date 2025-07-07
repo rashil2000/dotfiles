@@ -1,6 +1,7 @@
 [user]
     email = rashil2000@gmail.com
     name = Rashil Gandhi
+    signingkey = ~/.ssh/github_signing.pub
 [core]
     editor = nvim
 [filter "lfs"]
@@ -12,6 +13,8 @@
     gpgSign = true
 [tag]
     gpgSign = true
+[gpg]
+    format = ssh
 [init]
     defaultBranch = main
 [credential "helperselector"]
@@ -25,29 +28,7 @@
 [interactive]
     diffFilter = delta --color-only
 [delta]
-    features = navigate hyperlinks line-numbers decorations hoopoe
+    features = navigate hyperlinks line-numbers decorations
     whitespace-error-style = 22 reverse
-[delta "decorations"]
-    commit-decoration-style = bold yellow box ul
-    file-style = bold yellow ul
-    file-decoration-style = none
+    true-color = always
 
-
-[delta "hoopoe"]
-    commit-decoration-style = blue ol
-    commit-style = raw
-    file-style = omit
-    hunk-header-decoration-style = blue box
-    hunk-header-file-style = red
-    hunk-header-style = file line-number syntax
-    minus-emph-style = syntax 88
-    minus-style = syntax 52
-    plus-emph-style = syntax 28
-    plus-style = syntax 22
-    syntax-theme = terminal-ansi16
-    zero-style = syntax
-    map-styles = \
-       bold purple => syntax 53, \
-       bold blue => syntax 17, \
-       bold cyan => syntax 23, \
-       bold yellow => syntax 58
