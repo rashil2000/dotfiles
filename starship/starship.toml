@@ -25,11 +25,11 @@ right_format = """\
 
 [directory]
 truncate_to_repo = true
-read_only = " "
+read_only = " 󰌾"
 truncation_symbol = "…/"
 
 [package]
-symbol = " "
+symbol = "󰏗 "
 
 [git_branch]
 style = 'italic purple'
@@ -77,8 +77,8 @@ disabled = false
 
 [battery]
 full_symbol = "•"
-discharging_symbol = ""
-charging_symbol = ""
+discharging_symbol = "󰄼"
+charging_symbol = "󰄿"
 unknown_symbol = "!"
 format = " [$symbol$percentage]($style)"
 
@@ -107,7 +107,7 @@ symbol = "✕ "
 [memory_usage]
 format = " $symbol[${ram}]($style)"
 threshold = -1
-symbol = " "
+symbol = "󰍛 "
 disabled = false
 
 [aws]
@@ -128,8 +128,8 @@ symbol = " "
 [golang]
 symbol = " "
 
-# [haskell]
-# symbol = " "
+[haskell]
+symbol = " "
 
 [hg_branch]
 symbol = " "
@@ -141,7 +141,7 @@ symbol = " "
 symbol = " "
 
 [nim]
-symbol = " "
+symbol = "󰆥 "
 
 [nix_shell]
 symbol = " "

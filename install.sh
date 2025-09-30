@@ -59,4 +59,9 @@ ln -sf $DOT_DIR/bat ~/.config/bat
 mkdir -p ~/.config/bottom
 ln -sf $DOT_DIR/bottom/bottom.toml ~/.config/bottom/
 
+mkdir -p ~/.config/spotify-player
+ln -sf $DOT_DIR/spotify-player/app.toml ~/.config/spotify-player
+
+ln -sf $DOT_DIR/wezterm ~/.config/wezterm
+
 ln -sf $DOT_DIR/nvim ~/.config/nvim

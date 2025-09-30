@@ -15,7 +15,7 @@ if (!(Get-Command scoop -ErrorAction Ignore)) {
 
 # Install apps
 scoop bucket add extras
-scoop install starship autohotkey fd ripgrep bat bottom vifm ncspot neovim delta python fzf gdu gh gsudo clangd clink clink-completions busybox-lean nodejs-lts
+scoop install starship autohotkey fd ripgrep bat bottom vifm spotify-player neovim delta python fzf gdu gh gsudo clangd clink clink-completions busybox-lean nodejs-lts
 
 # Download dotfiles
 if (!(Test-Path $DotDir)) {
@@ -30,22 +30,22 @@ if (!(Test-Path $DotDir)) {
 
 # Setup configuration files
 @{
-    "$Env:AppData\bat"                                                              = "$DotDir\bat"
-    "$Env:AppData\bottom\bottom.toml"                                               = "$DotDir\bottom\bottom.toml"
-    "$Env:AppData\ncspot\config.toml"                                               = "$DotDir\ncspot\config.toml"
-    "$Env:AppData\Vifm\vifmrc"                                                      = "$DotDir\vifm\vifmrc"
-    "$Env:LocalAppData\clink\.inputrc"                                              = "$DotDir\.inputrc"
-    "$Env:LocalAppData\clink\clink_settings"                                        = "$DotDir\cmd\clink_settings"
-    "$Env:LocalAppData\clink\clink_start.cmd"                                       = "$DotDir\cmd\clink_start.cmd"
-    "$Env:LocalAppData\nvim"                                                        = "$DotDir\nvim"
-    "$Env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState" = "$DotDir\wt"
-#   "$Env:UserProfile\.bashrc"                                                      = "$DotDir\bash\.bashrc"
-    "$Env:UserProfile\.config\git\config"                                           = "$DotDir\git\config"
-    "$Env:UserProfile\.config\starship.toml"                                        = "$DotDir\starship\starship.toml"
-    "$Env:UserProfile\.config\tmux\tmux.conf"                                       = "$DotDir\tmux\tmux.conf"
-    "$DocDir\PowerShell\coc.vim_profile.ps1"                                        = "$DotDir\pwsh\Microsoft.PowerShell_profile.ps1"
-    "$DocDir\PowerShell\Microsoft.PowerShell_profile.ps1"                           = "$DotDir\pwsh\Microsoft.PowerShell_profile.ps1"
-    "$DocDir\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"                    = "$DotDir\pwsh\Microsoft.PowerShell_profile.ps1"
+    "$Env:AppData\bottom\bottom.toml"                            = "$DotDir\bottom\bottom.toml"
+    "$Env:AppData\Vifm\vifmrc"                                   = "$DotDir\vifm\vifmrc"
+    "$Env:AppData\bat"                                           = "$DotDir\bat"
+    "$Env:LocalAppData\clink\.inputrc"                           = "$DotDir\.inputrc"
+    "$Env:LocalAppData\clink\clink_settings"                     = "$DotDir\cmd\clink_settings"
+    "$Env:LocalAppData\clink\clink_start.cmd"                    = "$DotDir\cmd\clink_start.cmd"
+    "$Env:LocalAppData\nvim"                                     = "$DotDir\nvim"
+#   "$Env:UserProfile\.bashrc"                                   = "$DotDir\bash\.bashrc"
+    "$Env:UserProfile\.config\wezterm"                           = "$DotDir\wezterm"
+    "$Env:UserProfile\.config\git\config"                        = "$DotDir\git\config"
+    "$Env:UserProfile\.config\starship.toml"                     = "$DotDir\starship\starship.toml"
+    "$Env:UserProfile\.config\tmux\tmux.conf"                    = "$DotDir\tmux\tmux.conf"
+    "$Env:UserProfile\.config\spotify-player\app.toml"           = "$DotDir\spotify-player\app.toml"
+    "$DocDir\PowerShell\coc.vim_profile.ps1"                     = "$DotDir\pwsh\Microsoft.PowerShell_profile.ps1"
+    "$DocDir\PowerShell\Microsoft.PowerShell_profile.ps1"        = "$DotDir\pwsh\Microsoft.PowerShell_profile.ps1"
+    "$DocDir\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" = "$DotDir\pwsh\Microsoft.PowerShell_profile.ps1"
 }.GetEnumerator() | ForEach-Object {
     # Check symbolic link health
     if ((Test-Path $_.Name) `
