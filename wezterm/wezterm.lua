@@ -82,8 +82,8 @@ wezterm.on('format-tab-title',
 )
 
 wezterm.on('update-status',
-  function(window, _)
-    local segments = segments.get_right_status_segments(window)
+  function(window, pane)
+    local segments = segments.get_right_status_segments(window, pane)
     local color_scheme = window:effective_config().resolved_palette
 
     -- wezterm.color.parse returns a Color object, which we can
@@ -125,11 +125,15 @@ wezterm.on('update-status',
   end
 )
 
+local colors_object
 if is_appearance_dark() then
-  config.colors = colors.theme_config.dark
+  colors_object = colors.theme_config.dark
 else
-  config.colors = colors.theme_config.light
+  colors_object = colors.theme_config.light
 end
+config.colors = colors_object
+config.command_palette_bg_color = colors_object.tab_bar.active_tab.bg_color
+config.command_palette_fg_color = colors_object.tab_bar.active_tab.fg_color
 config.keys = keys.bindings
 config.default_prog = { 'pwsh', '-l' }
 config.initial_cols = 90
@@ -145,6 +149,9 @@ config.status_update_interval = 10000
 config.set_environment_variables = {
   POWERSHELL_UPDATECHECK= "Off",
   PATH = updated_path,
+}
+config.unix_domains = {
+  { name = "default" }
 }
 
 return config;

@@ -57,6 +57,11 @@ M.bindings = {
     mods = 'CTRL',
     action = wezterm.action.ActivateLastTab,
   },
+  {
+    key = 'D',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.DetachDomain 'CurrentPaneDomain',
+  },
 }
 
 return M
