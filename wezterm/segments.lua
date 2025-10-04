@@ -7,7 +7,6 @@ local cache = {
   spotify = '',
   kube = '',
   memory = '',
-  day = '',
   last_update_ms = 0,
 }
 
@@ -62,7 +61,7 @@ end
 local function get_playback_status()
   -- Check if spotify_player process is running
   if not is_process_running('spotify_player') then
-      return "󰎊"
+      return ''
   end
 
   local success, result, stderr = wezterm.run_child_process{
@@ -151,30 +150,44 @@ local function refresh_cache(window)
   -- Update synchronously; this runs at most as often as status_update_interval
   cache.spotify = get_playback_status() or ''
   cache.memory = get_memory_usage() or ''
-  cache.day = wezterm.strftime(' %a, %b %-d')
-  -- only fetch kube when we have room to show it
-  local cols = window:mux_window():active_tab():get_size().cols
-  if cols > 100 then
-    cache.kube = get_current_kube_context() or ''
-  else
-    cache.kube = ''
-  end
+  cache.kube = get_current_kube_context() or ''
   cache.last_update_ms = os.time() * 1000
 end
 
-function M.get_right_status_segments(window)
-  if is_stale(window) then
-    refresh_cache(window)
+function M.get_right_status_segments(window, pane)
+  local domain = pane:get_domain_name()
+  local items = {}
+  -- we can use `cols` to do conditional rendering of segments
+  -- local cols = window:mux_window():active_tab():get_size().cols
+
+  if domain == 'local' or domain == 'default' then
+    local domain_display = ''
+    if domain == 'default' then
+      domain_display = 'MUX'
+    end
+
+    if is_stale(window) then
+      refresh_cache(window)
+    end
+
+    items = {
+      cache.spotify,
+      cache.kube,
+      cache.memory,
+      domain_display
+    }
+  else
+    local m = pane:get_metadata() or {}
+    local ms = m.since_last_response_ms
+
+    if ms then
+      table.insert(items, " ".. ms .. "ms")
+    end
+
+    table.insert(items, domain)
   end
 
   -- Build segments and filter out empty values to avoid duplicate checks
-  local items = {
-    cache.spotify,
-    cache.kube,
-    cache.memory,
-    cache.day,
-  }
-
   local result = {}
   for _, v in ipairs(items) do
     if v and v ~= '' then

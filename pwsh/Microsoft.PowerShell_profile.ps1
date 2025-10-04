@@ -1,6 +1,5 @@
 <# Aliases and Functions #>
 Set-Alias mcm Measure-Command
-Set-Alias nvs ~/.nvs/nvs.ps1
 Function :q { exit }
 Function h { Set-Location ~ }
 Function d { Set-Location ~/Desktop }
@@ -31,7 +30,7 @@ Set-PSReadLineOption `
   -Colors @{ ListPredictionSelected = "$([char]0x1b)[48;5;243m" } `
   -AddToHistoryHandler {
     Param([string]$line)
-    $line -notin 'exit', 'dir', ':q', 'cls', 'history', 'Get-PSReadLineOption', '$PWD', '$PSVersionTable', '$Host.UI.RawUI.WindowSize'
+    $line -notin 'exit', 'dir', ':q', 'cls', 'history', 'Get-PSReadLineOption', '$PWD', '$PSVersionTable'
   }
 if (-not ($Host.UI.RawUI.WindowSize.Width -lt 54 -or $Host.UI.RawUI.WindowSize.Height -lt 15)) {
   Set-PSReadLineOption -PredictionViewStyle ListView
@@ -43,12 +42,6 @@ Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow -Function BackwardWord
 Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
 
-<# Import Completions #>
-if (Test-Path "~/GitHub/rashil2000/scripts/completions" -PathType Container) {
-  Get-ChildItem "~/GitHub/rashil2000/scripts/completions/_*.ps1" `
-    | ForEach-Object { . $_ }
-}
-
 <# Miscellaneous Settings #>
 if ($PSVersionTable.PSVersion.Major -gt 5) {
   Set-MarkdownOption `
@@ -57,10 +50,15 @@ if ($PSVersionTable.PSVersion.Major -gt 5) {
 }
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 
+<# Import Completions #>
+if (Test-Path "~/.local/share/carapace.ps1" -PathType Leaf) {
+  . "~/.local/share/carapace.ps1"
+}
+
 <# Enable Starship prompt #>
 if (Test-Path "~/.local/share/starship.ps1" -PathType Leaf) {
   . "~/.local/share/starship.ps1"
 }
 
 <# Import Modules #>
-Import-Module CompletionPredictor, Terminal-Icons, scoop-completion, npm-completion, posh-cargo, posh-git, kmt.winget.autocomplete -ErrorAction Ignore
+Import-Module CompletionPredictor, Terminal-Icons -ErrorAction Ignore

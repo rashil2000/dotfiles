@@ -54,14 +54,16 @@ wezterm.on('format-tab-title',
       next_background = gradient[next_index0 + 1]
     end
 
+    local pane = tab.active_pane
     local raw_title = tab.tab_title
     if raw_title == '' then
-      local pane = tab.active_pane
-      if pane.title == '' then
-        raw_title = string.gsub(pane.foreground_process_name, '(.*[/\\])(.*)', '%2')
-      else
-        raw_title = pane.title
-      end
+      raw_title = pane.title
+    end
+    if raw_title == '' then
+      raw_title = string.gsub(pane.foreground_process_name, '(.*[/\\])(.*)', '%2')
+    end
+    if raw_title == '' then
+      raw_title = 'pwsh'
     end
 
     -- Ensure that the titles fit in the available space,
@@ -82,8 +84,8 @@ wezterm.on('format-tab-title',
 )
 
 wezterm.on('update-status',
-  function(window, _)
-    local segments = segments.get_right_status_segments(window)
+  function(window, pane)
+    local segments = segments.get_right_status_segments(window, pane)
     local color_scheme = window:effective_config().resolved_palette
 
     -- wezterm.color.parse returns a Color object, which we can
@@ -125,26 +127,33 @@ wezterm.on('update-status',
   end
 )
 
+local colors_object
 if is_appearance_dark() then
-  config.colors = colors.theme_config.dark
+  colors_object = colors.theme_config.dark
 else
-  config.colors = colors.theme_config.light
+  colors_object = colors.theme_config.light
 end
+config.colors = colors_object
+config.command_palette_bg_color = colors_object.tab_bar.active_tab.bg_color
+config.command_palette_fg_color = colors_object.tab_bar.active_tab.fg_color
 config.keys = keys.bindings
 config.default_prog = { 'pwsh', '-l' }
+config.default_gui_startup_args = { 'connect', 'default' }
 config.initial_cols = 90
 config.initial_rows = 30
 config.switch_to_last_active_tab_when_closing_tab = true
 config.window_decorations = "RESIZE"
 config.enable_scroll_bar = true
 config.font = wezterm.font("Cascadia Code")
-config.font_size = 13.0
 config.use_fancy_tab_bar = false
 config.tab_max_width = 32
 config.status_update_interval = 10000
 config.set_environment_variables = {
   POWERSHELL_UPDATECHECK= "Off",
   PATH = updated_path,
+}
+config.unix_domains = {
+  { name = "default" }
 }
 
 return config;
