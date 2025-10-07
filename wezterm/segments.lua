@@ -10,21 +10,11 @@ local cache = {
   last_update_ms = 0,
 }
 
-local spotify_command = 'spotify_player'
-local starship_command = 'starship'
-local kube_command = 'kubectl'
-
-if wezterm.target_triple == 'aarch64-apple-darwin' then
-  spotify_command = wezterm.home_dir .. '/.cargo/bin/' .. spotify_command
-  starship_command = '/opt/homebrew/bin/' .. starship_command
-  kube_command = '/opt/homebrew/bin/' .. kube_command
-end
-
 local function is_process_running_windows(image)
   -- CSV output and no header; filter is ONE arg
   local ok, stdout, stderr = wezterm.run_child_process{
     "tasklist",
-    "/FI", ("IMAGENAME eq %s.exe"):format(image),
+    "/FI", ("IMAGENAME eq %s"):format(image),
     "/NH",
     "/FO", "CSV",
   }
@@ -35,7 +25,7 @@ local function is_process_running_windows(image)
 
   -- first line, then first comma-separated token, then equality check
   local first = (stdout:match("([^\r\n]+)") or ""):match("^([^,]+)") or ""
-  return first:lower() == ('"' .. image .. '.exe"'):lower()
+  return first:lower() == ('"' .. image .. '"'):lower()
 end
 
 local function is_process_running_macos(image)
@@ -55,7 +45,7 @@ local function is_process_running(image)
   if wezterm.target_triple == 'aarch64-apple-darwin' then
     return is_process_running_macos(image)
   end
-  return is_process_running_windows(image)
+  return is_process_running_windows(image .. '.exe')
 end
 
 local function get_playback_status()
@@ -64,8 +54,8 @@ local function get_playback_status()
       return ''
   end
 
-  local success, result, stderr = wezterm.run_child_process{
-    spotify_command,
+  local success, result, _ = wezterm.run_child_process{
+    'spotify_player',
     'get',
     'key',
     'playback'
@@ -104,11 +94,15 @@ end
 local function get_memory_usage()
   -- the below command will give us the following output:
   --  13GiB/24GiB
-  local success, output, stderr = wezterm.run_child_process{
-    starship_command,
+  local pcall_ok, success, output, _ = pcall(wezterm.run_child_process, {
+    'starship',
     'module',
     'memory_usage'
-  }
+  })
+
+  if not pcall_ok then
+    return ''
+  end
 
   if not success or not output or output == "" then
     return "1N/A"
@@ -125,11 +119,15 @@ end
 local function get_current_kube_context()
   -- the below command will give us the following output:
   -- saas-qa01-aks\n
-  local success, output, stderr = wezterm.run_child_process{
-    kube_command,
+  local pcall_ok, success, output, _ = pcall(wezterm.run_child_process, {
+    'kubectl',
     'config',
     'current-context'
-  }
+  })
+
+  if not pcall_ok then
+    return ''
+  end
 
   if not success or not output or output == "" then
     return "1N/A"
@@ -146,7 +144,7 @@ local function is_stale(window)
   return (now_ms - cache.last_update_ms) >= interval_ms
 end
 
-local function refresh_cache(window)
+local function refresh_cache()
   -- Update synchronously; this runs at most as often as status_update_interval
   cache.spotify = get_playback_status() or ''
   cache.memory = get_memory_usage() or ''
@@ -167,7 +165,7 @@ function M.get_right_status_segments(window, pane)
     end
 
     if is_stale(window) then
-      refresh_cache(window)
+      refresh_cache()
     end
 
     items = {

@@ -4,25 +4,14 @@ local colors = require 'colors';
 local keys = require 'keys';
 local config = wezterm.config_builder();
 
-local updated_path = os.getenv('PATH')
-
-if wezterm.target_triple == 'aarch64-apple-darwin' then
-  updated_path = wezterm.home_dir .. '/.cargo/bin:' ..
-                 wezterm.home_dir .. '/.local/bin:' ..
-                 '/opt/homebrew/bin:' ..
-                 '/opt/homebrew/sbin:' ..
-                 '/usr/local/bin:' ..
-                 updated_path
-end
-
 local function is_appearance_dark()
   local appearance = (wezterm.gui and wezterm.gui.get_appearance()) or 'Light'
   return appearance:find("Dark")
 end
 
 wezterm.on('format-tab-title',
-  function(tab, tabs, panes, config, hover, max_width)
-    local color_scheme = config.resolved_palette
+  function(tab, tabs, _, econfig, _, max_width)
+    local color_scheme = econfig.resolved_palette
     local edge_background = color_scheme.tab_bar.background
 
     -- Build a gradient across the number of tabs
@@ -49,7 +38,7 @@ wezterm.on('format-tab-title',
 
     -- Make the right wedge blend into the NEXT tab's background color
     local next_index0 = current_index0 + 1
-    local next_background = nil
+    local next_background
     if next_index0 < total_tabs then
       next_background = gradient[next_index0 + 1]
     end
@@ -61,6 +50,9 @@ wezterm.on('format-tab-title',
     end
     if raw_title == '' then
       raw_title = string.gsub(pane.foreground_process_name, '(.*[/\\])(.*)', '%2')
+    end
+    if string.match(raw_title, '[%.][eE][xX][eE]$') then
+      raw_title = string.gsub(raw_title, '(.*[/\\])(.*)', '%2'):gsub('[%.][eE][xX][eE]$', '')
     end
     if raw_title == '' then
       raw_title = 'pwsh'
@@ -85,7 +77,7 @@ wezterm.on('format-tab-title',
 
 wezterm.on('update-status',
   function(window, pane)
-    local segments = segments.get_right_status_segments(window, pane)
+    local segs = segments.get_right_status_segments(window, pane)
     local color_scheme = window:effective_config().resolved_palette
 
     -- wezterm.color.parse returns a Color object, which we can
@@ -104,13 +96,13 @@ wezterm.on('update-status',
         orientation = 'Horizontal',
         colors = { gradient_from, gradient_to },
       },
-      #segments -- as many colours as no. of segments
+      #segs -- as many colours as no. of segments
     )
 
     -- Build up the elements to send to wezterm.format
     local elements = {}
 
-    for i, seg in ipairs(segments) do
+    for i, seg in ipairs(segs) do
       local is_first = i == 1
 
       if is_first then
@@ -150,7 +142,6 @@ config.tab_max_width = 32
 config.status_update_interval = 10000
 config.set_environment_variables = {
   POWERSHELL_UPDATECHECK= "Off",
-  PATH = updated_path,
 }
 config.unix_domains = {
   { name = "default" }
