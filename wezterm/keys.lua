@@ -52,6 +52,17 @@ M.bindings = {
     mods = 'META',
     action = wezterm.action.SendString '\x1bf',
   },
+  -- Scroll up/down to previous/next prompt
+  {
+    key = 'UpArrow',
+    mods = 'SHIFT',
+    action = wezterm.action.ScrollToPrompt(-1)
+  },
+  {
+    key = 'DownArrow',
+    mods = 'SHIFT',
+    action = wezterm.action.ScrollToPrompt(1)
+  },
   {
     key = '`',
     mods = 'CTRL',
@@ -61,6 +72,15 @@ M.bindings = {
     key = 'D',
     mods = 'CTRL|SHIFT',
     action = wezterm.action.DetachDomain 'CurrentPaneDomain',
+  },
+}
+
+M.mouse_bindings = {
+  -- Select output of entire command when triple-clicking
+  {
+    event = { Down = { streak = 3, button = 'Left' } },
+    mods = 'NONE',
+    action = wezterm.action.SelectTextAtMouseCursor 'SemanticZone',
   },
 }
 

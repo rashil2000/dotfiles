@@ -60,5 +60,12 @@ if (Test-Path "~/.local/share/starship.ps1" -PathType Leaf) {
   . "~/.local/share/starship.ps1"
 }
 
+<# Enable Wezterm integration #>
+if ((Test-Path "~/.local/share/wezterm.ps1" -PathType Leaf) -and
+  $Env:TERM_PROGRAM -eq "WezTerm") {
+  . "~/.local/share/wezterm.ps1"
+  Enable-Wezterm-Integration
+}
+
 <# Import Modules #>
 Import-Module CompletionPredictor, Terminal-Icons -ErrorAction Ignore

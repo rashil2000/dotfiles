@@ -7,6 +7,7 @@ local cache = {
   spotify = '',
   kube = '',
   memory = '',
+  day = '',
   last_update_ms = 0,
 }
 
@@ -149,6 +150,7 @@ local function refresh_cache()
   cache.spotify = get_playback_status() or ''
   cache.memory = get_memory_usage() or ''
   cache.kube = get_current_kube_context() or ''
+  cache.day = wezterm.strftime(' %a, %b %-d')
   cache.last_update_ms = os.time() * 1000
 end
 
@@ -172,17 +174,18 @@ function M.get_right_status_segments(window, pane)
       cache.spotify,
       cache.kube,
       cache.memory,
+      cache.day,
       domain_display
     }
   else
     local m = pane:get_metadata() or {}
-    local ms = m.since_last_response_ms
+    local ms = m.since_last_response_ms or ''
 
-    if ms then
-      table.insert(items, " ".. ms .. "ms")
-    end
-
-    table.insert(items, domain)
+    items = {
+      " ".. ms .. "ms",
+      cache.day,
+      domain
+    }
   end
 
   -- Build segments and filter out empty values to avoid duplicate checks
