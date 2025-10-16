@@ -2,3 +2,6 @@ wt/*
 wt/settings.json
 nvim-pack-lock.json
 .idea/
+yazi/package.toml
+yazi/plugins/*
+.DS_Store

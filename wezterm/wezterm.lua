@@ -9,21 +9,52 @@ local function is_appearance_dark()
   return appearance:find("Dark")
 end
 
+local known_shells = {
+  pwsh = true, powershell = true, cmd = true,
+  bash = true, zsh = true, fish = true,
+  sh = true, csh = true, tcsh = true,
+  nu = true, elvish = true, xonsh = true,
+}
+
+local function basename(path)
+  return path:gsub('(.*[/\\])(.*)', '%2'):gsub('[%.][eE][xX][eE]$', '')
+end
+
+local function ternary(a, b)
+  if a and a ~= '' then
+    return a
+  end
+  return b
+end
+
 local function get_title(tab, fg_color, bg_color, wg_bg_color, max_width)
   -- Figure out what title to show
   local pane = tab.active_pane
   local raw_title = tab.tab_title
+  local ran_cmd = pane.user_vars.WEZTERM_CMD or ''
+  local pane_title = pane.title
+  local base_pane_title = basename(pane_title)
+  local is_shell = base_pane_title ~= '' and known_shells[base_pane_title]
+  local proc_name = basename(pane.foreground_process_name)
   if raw_title == '' then
-    raw_title = pane.title
-    if string.match(raw_title, '[%.][eE][xX][eE]$') then
-      raw_title = string.gsub(raw_title, '(.*[/\\])(.*)', '%2'):gsub('[%.][eE][xX][eE]$', '')
+    if pane_title == '' then
+      raw_title = ternary(ran_cmd, proc_name)
+    elseif ran_cmd == '' then
+      if is_shell then
+        raw_title = ternary(proc_name, base_pane_title)
+      else
+        raw_title = ternary(pane_title, proc_name)
+      end
+    else
+      if is_shell then
+        raw_title = ternary(ran_cmd, base_pane_title)
+      else
+        raw_title = ternary(pane_title, ran_cmd)
+      end
     end
   end
   if raw_title == '' then
-    raw_title = pane.user_vars.WEZTERM_CMD
-  end
-  if raw_title == '' or raw_title == nil then
-    raw_title = 'pwsh'
+    raw_title = ternary(proc_name, basename(os.getenv('WEZTERM_EXECUTABLE')))
   end
 
   -- If there is progress, show that as well
@@ -163,7 +194,10 @@ config.max_fps = 120
 config.switch_to_last_active_tab_when_closing_tab = true
 config.window_decorations = "RESIZE"
 config.enable_scroll_bar = true
-config.font = wezterm.font("Cascadia Code")
+config.font = wezterm.font("Cascadia Code NF")
+if wezterm.target_triple == 'aarch64-apple-darwin' then
+  config.font_size = 14
+end
 config.use_fancy_tab_bar = false
 config.tab_max_width = 32
 config.status_update_interval = 10000

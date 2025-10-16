@@ -1,0 +1,18 @@
+[mgr]
+ratio          = [ 1, 1, 1 ]
+show_hidden    = true
+linemode       = 'mtime'
+
+[opener]
+edit = [
+  { run = 'command -v nvim >/dev/null 2>&1 && nvim "$@" || vi "$@"',  block = true, for = "unix" },
+  { run = 'command -v nvim >/dev/null 2>&1 && nvim "$@" || vi "$@"',  block = true, for = "android" },
+  { run = 'where /q nvim.exe && ( nvim %* ) || ( edit %* )',          block = true, for = "windows" },
+]
+
+[[plugin.prepend_fetchers]]
+id   = "mime"
+name = "*"
+run  = "mime-ext"
+prio = "high"
+

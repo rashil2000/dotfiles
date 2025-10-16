@@ -30,7 +30,8 @@ Set-PSReadLineOption `
   -Colors @{ ListPredictionSelected = "$([char]0x1b)[48;5;243m" } `
   -AddToHistoryHandler {
     Param([string]$line)
-    $line -notin 'exit', 'dir', ':q', 'cls', 'history', 'Get-PSReadLineOption', '$PWD', '$PSVersionTable'
+    $line -notin 'exit', 'dir', ':q', 'cls', 'history', 'Get-PSReadLineOption', '$PWD', '$PSVersionTable', `
+                 'git status', 'git diff', 'git diff --staged', 'git log'
   }
 if (-not ($Host.UI.RawUI.WindowSize.Width -lt 54 -or $Host.UI.RawUI.WindowSize.Height -lt 15)) {
   Set-PSReadLineOption -PredictionViewStyle ListView

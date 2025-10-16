@@ -15,7 +15,9 @@ if (!(Get-Command scoop -ErrorAction Ignore)) {
 
 # Install apps
 scoop bucket add extras
-scoop install starship autohotkey fd ripgrep bat bottom vifm spotify-player neovim delta python fzf gdu gh gsudo clangd clink clink-completions busybox-lean nodejs-lts
+scoop install starship autohotkey fd ripgrep bat bottom yazi spotify-player delta python fzf gdu gh gsudo clangd clink clink-completions busybox-lean nodejs-lts
+scoop install https://raw.githubusercontent.com/ScoopInstaller/Versions/refs/heads/master/bucket/neovim-nightly.json
+scoop install https://raw.githubusercontent.com/ScoopInstaller/Versions/refs/heads/master/bucket/wezterm-nightly.json
 
 # Download dotfiles
 if (!(Test-Path $DotDir)) {
@@ -31,7 +33,7 @@ if (!(Test-Path $DotDir)) {
 # Setup configuration files
 @{
     "$Env:AppData\bottom\bottom.toml"                            = "$DotDir\bottom\bottom.toml"
-    "$Env:AppData\Vifm\vifmrc"                                   = "$DotDir\vifm\vifmrc"
+    "$Env:AppData\yazi\config"                                   = "$DotDir\yazi"
     "$Env:AppData\bat"                                           = "$DotDir\bat"
     "$Env:LocalAppData\clink\.inputrc"                           = "$DotDir\.inputrc"
     "$Env:LocalAppData\clink\clink_settings"                     = "$DotDir\cmd\clink_settings"
@@ -98,4 +100,8 @@ if (Get-Command pip -ErrorAction Ignore) {
 if (Get-Command clink -ErrorAction Ignore) {
     $scoopdir = if ($Env:SCOOP) { $Env:SCOOP } else { "$Env:UserProfile\Scoop" }
     clink autorun set "\`"$scoopdir\apps\clink\current\clink.bat\`" inject --autorun --quiet"
+}
+if (Get-Command ya -ErrorAction Ignore) {
+    ya pkg add yazi-rs/plugins:mime-ext
+    ya pkg add yazi-rs/plugins:toggle-pane
 }

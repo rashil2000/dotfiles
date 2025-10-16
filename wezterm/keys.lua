@@ -40,6 +40,20 @@ M.bindings = {
       args = { 'k9s' },
     },
   },
+  {
+    key = '[',
+    mods = 'SUPER',
+    action = wezterm.action.SpawnCommandInNewTab {
+      args = { 'yazi' },
+    },
+  },
+  {
+    key = ']',
+    mods = 'SUPER',
+    action = wezterm.action.SpawnCommandInNewTab {
+      args = { 'btm' },
+    },
+  },
   -- Sends ESC + b and ESC + f sequence, which is used
   -- for telling your shell to jump back/forward.
   {

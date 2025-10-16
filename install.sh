@@ -7,7 +7,7 @@ curl -fsSL https://github.com/rashil2000.keys >> ~/.ssh/authorized_keys
 
 if grep -qi ubuntu /etc/os-release; then
   sudo apt update
-  sudo apt install git make gawk fzf ripgrep fd-find bat vifm tmux apt-transport-https software-properties-common
+  sudo apt install git make gawk fzf ripgrep fd-find bat tmux apt-transport-https software-properties-common
 
   if ! command -v pwsh &> /dev/null; then
     curl -fsSL https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb -o packages-microsoft-prod.deb
@@ -16,6 +16,14 @@ if grep -qi ubuntu /etc/os-release; then
     sudo apt update
     sudo apt install powershell
     # Once this is done, run `Install-Module CompletionPredictor, Terminal-Icons, npm-completion, posh-cargo, posh-git, PsFzf` in pwsh
+  fi
+
+  if ! command -v wezterm &> /dev/null; then
+    curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
+    echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+    sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
+    sudo apt update
+    sudo apt install wezterm-nightly
   fi
 fi
 
@@ -51,8 +59,7 @@ mkdir -p ~/.config/powershell
 ln -sf $DOT_DIR/pwsh/Microsoft.PowerShell_profile.ps1 ~/.config/powershell/
 \cp -f $DOT_DIR/pwsh/profile.ps1 ~/.config/powershell/
 
-mkdir -p ~/.config/vifm
-ln -sf $DOT_DIR/vifm/vifmrc ~/.config/vifm/
+ln -sf $DOT_DIR/yazi ~/.config/yazi
 
 ln -sf $DOT_DIR/bat ~/.config/bat
 

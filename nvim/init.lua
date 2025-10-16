@@ -16,7 +16,6 @@ o.ignorecase = true
 o.smartcase = true          -- Ignore case only when the pattern contains no capital letters
 o.secure = true
 o.exrc = true               -- Project-specific settings
-o.clipboard = "unnamedplus"
 o.termguicolors = true      -- Enable 24-bit RGB colors
 o.foldmethod = "syntax"
 o.foldenable = true
@@ -143,3 +142,39 @@ require('lualine').setup {
     }
 }
 vim.cmd.colorscheme "catppuccin"
+
+-- Sync clipboard between Terminal and Neovim.
+-- Function to set OSC 52 clipboard. This function only executes on remote sessions
+-- so if we want to paste from home to remote, we need to use the terminal's paste functionality
+local function set_osc52_clipboard()
+  local function my_paste()
+    local content = vim.fn.getreg '"'
+    return vim.split(content, '\n')
+  end
+
+  local vimosc = require('vim.ui.clipboard.osc52')
+
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+      ['+'] = vimosc.copy '+',
+      ['*'] = vimosc.copy '*',
+    },
+    paste = {
+      ['+'] = my_paste,
+      ['*'] = my_paste,
+    },
+  }
+end
+
+-- Schedule the setting after `UiEnter` because it can increase startup-time.
+vim.schedule(function()
+  vim.opt.clipboard:append 'unnamedplus'
+
+  -- Standard SSH session handling or
+  -- if the current session is a remote WezTerm session based on the WezTerm executable
+  local wezterm_executable = vim.uv.os_getenv 'WEZTERM_EXECUTABLE'
+  if vim.uv.os_getenv 'SSH_CLIENT' ~= nil or vim.uv.os_getenv 'SSH_TTY' ~= nil or (wezterm_executable and wezterm_executable:find('wezterm-mux-server', 1, true)) then
+    set_osc52_clipboard()
+  end
+end)
