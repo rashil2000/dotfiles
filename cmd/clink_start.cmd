@@ -6,7 +6,7 @@
 ;= set ClinkReadlineHistory=%LocalAppData%\clink\clink_history
 ;= set ClinkInit=%LocalAppData%\clink\clink_start.cmd
 ;= set FZF_ALT_C_COMMAND=fd -H -L -E .git -t d
-;= set FZF_ALT_C_OPTS=--preview "exa -a --icons --group-directories-first --color=always {}"
+;= set FZF_ALT_C_OPTS=--preview "eza -a --icons --group-directories-first --color=always {}"
 ;= set FZF_CTRL_T_COMMAND=fd -H -L -E .git -t f
 ;= set FZF_CTRL_T_OPTS=--preview "bat --color=always --line-range=:500 {}"
 ;= set FZF_DEFAULT_OPTS=--exact --no-sort --reverse --cycle --height 40%%
@@ -21,7 +21,7 @@ h=cd /d %UserProfile%
 d=cd /d %UserProfile%\Desktop
 ghd=cd /d %UserProfile%\GitHub
 acd=cd /d %UserProfile%\Documents\Academics
-dir=exa -la --icons --git --group-directories-first $*
+dir=eza -la --icons --git --group-directories-first $*
 msvc="%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x64
 msys=%UserProfile%\GitHub\rashil2000\Scripts\msys-env.bat $1 $2
 nvs=%UserProfile%\.nvs\nvs.cmd $*

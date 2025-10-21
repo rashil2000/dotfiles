@@ -20,13 +20,14 @@
 [credential "helperselector"]
     selected = manager-core
 
-[pager]
-    diff = delta
-    log = delta
-    reflog = delta
-    show = delta
+[core]
+    pager = delta
 [interactive]
     diffFilter = delta --color-only
+[diff]
+    colorMoved = default
+[merge]
+    conflictStyle = zdiff3
 [delta]
     features = navigate hyperlinks line-numbers decorations
     whitespace-error-style = 22 reverse

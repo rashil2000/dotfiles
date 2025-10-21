@@ -60,7 +60,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Custom Aliases
-alias dir='exa -la --icons --git --group-directories-first'
+alias dir='eza -la --icons --git --group-directories-first'
 alias :q='exit'
 alias h="cd ~"
 alias d="cd ~/Desktop"
