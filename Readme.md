@@ -92,6 +92,7 @@
 <p align="center">
   <img width="908" height="707" alt="git blame" src="https://github.com/user-attachments/assets/57afef37-166a-4976-98a5-888b82048bd8" /><br />
   <sub><em>beautiful git diff/blame/log/show output using <a href="https://dandavison.github.io/delta/" target="_blank">delta</a></em></sub><br /><br />
-  <img width="1065" height="841" alt="git diff" src="https://github.com/user-attachments/assets/acb745a5-8809-4f39-a991-7f8245aad87a" />
+  <img width="1065" height="841" alt="git diff" src="https://github.com/user-attachments/assets/acb745a5-8809-4f39-a991-7f8245aad87a" /><br />
+  <sub><em>head over here if you want to know <a href="https://rashil2000.me/blogs/multiple-github-accounts" target="_blank">how to manage multiple github accounts on one machine</a></em></sub>
 </p>
 

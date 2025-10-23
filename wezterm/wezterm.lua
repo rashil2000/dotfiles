@@ -55,27 +55,29 @@ local function get_title(tab, fg_color, bg_color, wg_bg_color, max_width)
   end
   if raw_title == '' then
     raw_title = ternary(proc_name, basename(os.getenv('WEZTERM_EXECUTABLE')))
+  else
+    raw_title = raw_title:gsub('[%.][eE][xX][eE]$', '')
   end
 
   -- If there is progress, show that as well
   local foreground = fg_color
   local progress = pane.progress or 'None'
   if progress ~= 'None' then
-      local color = 'green'
-      local status
-      if progress.Percentage ~= nil then
-         status = string.format("%d%%", progress.Percentage)
-      elseif progress.Error ~= nil then
-         status = string.format("%d%%", progress.Error)
-        color = 'red'
-      elseif progress == 'Indeterminate' then
-        status = '~'
-      else
-        status = wezterm.serde.json_encode(progress)
-      end
-      foreground = color
-      raw_title = status .. ' ' .. raw_title
+    local color = 'green'
+    local status
+    if progress.Percentage ~= nil then
+        status = string.format("%d%%", progress.Percentage)
+    elseif progress.Error ~= nil then
+        status = string.format("%d%%", progress.Error)
+      color = 'red'
+    elseif progress == 'Indeterminate' then
+      status = '~'
+    else
+      status = wezterm.serde.json_encode(progress)
     end
+    foreground = color
+    raw_title = status .. ' ' .. raw_title
+  end
 
   -- Ensure that the titles fit in the available space,
   local title_cells = max_width - 3 -- (leading space + trailing space + wedge)

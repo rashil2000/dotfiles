@@ -1,57 +1,85 @@
 local wezterm = require 'wezterm';
 
 local M = {}
+local system_shell = { 'cmd' }
+local bash_env = 'MINGW64'
+if wezterm.target_triple == 'aarch64-apple-darwin' then
+  system_shell = { 'zsh', '-l' }
+  bash_env = ''
+end
 
 M.bindings = {
   -- Shortcuts
   {
-    key = ',',
-    mods = 'SUPER',
+    key = '<',
+    mods = 'CTRL|SHIFT',
     action = wezterm.action.SpawnCommandInNewTab {
       cwd = wezterm.config_dir,
       args = { 'nvim', wezterm.config_file },
     },
   },
   {
-    key = '.',
-    mods = 'SUPER',
+    key = '>',
+    mods = 'CTRL|SHIFT',
     action = wezterm.action.SpawnCommandInNewTab {
       args = { 'pwsh', "-nop", "-c", "cd (Split-Path $PROFILE); nvim $PROFILE.CurrentUserAllHosts" },
     },
   },
   {
-    key = '/',
-    mods = 'SUPER',
+    key = '?',
+    mods = 'CTRL|SHIFT',
     action = wezterm.action.SpawnCommandInNewTab {
       args = { "nvim", "-c", "edit $MYVIMRC | lcd %:p:h" },
     },
   },
   {
-    key = "'",
-    mods = 'SUPER',
+    key = '2',
+    mods = 'ALT|CTRL',
     action = wezterm.action.SpawnCommandInNewTab {
-      args = { 'spotify_player' },
+      args = system_shell,
     },
   },
   {
-    key = ';',
-    mods = 'SUPER',
+    key = '3',
+    mods = 'ALT|CTRL',
     action = wezterm.action.SpawnCommandInNewTab {
-      args = { 'k9s' },
+      args = { 'bash', '-l' },
+      set_environment_variables = { MSYSTEM = bash_env },
     },
   },
   {
-    key = '[',
-    mods = 'SUPER',
+    key = '4',
+    mods = 'ALT|CTRL',
+    action = wezterm.action.SpawnCommandInNewTab {
+      args = { 'nvim' },
+    },
+  },
+  {
+    key = '5',
+    mods = 'ALT|CTRL',
     action = wezterm.action.SpawnCommandInNewTab {
       args = { 'yazi' },
     },
   },
   {
-    key = ']',
-    mods = 'SUPER',
+    key = '6',
+    mods = 'ALT|CTRL',
     action = wezterm.action.SpawnCommandInNewTab {
       args = { 'btm' },
+    },
+  },
+  {
+    key = '7',
+    mods = 'ALT|CTRL',
+    action = wezterm.action.SpawnCommandInNewTab {
+      args = { 'spotify_player' },
+    },
+  },
+  {
+    key = '8',
+    mods = 'ALT|CTRL',
+    action = wezterm.action.SpawnCommandInNewTab {
+      args = { 'k9s' },
     },
   },
   -- Sends ESC + b and ESC + f sequence, which is used
@@ -86,6 +114,11 @@ M.bindings = {
     key = 'D',
     mods = 'CTRL|SHIFT',
     action = wezterm.action.DetachDomain 'CurrentPaneDomain',
+  },
+  {
+    key = 'H',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.Search { CaseInSensitiveString = '' },
   },
 }
 
