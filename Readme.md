@@ -51,7 +51,7 @@
     </em>
   </sub>
   <br /><br />
-  <img src="https://github.com/user-attachments/assets/faf83244-6801-42c0-91b0-44720e33af45" alt="pwsh-fzf" /><br />
+  <img src="https://github.com/user-attachments/assets/fd899aee-e1dc-494b-b5dd-0a36836949b6" alt="pwsh-fzf" /><br />
   <sub>
     <em>
       a few custom functions

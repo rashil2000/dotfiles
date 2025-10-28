@@ -27,7 +27,31 @@ local function ternary(a, b)
   return b
 end
 
-local function get_title(tab, fg_color, bg_color, wg_bg_color, max_width)
+local function get_progress(pane, raw_title, foreground)
+  local title = raw_title
+  local fg_color = foreground
+  local progress = pane.progress or 'None'
+  if progress ~= 'None' then
+    local color = 'green'
+    local status
+    if progress.Percentage ~= nil then
+      status = string.format("%d%%", progress.Percentage)
+    elseif progress.Error ~= nil then
+      status = string.format("%d%%", progress.Error)
+      color = 'red'
+    elseif progress == 'Indeterminate' then
+      status = '~'
+    else
+      status = wezterm.serde.json_encode(progress)
+    end
+    fg_color = color
+    title = status .. ' ' .. title
+  end
+
+  return fg_color, title
+end
+
+local function get_title(tab, foreground)
   -- Figure out what title to show
   local pane = tab.active_pane
   local raw_title = tab.tab_title
@@ -60,44 +84,14 @@ local function get_title(tab, fg_color, bg_color, wg_bg_color, max_width)
   end
 
   -- If there is progress, show that as well
-  local foreground = fg_color
-  local progress = pane.progress or 'None'
-  if progress ~= 'None' then
-    local color = 'green'
-    local status
-    if progress.Percentage ~= nil then
-        status = string.format("%d%%", progress.Percentage)
-    elseif progress.Error ~= nil then
-        status = string.format("%d%%", progress.Error)
-      color = 'red'
-    elseif progress == 'Indeterminate' then
-      status = '~'
-    else
-      status = wezterm.serde.json_encode(progress)
-    end
-    foreground = color
-    raw_title = status .. ' ' .. raw_title
-  end
-
-  -- Ensure that the titles fit in the available space,
-  local title_cells = max_width - 3 -- (leading space + trailing space + wedge)
-  if title_cells < 0 then title_cells = 0 end
-  local title = wezterm.truncate_right((tab.tab_index + 1) .. ': ' .. raw_title, title_cells)
-
-  return {
-    { Background = { Color = bg_color } },
-    { Foreground = { Color = foreground } },
-    { Text = ' ' .. title .. ' ' },
-
-    { Background = { Color = wg_bg_color } },
-    { Foreground = { Color = bg_color } },
-    { Text = '' },
-  }
+  return get_progress(pane, raw_title, foreground)
 end
 
 wezterm.on('format-tab-title',
   function(tab, tabs, _, econfig, _, max_width)
     local color_scheme = econfig.resolved_palette
+    local total_tabs = #tabs > 0 and #tabs or 1
+    local foreground = color_scheme.foreground
     local edge_background = color_scheme.tab_bar.background
 
     -- Build a gradient across the number of tabs
@@ -113,14 +107,12 @@ wezterm.on('format-tab-title',
         orientation = 'Horizontal',
         colors = { gradient_to, gradient_from },
       },
-      #tabs > 0 and #tabs or 1
+      total_tabs
     )
 
     -- Use the tab index (0-based) to pick the colour for this tab
-    local total_tabs = #tabs > 0 and #tabs or 1
     local current_index0 = tab.tab_index or 0
     local background = gradient[current_index0 + 1]
-    local foreground = color_scheme.foreground
 
     -- Make the right wedge blend into the NEXT tab's background color
     local next_index0 = current_index0 + 1
@@ -129,7 +121,21 @@ wezterm.on('format-tab-title',
       next_background = gradient[next_index0 + 1]
     end
 
-    return get_title(tab, foreground, background, next_background or edge_background, max_width)
+    local fg_color, raw_title = get_title(tab, foreground)
+
+    -- Ensure that the titles fit in the available space,
+    local title_cells = math.max(0, max_width - 3) -- (leading space + trailing space + wedge)
+    local title = wezterm.truncate_right((tab.tab_index + 1) .. ': ' .. raw_title, title_cells)
+
+    return {
+      { Background = { Color = background } },
+      { Foreground = { Color = fg_color } },
+      { Text = ' ' .. title .. ' ' },
+
+      { Background = { Color = next_background or edge_background } },
+      { Foreground = { Color = background } },
+      { Text = '' },
+    }
   end
 )
 

@@ -45,9 +45,7 @@ Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
 
 <# Miscellaneous Settings #>
 if ($PSVersionTable.PSVersion.Major -gt 5) {
-  Set-MarkdownOption `
-    -LinkForegroundColor "[5;4;38;5;117m" `
-    -ItalicsForegroundColor "[3m"
+  Set-MarkdownOption -ItalicsForegroundColor "[3m"
 }
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 

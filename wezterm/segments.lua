@@ -183,7 +183,7 @@ function M.get_right_status_segments(window, pane)
 
     items = {
       " ".. ms .. "ms",
-      cache.day,
+      wezterm.strftime(' %a, %b %-d'),
       domain
     }
   end

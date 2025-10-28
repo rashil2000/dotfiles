@@ -14,22 +14,21 @@ M.bindings = {
     key = '<',
     mods = 'CTRL|SHIFT',
     action = wezterm.action.SpawnCommandInNewTab {
-      cwd = wezterm.config_dir,
-      args = { 'nvim', wezterm.config_file },
+      args = { 'nvim', '-c', 'edit '..wezterm.config_file..' | cd %:p:h' },
     },
   },
   {
     key = '>',
     mods = 'CTRL|SHIFT',
     action = wezterm.action.SpawnCommandInNewTab {
-      args = { 'pwsh', "-nop", "-c", "cd (Split-Path $PROFILE); nvim $PROFILE.CurrentUserAllHosts" },
+      args = { 'pwsh', '-nop', '-c', 'nvim -c "edit $($PROFILE.CurrentUserAllHosts) | cd %:p:h"' },
     },
   },
   {
     key = '?',
     mods = 'CTRL|SHIFT',
     action = wezterm.action.SpawnCommandInNewTab {
-      args = { "nvim", "-c", "edit $MYVIMRC | lcd %:p:h" },
+      args = { 'nvim', '-c', 'edit $MYVIMRC | cd %:p:h' },
     },
   },
   {
@@ -126,7 +125,6 @@ M.mouse_bindings = {
   -- Select output of entire command when triple-clicking
   {
     event = { Down = { streak = 3, button = 'Left' } },
-    mods = 'NONE',
     action = wezterm.action.SelectTextAtMouseCursor 'SemanticZone',
   },
 }
