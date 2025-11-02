@@ -180,6 +180,12 @@ wezterm.on('update-status',
       table.insert(elements, { Text = ' ' .. seg .. ' ' })
     end
     window:set_right_status(wezterm.format(elements))
+
+    -- Hide scrollbar if content fits in the scrollback, or if alternate screen is active
+    local overrides = window:get_config_overrides() or {}
+    local dimensions = pane:get_dimensions()
+    overrides.enable_scroll_bar = dimensions.scrollback_rows > dimensions.viewport_rows and not pane:is_alt_screen_active()
+    window:set_config_overrides(overrides)
   end
 )
 
