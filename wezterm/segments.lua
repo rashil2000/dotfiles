@@ -42,11 +42,25 @@ local function is_process_running_macos(image)
   return ok
 end
 
+local function is_process_running_linux(image)
+  -- -x: exact match of the process name
+  local ok, _, _ = wezterm.run_child_process{
+    "pgrep",
+    "-x",
+    image,
+  }
+
+  return ok
+end
+
 local function is_process_running(image)
   if wezterm.target_triple == 'aarch64-apple-darwin' then
     return is_process_running_macos(image)
+  elseif wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
+     return is_process_running_linux(image)
+  else
+     return is_process_running_windows(image .. '.exe')
   end
-  return is_process_running_windows(image .. '.exe')
 end
 
 local function get_playback_status()
