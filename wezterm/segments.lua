@@ -41,10 +41,10 @@ local function is_process_running_unix(image)
 end
 
 local function is_process_running(image)
-   if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-      return is_process_running_windows(image .. '.exe')
-   end
-   return is_process_running_unix(image)
+  if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+    return is_process_running_windows(image .. '.exe')
+  end
+  return is_process_running_unix(image)
 end
 
 local function get_playback_status()
