@@ -34,8 +34,13 @@ Set-PSReadLineOption `
                  'git status', 'git diff', 'git diff --staged', 'git log'
   }
 if (-not ($Host.UI.RawUI.WindowSize.Width -lt 54 -or $Host.UI.RawUI.WindowSize.Height -lt 15)) {
-  Set-PSReadLineOption -PredictionViewStyle ListView
-  Set-PSReadlineKeyHandler -Key Escape -Function Undo
+  if ([Environment]::UserInteractive -and
+      $Host.Name -eq 'ConsoleHost' -and
+      -not [Console]::IsInputRedirected -and
+      -not [Console]::IsOutputRedirected) {
+        Set-PSReadLineOption -PredictionViewStyle ListView
+        Set-PSReadlineKeyHandler -Key Escape -Function Undo
+  }
 }
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
