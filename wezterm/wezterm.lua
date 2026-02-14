@@ -221,5 +221,6 @@ config.set_environment_variables = {
 config.unix_domains = {
   { name = "default" }
 }
+config.inactive_pane_hsb = { brightness = 0.9 }
 
 return config;

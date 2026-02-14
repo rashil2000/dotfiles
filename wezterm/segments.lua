@@ -7,7 +7,6 @@ local cache = {
   spotify = '',
   kube = '',
   memory = '',
-  day = '',
   last_update_ms = 0,
 }
 
@@ -148,12 +147,12 @@ local function refresh_cache()
   cache.spotify = get_playback_status() or ''
   cache.memory = get_memory_usage() or ''
   cache.kube = get_current_kube_context() or ''
-  cache.day = wezterm.strftime(' %a, %b %-d')
   cache.last_update_ms = os.time() * 1000
 end
 
 function M.get_right_status_segments(window, pane)
   local domain = pane:get_domain_name()
+  local custom_title = pane:get_user_vars().WIN_TITLE
   local items = {}
   -- we can use `cols` to do conditional rendering of segments
   -- local cols = window:mux_window():active_tab():get_size().cols
@@ -172,8 +171,8 @@ function M.get_right_status_segments(window, pane)
       cache.spotify,
       cache.kube,
       cache.memory,
-      cache.day,
-      domain_display
+      domain_display,
+      custom_title
     }
   else
     local m = pane:get_metadata() or {}
@@ -181,8 +180,8 @@ function M.get_right_status_segments(window, pane)
 
     items = {
       " ".. ms .. "ms",
-      wezterm.strftime(' %a, %b %-d'),
-      domain
+      domain,
+      custom_title
     }
   end
 

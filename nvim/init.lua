@@ -21,6 +21,10 @@ o.foldmethod = "syntax"
 o.foldenable = true
 o.foldlevel = 99            -- Keep almost everything open
 o.foldlevelstart = 99       -- On buffer open, show folds expanded
+o.wildmode = {
+    "lastused",
+    "full"
+}                          -- Command-line completion mode
 
 -- Tags completion
 vim.g.closetag_filenames = "*.html,*.xhtml,*.xml,*.js,*.html.erb,*.md"

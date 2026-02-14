@@ -20,6 +20,11 @@ Function gccd {
   git clone "git@github.com:$args.git"
   if ($?) { Set-Location $args.Split('/')[1] }
 }
+Function Set-WezVar([string]$Name, [string]$Value) {
+  $b64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($Value))
+  [Console]::Out.Write("$([char]27)]1337;SetUserVar=$Name=$b64$([char]7)")
+}
+
 
 <# Line Editing Options #>
 Set-PSReadLineOption `

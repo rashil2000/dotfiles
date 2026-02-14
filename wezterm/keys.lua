@@ -14,7 +14,8 @@ M.bindings = {
     key = '<',
     mods = 'CTRL|SHIFT',
     action = wezterm.action.SpawnCommandInNewTab {
-      args = { 'nvim', '-c', 'edit '..wezterm.config_file..' | cd %:p:h' },
+      cwd = wezterm.config_dir,
+      args = { 'nvim', wezterm.config_file },
     },
   },
   {
@@ -78,6 +79,14 @@ M.bindings = {
     key = '8',
     mods = 'ALT|CTRL',
     action = wezterm.action.SpawnCommandInNewTab {
+      cwd = wezterm.home_dir .. '/Desktop',
+      args = { 'claude' },
+    },
+  },
+  {
+    key = '9',
+    mods = 'ALT|CTRL',
+    action = wezterm.action.SpawnCommandInNewTab {
       args = { 'k9s' },
     },
   },
@@ -118,6 +127,11 @@ M.bindings = {
     key = 'H',
     mods = 'CTRL|SHIFT',
     action = wezterm.action.Search { CaseInSensitiveString = '' },
+  },
+  {
+    key = "Enter",
+    mods = "ALT",
+    action = wezterm.action.DisableDefaultAssignment
   },
 }
 
